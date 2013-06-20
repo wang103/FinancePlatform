@@ -1,0 +1,4 @@
+1. Set up LAMP (http://fedorasolved.org/server-solutions/lamp-stack)
+    port: 3306
+    protocol: tcp
+
