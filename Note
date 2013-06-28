@@ -4,6 +4,23 @@
 
 2. Database details:
 
+mysqladmin -u root password tianyi
+mysql -u root -p
+
+CREATE DATABASE reimbursement_db;
+
+USE reimbursement_db;
+
+CREATE TABLE users
+(
+email VARCHAR(255),
+password VARCHAR(255),
+first_name VARCHAR(255),
+last_name VARCHAR(255),
+status INT(1)
+);
+
+// status: 0 is professor, 1 is grad student, 2 is undergrad student
 
 3. There are 3 main interfaces: submit, process, and check.
     'submit' is mainly used by students to submit new reimbursement.

@@ -10,7 +10,7 @@
 
 <!--Navigation Bar-->
 <?php
-include '../show_navi.html';
+include 'show_navi.html';
 ?>
 
 </body>
