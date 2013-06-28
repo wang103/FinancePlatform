@@ -1,0 +1,13 @@
+#layout_left {
+    width:15%;
+    float:left;
+}
+
+#layout_middle {
+    width:70%;
+}
+
+#layout_right {
+    width:15%;
+    float:right;
+}
