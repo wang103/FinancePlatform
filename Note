@@ -4,3 +4,14 @@
 
 2. Database details:
 
+
+3. There are 3 main interfaces: submit, process, and check.
+    'submit' is mainly used by students to submit new reimbursement.
+    'process' is mainly used by professors to process reimbursement submitted
+        by students.
+    'check' is used by everyone to check all sort of reimburments, such as:
+        submitted by me
+        processed by me
+        other reimbursement requests
+    
+    Identity will be checked before any action can be granted.
