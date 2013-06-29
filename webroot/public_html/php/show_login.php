@@ -14,16 +14,22 @@ if (isset($_SESSION['EMAIL']) && !empty($_SESSION['EMAIL'])) {
         $status = "本科生";
     }
 
-	echo '
+    echo '
+    <h4>账户信息</h4>
 	<form name="logout_form" action="php/logout.php" method="post">
-	<p id="login_p">
-	<label id="login_label">User:</label> ' . $_SESSION['USER_NAME'] . '
+	<p id="login_p" align="left">
+	<label id="login_label">邮箱：</label>' . $email . '
 	</p>
-	<p id="login_p">' . $identity .
-	'</p>
+    <p id="login_p" align="left">
+    <label id="login_label">姓名：</label>' . $last_name . " " . $first_name . '
+    </p>
+    <p id="login_p" align="left">
+    <label id="login_label">身份：</label>' . $status . '
+    </p>
 	<p id="login_p" align="center">
-	<input type="submit" value="Logout">
-	</p>';
+	<input type="submit" value="登出">
+    </p>
+    </form>';
 }
 else {
     echo '
