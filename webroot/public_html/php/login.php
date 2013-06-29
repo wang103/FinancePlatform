@@ -41,11 +41,11 @@ if (mysql_num_rows($login_result) > 0) {
 
     # Go back.
     $last_url = $_SESSION['last_url'];
-    header("Location: " . $last_url);
+    header("location: " . $last_url);
     die();
 } else {
     # Login failed.
-    header();
+    header("location: login_failed.php");
     die();
 }
 
