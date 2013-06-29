@@ -40,7 +40,8 @@ if (mysql_num_rows($login_result) > 0) {
     session_write_close();
 
     # Go back.
-    header();
+    $last_url = $_SESSION['last_url'];
+    header("Location: " . $last_url);
     die();
 } else {
     # Login failed.

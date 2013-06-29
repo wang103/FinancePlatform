@@ -7,6 +7,12 @@
 
 <body>
 
+<!--Store the last visited page-->
+<?php
+session_start();
+$_SESSION['last_url'] = $_SERVER['REQUEST_URI'];
+?>
+
 <h1>北邮报销申请 - 主页</h1>
 
 <!--Left: Navigation Bar-->
