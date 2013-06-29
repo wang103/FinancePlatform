@@ -9,6 +9,8 @@ mysql -u root -p
 
 CREATE DATABASE reimbursement_db;
 
+ALTER DATABASE reimbursement_db DEFAULT CHARACTER SET 'utf8';
+
 USE reimbursement_db;
 
 CREATE TABLE users

@@ -19,6 +19,7 @@ $pwd = $_POST['pwd'];
 
 #Check against the database.
 $qry = "SELECT first_name,last_name,status FROM users WHERE email='" . $email . "' AND password='" . md5($pwd) . "'"; 
+mysql_query('SET NAMES utf8');
 $login_result = mysql_query($qry);
 
 mysql_close($con);
