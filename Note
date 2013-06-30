@@ -40,4 +40,6 @@ INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王'
 4. config.php contains sensitive information, and should be placed outside the
     public directory. It's permission should be set to something like 644.
 
+5. Only professors can modify the announcement list.
+
 

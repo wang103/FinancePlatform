@@ -24,6 +24,9 @@ include 'show_navi.html';
 
 <!--Middle: Current Page's Contents-->
 <div id='layout_middle'>
+<?php
+include 'php/show_process.php';
+?>
 </div>
 
 <!--Right: Log In-->

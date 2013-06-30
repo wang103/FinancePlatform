@@ -24,6 +24,9 @@ include 'show_navi.html';
 
 <!--Middle: Current Page's Contents-->
 <div id='layout_middle'>
+<?php
+include 'php/show_announcement.php';
+?>
 </div>
 
 <!--Right: Log In-->
