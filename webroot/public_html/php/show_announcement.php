@@ -28,8 +28,8 @@ while ($row = mysql_fetch_array($result)) {
     # If it's professor, allow modifying the post.
     if (isset($_SESSION['STATUS']) && $_SESSION['STATUS'] == 0) {
         echo '
-        <input type="button" value="修改" onClick="location=\'php/modify_announcement.php\';"/>
-        <input type="button" value="删除" onClick="location=\'php/delete_announcement.php\';"/>
+        <input type="button" value="修改" class="btn" onClick="location=\'php/modify_announcement.php\';"/>
+        <input type="button" value="删除" class="btn" onClick="if(confirm(\'确定删除？\'))location=\'php/delete_announcement.php\';return false;"/>
         ';
     }
     
