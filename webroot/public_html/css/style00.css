@@ -1,10 +1,10 @@
 body {
-    min-width: 600px;       /* LC + RC + 200 */
+    min-width: 680px;       /* 2 X (LC + CC padding) + RC */
 }
 
 #container {
     padding-left: 200px;    /* LC width */
-    padding-right: 200px;   /* RC width */
+    padding-right: 240px;   /* RC width + CC padding */
 }
 
 #container .column {
@@ -13,16 +13,19 @@ body {
 }
 
 #layout_middle {
+    padding: 10px 20px;     /* CC padding */
     width: 100%;
 }
 
 #layout_left {
-    width: 200px;           /* LC width */
-    right: 200px;           /* LC width */
+    width: 180px;           /* LC width */
+    padding: 0 10px;        /* LC padding */
+    right: 240px;           /* LC width + CC padding */
     margin-left: -100%;
 }
 
 #layout_right {
-    width: 200px;           /* RC width */
-    margin-right: -200px;   /* RC width */
+    width: 180px;           /* RC width */
+    padding: 0 10px;        /* RC padding */
+    margin-right: -240px;   /* RC width + CC padding */
 }

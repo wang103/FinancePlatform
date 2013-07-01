@@ -11,13 +11,15 @@ if (!$con) {
 mysql_select_db(DB_DATABASE, $con);
 
 # Load announcements.
+mysql_query('SET NAMES utf8');
 $result = mysql_query('SELECT * FROM announcements ORDER BY announce_id DESC');
 
 $announce_empty = 1;
 while ($row = mysql_fetch_array($result)) {
+    $content = wordwrap($row['content'], 84, '<br>', true);
     echo '
     <p>' .
-    $row['content'] . '<br>' .
+    $content . '<br><br>' .
     '<i>' . $row['date'] . ' by ' . $row['poster'] . '</i>' .
     '</p>';
     echo '<hr>';
