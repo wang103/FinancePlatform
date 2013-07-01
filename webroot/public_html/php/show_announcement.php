@@ -20,6 +20,15 @@ mysql_close($con);
 <?php
 session_start();
 if (isset($_SESSION['STATUS']) && $_SESSION['STATUS'] == 0) {
-
+    echo '
+    <form action="php/insert_announcement.php" method="post">
+    <p>
+    公告内容：<br>
+    <textarea name="content" rows="6" cols="60" required></textarea>
+    <br>
+    <input type="submit" value="发布新公告"/>
+    <br>
+    </p>
+    </form>';
 }
 ?>

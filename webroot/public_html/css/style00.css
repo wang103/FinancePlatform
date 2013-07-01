@@ -1,13 +1,28 @@
-#layout_left {
-    width:15%;
-    float:left;
+body {
+    min-width: 600px;       /* LC + RC + 200 */
+}
+
+#container {
+    padding-left: 200px;    /* LC width */
+    padding-right: 200px;   /* RC width */
+}
+
+#container .column {
+    position: relative;
+    float: left;
 }
 
 #layout_middle {
-    width:70%;
+    width: 100%;
+}
+
+#layout_left {
+    width: 200px;           /* LC width */
+    right: 200px;           /* LC width */
+    margin-left: -100%;
 }
 
 #layout_right {
-    width:15%;
-    float:right;
+    width: 200px;           /* RC width */
+    margin-right: -200px;   /* RC width */
 }
