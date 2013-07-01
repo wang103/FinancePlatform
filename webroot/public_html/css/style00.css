@@ -13,19 +13,19 @@ body {
 }
 
 #layout_middle {
-    padding: 10px 20px;     /* CC padding */
+    padding: 5px 40px 5px 0px;  /* CC padding */
     width: 100%;
 }
 
 #layout_left {
-    width: 180px;           /* LC width */
-    padding: 0 10px;        /* LC padding */
+    width: 200px;           /* LC width */
+    padding: 0 0px;         /* LC padding */
     right: 240px;           /* LC width + CC padding */
     margin-left: -100%;
 }
 
 #layout_right {
-    width: 180px;           /* RC width */
-    padding: 0 10px;        /* RC padding */
+    width: 200px;           /* RC width */
+    padding: 0 0px;         /* RC padding */
     margin-right: -240px;   /* RC width + CC padding */
 }
