@@ -15,11 +15,21 @@ USE reimbursement_db;
 
 CREATE TABLE users
 (
-email VARCHAR(255),
-password VARCHAR(255),
-first_name VARCHAR(255),
-last_name VARCHAR(255),
-status INT(1)
+email VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL,
+first_name VARCHAR(255) NOT NULL,
+last_name VARCHAR(255) NOT NULL,
+status INT(1) NOT NULL,
+PRIMARY KEY (email)
+);
+
+CREATE TABLE announcements
+(
+announce_id INT NOT NULL AUTO_INCREMENT,
+content TEXT NOT NULL,
+poster VARCHAR(255) NOT NULL,
+date DATETIME NOT NULL,
+PRIMARY KEY (announce_id)
 );
 
 // status: 0 is professor, 1 is grad student, 2 is undergrad student

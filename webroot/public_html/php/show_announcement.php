@@ -11,7 +11,27 @@ if (!$con) {
 mysql_select_db(DB_DATABASE, $con);
 
 # Load announcements.
+$result = mysql_query('SELECT * FROM announcements ORDER BY announce_id DESC');
 
+$announce_empty = 1;
+while ($row = mysql_fetch_array($result)) {
+    echo '
+    <p>' .
+    $row['content'] . '<br>' .
+    '<i>' . $row['date'] . ' by ' . $row['poster'] . '</i>' .
+    '</p>';
+    echo '<hr>';
+    $announce_empty = 0;
+
+    # If it's professor, allow modifying the post.
+
+}
+
+if ($announce_empty == 1) {
+    echo '
+    <p>没有任何公告</p>
+    ';
+}
 
 mysql_close($con);
 ?>
@@ -21,6 +41,7 @@ mysql_close($con);
 session_start();
 if (isset($_SESSION['STATUS']) && $_SESSION['STATUS'] == 0) {
     echo '
+    <hr style="height:5px;">
     <form action="php/insert_announcement.php" method="post">
     <p>
     公告内容：<br>
