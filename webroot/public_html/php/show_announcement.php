@@ -22,7 +22,7 @@ while ($row = mysql_fetch_array($result)) {
     echo '
     <p>' .
     $content . '<br><br>' .
-    '<i>' . $row['date'] . ' by ' . $row['poster'] . '</i>' .
+    '最后发布/修改时间：<i>' . $row['date'] . ' by ' . $row['poster'] . '</i>' .
     '</p>';
     
     # If it's professor, allow modifying the post.
@@ -30,7 +30,7 @@ while ($row = mysql_fetch_array($result)) {
         # Pass the announcement id to php page using GET.
         echo '
             <input type="button" value="修改" class="btn" ' .
-            'onClick="location=\'php/modify_announcement.php?an=' .
+            'onClick="location=\'php/show_modify_announce.php?an=' .
             $row['announce_id'] . '\';"/>
             
             <input type="button" value="删除" class="btn" ' .

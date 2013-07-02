@@ -49,5 +49,4 @@ if (mysql_num_rows($login_result) > 0) {
     header("location: login_failed.php");
     die();
 }
-
 ?>

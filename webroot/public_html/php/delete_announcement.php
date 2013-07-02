@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
+    die();
+}
+
 require('../../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
