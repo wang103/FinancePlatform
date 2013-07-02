@@ -20,7 +20,12 @@ $_SESSION['last_url'] = $_SERVER['REQUEST_URI'];
 <!--Middle: Current Page's Contents-->
 <div id='layout_middle' class='column'>
 <?php
-include 'php/show_submit.php';
+# Check if signed in.
+if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
+    echo '请先登录再提交申请';
+} else {
+    include 'php/show_submit.php';
+}
 ?>
 </div>
 

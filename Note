@@ -55,4 +55,13 @@ INSERT INTO users VALUES ('bai@fake.edu', md5('bailin'), '琳', '柏', 0);
 
 6. Three-column HTML: http://alistapart.com/article/holygrail
 
-7. 
+7.
+
+==================================================================
+
+TODO:
+1. Change account information.
+
+2. Linking to two other platforms.
+
+3.  
