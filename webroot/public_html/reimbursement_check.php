@@ -20,7 +20,12 @@ $_SESSION['last_url'] = $_SERVER['REQUEST_URI'];
 <!--Middle: Current Page's Contents-->
 <div id='layout_middle' class='column'>
 <?php
-include 'php/show_check.php';
+# Check if signed in.
+if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
+    echo '<FONT COLOR="Red">请先登录再查看申请</FONT>';
+} else {
+    include 'php/show_check.php';
+}
 ?>
 </div>
 

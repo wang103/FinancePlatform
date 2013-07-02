@@ -22,7 +22,7 @@ $_SESSION['last_url'] = $_SERVER['REQUEST_URI'];
 <?php
 # Check if signed in.
 if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
-    echo '请先登录再提交申请';
+    echo '<FONT COLOR="Red">请先登录再提交申请</FONT>';
 } else {
     include 'php/show_submit.php';
 }
