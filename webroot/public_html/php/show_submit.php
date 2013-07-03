@@ -70,14 +70,6 @@ function paymentChanged(sel) {
 
 <?php
 session_start();
-
-if (isset($_GET['status']) && $_GET['status'] == 1) {
-    echo '
-        <script>
-        alert("提交报销申请成功！");
-        </script>
-        ';
-}
 ?>
 
 <h3>新建报销申请</h3>
@@ -220,6 +212,15 @@ if (isset($_GET['status']) && $_GET['status'] == 1) {
 
 <input id="submit_button" type="submit" value="提交报销申请">
 </form>
+
+<?php
+if (isset($_GET['status']) && $_GET['status'] == 1) {
+    echo '
+    <script>
+        alert("提交报销申请成功！");
+    </script>';
+}
+?>
 
 </body>
 
