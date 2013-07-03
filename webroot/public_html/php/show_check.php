@@ -53,7 +53,7 @@ require('utils.php');
 while ($row = mysql_fetch_array($result)) {
     echo '
     <tr>
-        <td><p><a href="">' . $row['date'] . '</a></p></td>
+        <td><p><a href="php/show_reimbursement.php?rn=' . $row['request_id'] . '">' . $row['date'] . '</a></p></td>
         <td><p>' . $row['submitter_name'] . '</p></td>
         <td><p>' . $row['amount'] . '</p></td>
         <td><p>';

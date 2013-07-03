@@ -38,6 +38,7 @@ CREATE TABLE requests
 request_id INT NOT NULL AUTO_INCREMENT,
 submitter_email VARCHAR(255),
 submitter_name VARCHAR(255),
+submitter_id_number VARCHAR(127),
 date DATE NOT NULL,
 amount INT NOT NULL,
 have_budget INT(1) NOT NULL,
