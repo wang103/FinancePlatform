@@ -70,6 +70,14 @@ function paymentChanged(sel) {
 
 <?php
 session_start();
+
+if (isset($_GET['status']) && $_GET['status'] == 1) {
+    echo '
+        <script>
+        alert("提交报销申请成功！");
+        </script>
+        ';
+}
 ?>
 
 <h3>新建报销申请</h3>
@@ -153,7 +161,7 @@ session_start();
     <br>
 
     <label id="receipt_label" style="display: none">请填写不一致的内容：</label>
-    <textarea id="receipt_content" style="display: none" rows="6" cols="60"></textarea>
+    <textarea id="receipt_content" name="receipt_content" style="display: none" rows="6" cols="60"></textarea>
 </fieldset>
 
 <br><br>
@@ -201,12 +209,12 @@ session_start();
 <br><br>
 
 <label id="usage_label">用途：</label> <br>
-<textarea id="usage_content" rows="6" cols="60"></textarea>
+<textarea id="usage_content" name="usage" rows="6" cols="60"></textarea>
 
 <br><br>
 
 <label id="note_label">备注：</label> <br>
-<textarea id="note_content" rows="6" cols="60"></textarea>
+<textarea id="note_content" name="note" rows="6" cols="60"></textarea>
 
 <br><br>
 
