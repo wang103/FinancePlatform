@@ -11,6 +11,18 @@ function subjectChanged(sel) {
         document.getElementById("other_subject_input").required = false;
     }
 }
+
+function receiptChanged(sel) {
+    if (sel.value == "yes") {
+        document.getElementById("receipt_label").style.display = 'none';
+        document.getElementById("receipt_content").style.display = 'none';
+        document.getElementById("receipt_content").required = false;
+    } else {
+        document.getElementById("receipt_label").style.display = 'block';
+        document.getElementById("receipt_content").style.display = 'block';
+        document.getElementById("receipt_content").required = true;
+    }
+}
 </script>
 
 <html>
@@ -68,9 +80,19 @@ session_start();
     <label id="opener">开户行：</label> <input type="text" name="opener">
 </fieldset>
 
+<br>
+
 <fieldset class="fieldset-auto-width">
     <legend>发票内容</legend>
 
+    <label>是否和实际内容一致？</label>
+    <input type="radio" name="receipt_agree" onclick="receiptChanged(this);" value="yes" checked>是
+    <input type="radio" name="receipt_agree" onclick="receiptChanged(this);" value="no">不是
+
+    <br>
+
+    <label id="receipt_label" style="display: none">请填写不一致的内容：</label>
+    <textarea id="receipt_content" style="display: none" rows="6" cols="60"></textarea>
 </fieldset>
 
 <br><br>
