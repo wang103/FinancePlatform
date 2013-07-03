@@ -33,7 +33,40 @@ date DATETIME NOT NULL,
 PRIMARY KEY (announce_id)
 );
 
-// status: 0 is professor, 1 is grad student, 2 is undergrad student
+CREATE TABLE requests
+(
+request_id INT NOT NULL AUTO_INCREMENT,
+submitter_email VARCHAR(255),
+submitter_name VARCHAR(255),
+date DATETIME NOT NULL,
+amount INT NOT NULL,
+have_budget INT(1) NOT NULL,
+financial_assistant_name VARCHAR(255),
+page_number INT NOT NULL,
+subject INT NOT NULL,
+subject_other VARCHAR(127),
+have_all_files INT(1) NOT NULL,
+contract_company_name VARCHAR(255),
+contract_location INT,
+contract_bank_number VARCHAR(255),
+contract_opener VARCHAR(255),
+receipt_same_as_actual INT(1) NOT NULL,
+receipt_difference TEXT,
+professor_class VARCHAR(255),
+professor_name VARCHAR(255),
+expanse_number VARCHAR(255),
+expanse_name VARCHAR(255),
+payment_option INT,
+payment_option_other VARCHAR(255),
+usage_optional TEXT,
+note_optional TEXT,
+request_status INT(1) NOT NULL,
+PRIMARY KEY (request_id),
+FOREIGN KEY (submitter_email) REFERENCES users(email)
+);
+
+// status: 0 -- professor, 1 -- grad student, 2 -- undergrad student
+// request_status: 0 -- submitted, ... ..., 5 -- completed
 
 INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
 INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', '', 0);
