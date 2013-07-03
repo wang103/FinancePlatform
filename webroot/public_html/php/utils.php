@@ -13,7 +13,7 @@ function getSubjectNameFromIndex($subjectIndex, $othersName) {
     } else if ($subjectIndex == 5) {
         echo "差旅";
     } else {
-        echo othersName;
+        echo $othersName;
     }
 }
 

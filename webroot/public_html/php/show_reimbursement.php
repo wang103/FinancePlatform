@@ -34,6 +34,7 @@ if ($_SESSION['EMAIL'] != $row['submitter_email'] && $_SESSION['STATUS'] != 0) {
 
 <head>
 <link rel='stylesheet' type='text/css' href='../css/style01.css'>
+<script src='../js/interface_listener.js'></script>
 </head>
 
 <body>
@@ -50,20 +51,20 @@ if ($_SESSION['EMAIL'] != $row['submitter_email'] && $_SESSION['STATUS'] != 0) {
 
 <br>
 
-<p>报销金额：<input type="number" name="amount" min=0.0 step=0.01 required>元</p>
+<p>报销金额：<input type="number" name="amount" min=0.0 step=0.01 required readonly value="<?php echo $row['amount']?>">元</p>
 
 <p>
 是否有预算（有预算才可提交报销申请）？
-<input type="radio" name="budget" onclick="budgetChanged(this);" value="yes" checked>有
-<input type="radio" name="budget" onclick="budgetChanged(this);" value="no">没有
+<input type="radio" name="budget" onclick="budgetChanged(this);" disabled='disabled' value="yes" checked>有
+<input type="radio" name="budget" onclick="budgetChanged(this);" disabled='disabled' value="no">没有
 </p>
 
 <p>
-财务助理姓名：<input type="text" name="finance_assist_name" required>
+财务助理姓名：<input type="text" name="finance_assist_name" required readonly value="<?php echo $row['financial_assistant_name']?>">
 </p>
 
 <p>
-单据数量：<input type="number" name="pages" min=0 step=1 required>页
+单据数量：<input type="number" name="pages" min=0 step=1 required readonly value="<?php echo $row['page_number']?>">页
 </p>
 
 <p>
@@ -85,8 +86,8 @@ if ($_SESSION['EMAIL'] != $row['submitter_email'] && $_SESSION['STATUS'] != 0) {
 </p>
 
 报销材料是否齐全（齐全才可提交报销申请）？
-<input type="radio" name="files" onclick="filesChanged(this);" value="yes" checked>是
-<input type="radio" name="files" onclick="filesChanged(this);" value="no">否
+<input type="radio" name="files" onclick="filesChanged(this);" readonly value="yes" checked>是
+<input type="radio" name="files" onclick="filesChanged(this);" readonly value="no">否
 
 <br><br>
 
