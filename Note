@@ -60,13 +60,15 @@ payment_option INT,
 payment_option_other VARCHAR(255),
 usage_optional TEXT,
 note_optional TEXT,
+last_added_note TEXT,
 request_status INT(1) NOT NULL,
 PRIMARY KEY (request_id),
 FOREIGN KEY (submitter_email) REFERENCES users(email)
 );
 
 // status: 0 -- professor, 1 -- grad student, 2 -- undergrad student
-// request_status: 0 -- submitted, ... ..., 5 -- completed
+// request_status: 0 -- submitted, 1 -- professor pass one,
+// 2 -- student pass one, 3 -- professor pass two, complete.
 
 INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
 INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', '', 0);
