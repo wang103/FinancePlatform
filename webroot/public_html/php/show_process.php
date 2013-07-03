@@ -36,7 +36,7 @@ mysql_select_db(DB_DATABASE, $con);
 
 # Load unfinished requests.
 mysql_query('SET NAMES utf8');
-$result = mysql_query('SELECT * FROM requests WHERE request_status!=3');
+$result = mysql_query('SELECT * FROM requests WHERE request_status!=2');
 
 require('utils.php');
 
@@ -50,7 +50,10 @@ while ($row = mysql_fetch_array($result)) {
     getSubjectNameFromIndex($row['subject'], $row['subject_other']);
     echo '
         </p></td>
-        <td><p>' . $row['request_status'] . '</p></td>
+        <td><p>';
+    getStatusFromIndex($row['request_status']);
+    echo '
+        </p></td>
     </tr>';
 }
 

@@ -16,4 +16,35 @@ function getSubjectNameFromIndex($subjectIndex, $othersName) {
         echo othersName;
     }
 }
+
+function getStatusFromIndex($statusIndex) {
+    session_start();
+
+    if ($statusIndex == 0) {
+        if ($_SESSION['STATUS'] == 0) {
+            echo "修改或者完成网报";
+        } else {
+            echo "等待老师完成网报";
+        }
+    } else if ($statusIndex == 1) {
+        if ($_SESSION['STATUS'] == 0) {
+            echo "等待学生完成报销";
+        } else {
+            echo "点此完成报销";
+        }
+    } else {
+        if ($_SESSION['STATUS'] == 0) {
+            echo "已完成，点此添加意见";
+        } else {
+            echo "已完成，查看老师意见";
+        }
+    }
+}
+
+function notifyWithEmail($from, $to, $subject, $message) {
+    $headers = "From:" . $from;
+    mail($to, $subject, $message, $headers);
+
+    return 0;
+}
 ?>

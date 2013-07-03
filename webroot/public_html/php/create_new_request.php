@@ -94,7 +94,7 @@ if ($_POST['payment_option'] == "post") {
 }
 $usage_optional = $_POST['usage'];
 $note_optional = $_POST['note'];
-$request_status = 1;
+$request_status = 0;
 
 # Insert new request into the database.
 $sql = 'INSERT INTO requests (submitter_email, submitter_name, date, amount,' .
