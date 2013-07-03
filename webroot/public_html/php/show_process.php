@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
+if (!isset($_SESSION['STATUS'])) {
     die();
 }
 ?>
@@ -34,9 +34,14 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
-# Load unfinished requests.
+# Load all unfinished requests for the user.
 mysql_query('SET NAMES utf8');
-$result = mysql_query('SELECT * FROM requests WHERE request_status!=2');
+if ($_SESSION['STATUS'] == 0) {
+    $qry = 'SELECT * FROM requests WHERE request_status=0 OR request_status=2 ORDER BY request_id DESC';
+} else {
+    $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] . '" AND request_status=1 ORDER BY request_id DESC';
+}
+$result = mysql_query($qry);
 
 require('utils.php');
 
@@ -50,10 +55,10 @@ while ($row = mysql_fetch_array($result)) {
     getSubjectNameFromIndex($row['subject'], $row['subject_other']);
     echo '
         </p></td>
-        <td><p>';
+        <td><p><a href="">';
     getStatusFromIndex($row['request_status']);
     echo '
-        </p></td>
+        </a></p></td>
     </tr>';
 }
 

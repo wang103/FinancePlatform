@@ -32,12 +32,14 @@ function getStatusFromIndex($statusIndex) {
         } else {
             echo "点此完成报销";
         }
-    } else {
+    } else if ($statusIndex == 2) {
         if ($_SESSION['STATUS'] == 0) {
-            echo "已完成，点此添加意见";
+            echo "点此添加意见";
         } else {
-            echo "已完成，查看老师意见";
+            echo "等待老师添加意见";
         }
+    } else {
+        echo "此报销已完成";
     }
 }
 

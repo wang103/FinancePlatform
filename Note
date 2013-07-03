@@ -69,7 +69,8 @@ FOREIGN KEY (submitter_email) REFERENCES users(email)
 // status: 0 -- professor, 1 -- grad student, 2 -- undergrad student
 // request_status: 0 -- submitted, need professor to modify and finish net reporting,
 // 1 -- professor finished net reporting, need student to complete,
-// 2 -- student completed, process is over, professor can add comment
+// 2 -- student completed, professor didn't add comment,
+// 3 -- all completed, professor added comment.
 
 INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
 INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', '', 0);

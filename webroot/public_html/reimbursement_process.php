@@ -23,10 +23,7 @@ $_SESSION['last_url'] = $_SERVER['REQUEST_URI'];
 # Check if signed in.
 if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
     echo '<FONT COLOR="Red">请先登录再处理申请</FONT>';
-} else if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
-    echo '<FONT COLOR="Red">您无权处理申请</FONT>';
-}
-else {
+} else {
     include 'php/show_process.php';
 }
 ?>
