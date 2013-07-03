@@ -83,25 +83,24 @@ session_start();
 
 <br>
 
-报销金额：<input type="number" name="amount" min=0.0 step=0.01 required>元
+<p>报销金额：<input type="number" name="amount" min=0.0 step=0.01 required>元</p>
 
-<br>
-
-<label>是否有预算（有预算才可提交报销申请）？<label>
+<p>
+是否有预算（有预算才可提交报销申请）？
 <input type="radio" name="budget" onclick="budgetChanged(this);" value="yes" checked>有
 <input type="radio" name="budget" onclick="budgetChanged(this);" value="no">没有
+</p>
 
-<br>
-
+<p>
 财务助理姓名：<input type="text" name="finance_assist_name" required>
+</p>
 
-<br>
-
+<p>
 单据数量：<input type="number" name="pages" min=0 step=1 required>页
+</p>
 
-<br>
-
-<label id="class">报销科目：</label>
+<p>
+报销科目：
 <select name="class" required onchange="subjectChanged(this)">
     <option value="equipment">设备</option>
     <option value="material">材料</option>
@@ -112,12 +111,13 @@ session_start();
     <option value="others">其他</option>
 </select>
 
-<label id="other_subject_label" style="display: none">请填写具体报销科目：</label>
-<input id="other_subject_input" style="display: none" type="text" name="other_subject">
-
 <br>
 
-<label>报销材料是否齐全（齐全才可提交报销申请）？<label>
+<label id="other_subject_label" style="display: none">请填写具体报销科目：</label>
+<input id="other_subject_input" style="display: none" type="text" name="other_subject">
+</p>
+
+报销材料是否齐全（齐全才可提交报销申请）？
 <input type="radio" name="files" onclick="filesChanged(this);" value="yes" checked>是
 <input type="radio" name="files" onclick="filesChanged(this);" value="no">否
 
@@ -164,7 +164,7 @@ session_start();
     <label>导师组组别：</label>
     <input type="text" name="professor_class" required>
 
-    <label>导师姓名：</label>
+    <label id="professor_name_label">导师姓名：</label>
     <input type="text" name="professor_name" required>
 </fieldset>
 
@@ -176,7 +176,7 @@ session_start();
     <label>经费卡编号：</label>
     <input type="text" name="card_number" required>
 
-    <label>经费卡名称：</label>
+    <label id="card_name_label">经费卡名称：</label>
     <input type="text" name="card_name" required>
 </fieldset>
 
@@ -197,6 +197,11 @@ session_start();
     <label id="other_payment_label" style="display: none">请填写支付方式：</label>
     <input id="other_payment_input" style="display: none" type="text" name="other_payment_option">
 </fieldset>
+
+<br><br>
+
+<label id="usage_label">用途：</label> <br>
+<textarea id="usage_content" rows="6" cols="60"></textarea>
 
 <br><br>
 
