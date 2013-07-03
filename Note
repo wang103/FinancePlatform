@@ -19,6 +19,7 @@ email VARCHAR(255) NOT NULL,
 password VARCHAR(255) NOT NULL,
 first_name VARCHAR(255) NOT NULL,
 last_name VARCHAR(255) NOT NULL,
+id_number VARCHAR(127),
 status INT(1) NOT NULL,
 PRIMARY KEY (email)
 );
@@ -34,8 +35,8 @@ PRIMARY KEY (announce_id)
 
 // status: 0 is professor, 1 is grad student, 2 is undergrad student
 
-INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 1);
-INSERT INTO users VALUES ('bai@fake.edu', md5('bailin'), '琳', '柏', 0);
+INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
+INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', '', 0);
 
 3. There are 3 main interfaces: submit, process, and check.
     'submit' is mainly used by students to submit new reimbursement.
@@ -55,7 +56,9 @@ INSERT INTO users VALUES ('bai@fake.edu', md5('bailin'), '琳', '柏', 0);
 
 6. Three-column HTML: http://alistapart.com/article/holygrail
 
-7.
+7. An unique number is generated for each request.
+
+8. 
 
 ==================================================================
 
@@ -64,4 +67,6 @@ TODO:
 
 2. Linking to two other platforms.
 
-3.  
+3. What other type?? 
+
+4. 

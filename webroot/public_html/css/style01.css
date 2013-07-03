@@ -2,6 +2,10 @@
     display: inline-block;
 }
 
+#id_number {
+    margin-left: 20px;
+}
+
 #date {
     margin-left: 20px;
 }

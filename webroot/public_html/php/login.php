@@ -18,7 +18,7 @@ if (!get_magic_quotes_gpc()) {
 $pwd = $_POST['pwd'];
 
 #Check against the database.
-$qry = "SELECT first_name,last_name,status FROM users WHERE email='" . $email . "' AND password='" . md5($pwd) . "'"; 
+$qry = "SELECT * FROM users WHERE email='" . $email . "' AND password='" . md5($pwd) . "'"; 
 mysql_query('SET NAMES utf8');
 $login_result = mysql_query($qry);
 
@@ -35,6 +35,7 @@ if (mysql_num_rows($login_result) > 0) {
     $_SESSION['EMAIL'] = $email;
     $_SESSION['FIRST_NAME'] = $member['first_name'];
     $_SESSION['LAST_NAME'] = $member['last_name'];
+    $_SESSION['ID_NUMBER'] = $member['id_number'];
     $_SESSION['STATUS'] = $member['status'];
 
     # Write session to disc.
