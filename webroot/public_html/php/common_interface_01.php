@@ -60,13 +60,9 @@ require('utils.php');
     <legend>合同内容</legend>
     <label id="company_name">公司名称：</label> <input type="text" name="company_name" readonly value="<?php echo $row['contract_company_name']?>">
     
-    <label id="company_location">地区：</label>
-    <select name="company_location" disabled="disabled">
-        <option <?php if($row['contract_location']==0) echo 'selected'?> value="beijing">北京</option>
-        <option <?php if($row['contract_location']==1) echo 'selected'?> value="remote">外地</option>
-        <option <?php if($row['contract_location']==2) echo 'selected'?> value="others">其他</option>
-    </select>
-    
+    <label id="company_location">地区（城市）：</label>
+    <input type="text" name="company_location" readonly value="<?php echo $row['contract_location']?>">
+
     <br>
 
     <label id="bank_card">银行卡号：</label> <input type="text" name="bank_card" readonly value="<?php echo $row['contract_bank_number']?>">

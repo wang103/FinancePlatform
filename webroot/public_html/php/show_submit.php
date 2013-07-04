@@ -66,13 +66,9 @@ session_start();
     <legend>合同内容</legend>
     <label id="company_name">公司名称：</label> <input type="text" name="company_name">
     
-    <label id="company_location">地区：</label>
-    <select name="company_location">
-        <option value="beijing">北京</option>
-        <option value="remote">外地</option>
-        <option value="others">其他</option>
-    </select>
-    
+    <label id="company_location">地区（城市）：</label>
+    <input type="text" name="company_location" value="北京">
+
     <br>
 
     <label id="bank_card">银行卡号：</label> <input type="text" name="bank_card">

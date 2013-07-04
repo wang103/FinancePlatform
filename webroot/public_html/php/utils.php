@@ -23,7 +23,7 @@ function getGeneralStatusFromIndex($statusIndex) {
     if ($statusIndex == 0) {
         echo "刚刚提交，等待老师完成网报";
     } else if ($statusIndex == 1) {
-        echo "网报完成，等待学生完成报销";
+        echo "网报完成，等待申请人完成报销";
     } else if ($statusIndex == 2) {
         echo "报销完成，等待老师添加意见";
     } else {
@@ -42,7 +42,7 @@ function getStatusFromIndex($statusIndex) {
         }
     } else if ($statusIndex == 1) {
         if ($_SESSION['STATUS'] == 0) {
-            echo "等待学生完成报销";
+            echo "点此完成报销";
         } else {
             echo "点此完成报销";
         }

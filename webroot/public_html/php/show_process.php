@@ -37,7 +37,7 @@ mysql_select_db(DB_DATABASE, $con);
 # Load all unfinished requests for the user.
 mysql_query('SET NAMES utf8');
 if ($_SESSION['STATUS'] == 0) {
-    $qry = 'SELECT * FROM requests WHERE request_status=0 OR request_status=2 ORDER BY request_id DESC';
+    $qry = 'SELECT * FROM requests WHERE request_status=0 OR request_status=2 OR (request_status=1 AND submitter_email="' . $_SESSION['EMAIL'] . '") ORDER BY request_id DESC';
 } else {
     $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] . '" AND request_status=1 ORDER BY request_id DESC';
 }

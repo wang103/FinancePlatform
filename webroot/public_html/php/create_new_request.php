@@ -60,13 +60,7 @@ if ($_POST['class'] == "equipment") {
 }
 $have_all_files = 1;
 $contract_company_name = $_POST['company_name'];
-if ($_POST['company_location'] == "beijing") {
-    $contract_location = 0;
-} elseif ($_POST['company_location'] == "remote") {
-    $contract_location = 1;
-} else {    // others
-    $contract_location = 2;
-}
+$contract_location = $_POST['company_location'];
 $contract_bank_number = $_POST['bank_card'];
 $contract_opener = $_POST['opener'];
 if ($_POST['receipt_agree'] == "yes") {
@@ -106,7 +100,7 @@ $sql = 'INSERT INTO requests (submitter_email, submitter_name, submitter_id_numb
     'usage_optional, note_optional, request_status) VALUES (' .
     '"' . $submitter_email . '", "' . $submitter_name . '", "' . $submitter_id_number . '", "' . $submit_date . '", ' . $amount .
     ', ' . $have_budget . ', "' . $financial_assistant_name . '", ' . $page_number . ', ' . $subject . ', "'. $subject_other .
-    '", ' . $have_all_files . ', "'. $contract_company_name . '", ' . $contract_location . ', "' . $contract_bank_number .
+    '", ' . $have_all_files . ', "'. $contract_company_name . '", "' . $contract_location . '", "' . $contract_bank_number .
     '", "' . $contract_opener . '", ' . $receipt_same_as_actual . ', "' . $receipt_difference . '", "' . $professor_class .
     '", "' . $professor_name . '", "' . $expanse_number . '", "' . $expanse_name . '", ' . $payment_option . ', "' . $payment_option_other .
     '", "' . $usage_optional . '", "' . $note_optional . '", ' . $request_status . ')';

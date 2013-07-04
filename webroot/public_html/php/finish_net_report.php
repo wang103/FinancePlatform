@@ -51,13 +51,7 @@ if ($_POST['class'] == "equipment") {
 }
 $have_all_files = 1;
 $contract_company_name = $_POST['company_name'];
-if ($_POST['company_location'] == "beijing") {
-    $contract_location = 0;
-} elseif ($_POST['company_location'] == "remote") {
-    $contract_location = 1;
-} else {    // others
-    $contract_location = 2;
-}
+$contract_location = $_POST['company_location'];
 $contract_bank_number = $_POST['bank_card'];
 $contract_opener = $_POST['opener'];
 if ($_POST['receipt_agree'] == "yes") {
@@ -101,7 +95,7 @@ if ($_POST['submit_button'] == 1) {
 $sql = 'UPDATE requests SET amount=' . $amount . ',' . 'have_budget=' . $have_budget . ',' . 'financial_assistant_name="' .
     $financial_assistant_name . '",' . 'page_number=' . $page_number . ',' . 'subject=' . $subject . ',' . 'subject_other="' .
     $subject_other . '",' . 'have_all_files=' . $have_all_files . ',' . 'contract_company_name="' . $contract_company_name .
-    '",' . 'contract_location=' . $contract_location . ',' . 'contract_bank_number="' . $contract_bank_number . '",' .
+    '",' . 'contract_location="' . $contract_location . '",' . 'contract_bank_number="' . $contract_bank_number . '",' .
     'contract_opener="' . $contract_opener . '",' . 'receipt_same_as_actual=' . $receipt_same_as_actual . ',' .
     'receipt_difference="' . $receipt_difference . '",' . 'professor_class="' . $professor_class . '",' . 'professor_name="' .
     $professor_name . '",' . 'expanse_number="' . $expanse_number . '",' . 'expanse_name="' . $expanse_name . '",' .
