@@ -89,6 +89,13 @@ if (isset($_GET['status']) && $_GET['status'] == 3) {
         alert("报销申请网报成功！");
     </script>';
 }
+
+if (isset($_GET['status']) && $_GET['status'] == 4) {
+    echo '
+    <script>
+        alert("报销完成。请等待老师添加意见。");
+    </script>';
+}
 ?>
 
 </body>

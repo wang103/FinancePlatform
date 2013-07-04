@@ -21,31 +21,31 @@ mysql_query('SET NAMES utf8');
 $result = mysql_query('SELECT * FROM requests WHERE request_id=' . $_GET['rn']);
 $row = mysql_fetch_array($result);
 
-mysql_close($con);
-
 # Check for user name.
 if ($_SESSION['EMAIL'] != $row['submitter_email']) {
     echo 'error code: 1';
     die();
 }
+
+$request_status = 2;
+
+# Modify the row in the database.
+$sql = 'UPDATE requests SET request_status=' . $request_status .
+    ' WHERE request_id=' . $_GET['rn'] . ';';
+
+mysql_query('SET NAMES utf8');
+if (!mysql_query($sql, $con)) {
+    die('Error: ' . mysql_error());
+}
+
+mysql_close($con);
+
+# Send a notification message to student.
+
+
+# Set status to 4, so the last url can display a success message.
+$last_url = $_SESSION['last_url'];
+header("location: " . $last_url . "?status=4");
+
+die();
 ?>
-
-<html>
-
-<head>
-<link rel='stylesheet' type='text/css' href='../css/style01.css'>
-<script src='../js/interface_listener.js'></script>
-</head>
-
-<body>
-
-<?php
-require('common_interface_01.php');
-?>
-
-<input action="action" type="button" onclick='<?php echo 'location.href="student_finish.php?rn=' . $row['request_id'] . '"'?>' value="完成报销"/>
-<input action="action" type="button" onclick="history.go(-1);" value="返回"/>
-
-</body>
-
-</html>
