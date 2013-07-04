@@ -61,7 +61,7 @@ while ($row = mysql_fetch_array($result)) {
     echo '
         </p></td>
         <td><p>';
-    getStatusFromIndex($row['request_status']);
+    getGeneralStatusFromIndex($row['request_status']);
     echo '
         </p></td>
     </tr>';
