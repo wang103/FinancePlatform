@@ -23,25 +23,42 @@ function receiptChanged(sel) {
     }
 }
 
+var passBudget = true;
+var passFiles = true;
+
 function budgetChanged(sel) {
     var theButton = document.getElementById("submit_button");
     if (sel.value == "yes") {
-        theButton.value = "提交报销申请";
-        theButton.disabled = false;
+        if (passFiles) {
+            theButton.value = "提交报销申请";
+            theButton.disabled = false;
+        } else {
+            theButton.value = "材料不齐无法提交";
+            theButton.disabled = true;
+        }
+        passBudget = true;
     } else {
         theButton.value = "没有预算无法提交";
         theButton.disabled = true;
+        passBudget = false;
     }
 }
 
 function filesChanged(sel) {
     var theButton = document.getElementById("submit_button");
     if (sel.value == "yes") {
-        theButton.value = "提交报销申请";
-        theButton.disabled = false;
+        if (passBudget) {
+            theButton.value = "提交报销申请";
+            theButton.disabled = false;
+        } else {
+            theButton.value = "没有预算无法提交";
+            theButton.disabled = true;
+        }
+        passFiles = true;
     } else {
         theButton.value = "材料不齐无法提交";
         theButton.disabled = true;
+        passFiles = false;
     }
 }
 
