@@ -1,10 +1,12 @@
+/* LC: 200px, RC: 250px, CC padding: 40px */
+
 body {
-    min-width: 680px;       /* 2 X (LC + CC padding) + RC */
+    min-width: 730px;       /* 2 X (LC + CC padding) + RC */
 }
 
 #container {
     padding-left: 200px;    /* LC width */
-    padding-right: 240px;   /* RC width + CC padding */
+    padding-right: 290px;   /* RC width + CC padding */
 }
 
 #container .column {
@@ -25,7 +27,7 @@ body {
 }
 
 #layout_right {
-    width: 200px;           /* RC width */
+    width: 250px;           /* RC width */
     padding: 0 0px;         /* RC padding */
-    margin-right: -240px;   /* RC width + CC padding */
+    margin-right: -290px;   /* RC width + CC padding */
 }
