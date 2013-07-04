@@ -15,8 +15,12 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
-# Insert new announcement into the database.
-$sql = 'INSERT INTO announcements (content, poster, date) VALUES ("' . $_POST['content'] . '", "' . $_SESSION['LAST_NAME'] . $_SESSION['FIRST_NAME'] . '", NOW())';
+$last_added_note = $_POST['last_added_note'];
+$request_status = 3;
+
+# Modify the row in the database.
+$sql = 'UPDATE requests SET last_added_note="' . $last_added_note . '", request_status=' . $request_status .
+    ' WHERE request_id=' . $_GET['rn'] . ';';
 
 mysql_query('SET NAMES utf8');
 if (!mysql_query($sql, $con)) {
@@ -25,6 +29,12 @@ if (!mysql_query($sql, $con)) {
 
 mysql_close($con);
 
-header('location: ../index.php');
+# Send a notification message to student.
+
+
+# Set status to 5, so the last url can display a success message.
+$last_url = $_SESSION['last_url'];
+header("location: " . $last_url . "?status=5");
+
 die();
 ?>

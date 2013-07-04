@@ -76,25 +76,28 @@ mysql_close($con);
 </table>
 
 <?php
-if (isset($_GET['status']) && $_GET['status'] == 2) {
-    echo '
-    <script>
+if (isset($_GET['status'])) {
+    if ($_GET['status'] == 2) {
+        echo '
+        <script>
         alert("报销申请内容保存成功！");
-    </script>';
-}
-
-if (isset($_GET['status']) && $_GET['status'] == 3) {
-    echo '
-    <script>
+        </script>';
+    } elseif ($_GET['status'] == 3) {
+        echo '
+        <script>
         alert("报销申请网报成功！");
-    </script>';
-}
-
-if (isset($_GET['status']) && $_GET['status'] == 4) {
-    echo '
-    <script>
+        </script>';
+    } elseif ($_GET['status'] == 4) {
+        echo '
+        <script>
         alert("报销完成。请等待老师添加意见。");
-    </script>';
+        </script>';
+    } elseif ($_GET['status'] == 5) {
+        echo '
+        <script>
+        alert("报销完成!");
+        </script>';
+    }
 }
 ?>
 
