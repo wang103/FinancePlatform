@@ -3,6 +3,7 @@
 <head>
 <title>北邮报销申请 - 提交</title>
 <link rel='stylesheet' type='text/css' href='css/style00.css'>
+<script src='js/utils.js'></script>
 </head>
 
 <body>
@@ -10,7 +11,7 @@
 <!--Store the last visited page-->
 <?php
 session_start();
-$_SESSION['last_url'] = $_SERVER['REQUEST_URI'];
+$_SESSION['last_url'] = explode("?", $_SERVER['REQUEST_URI'])[0];
 ?>
 
 <h1>北邮报销申请 - 提交</h1>
