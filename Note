@@ -96,7 +96,10 @@ INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', 
 
 7. An unique number is generated for each request.
 
-8. 
+8. Seven student accounts, each corresponds to a professor, and one master
+    professor.
+
+9. 
 
 ==================================================================
 
