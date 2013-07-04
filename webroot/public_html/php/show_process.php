@@ -46,6 +46,15 @@ $result = mysql_query($qry);
 require('utils.php');
 
 while ($row = mysql_fetch_array($result)) {
+    if ($row['request_status'] == 0) {
+        $dest_page = 'php/step_finish_net_report.php';
+    } elseif ($row['request_status'] == 1) {
+        $dest_page = 'php/step_student_finish.php';
+    } else {    // status is 2
+        $dest_page = 'php/step_professor_finish.php';
+    }
+    $dest_page = $dest_page . '?rn=' . $row['request_id'];
+
     echo '
     <tr>
         <td><p>' . $row['date'] . '</p></td>
@@ -55,7 +64,7 @@ while ($row = mysql_fetch_array($result)) {
     getSubjectNameFromIndex($row['subject'], $row['subject_other']);
     echo '
         </p></td>
-        <td><p><a href="">';
+        <td><p><a href="' . $dest_page . '">';
     getStatusFromIndex($row['request_status']);
     echo '
         </a></p></td>
@@ -65,6 +74,22 @@ while ($row = mysql_fetch_array($result)) {
 mysql_close($con);
 ?>
 </table>
+
+<?php
+if (isset($_GET['status']) && $_GET['status'] == 2) {
+    echo '
+    <script>
+        alert("报销申请内容保存成功！");
+    </script>';
+}
+
+if (isset($_GET['status']) && $_GET['status'] == 3) {
+    echo '
+    <script>
+        alert("报销申请网报成功！");
+    </script>';
+}
+?>
 
 </body>
 
