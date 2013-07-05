@@ -40,7 +40,10 @@ request_id INT NOT NULL AUTO_INCREMENT,
 submitter_email VARCHAR(255),
 submitter_name VARCHAR(255),
 submitter_id_number VARCHAR(127),
-date DATE NOT NULL,
+date_start DATE NOT NULL,
+date_net_report_finished DATE,
+date_student_finished DATE,
+date_finished DATE,
 amount INT NOT NULL,
 have_budget INT(1) NOT NULL,
 financial_assistant_name VARCHAR(255),
@@ -109,6 +112,6 @@ TODO:
 
 2. Linking to two other platforms.
 
-3. What other type?? 
+3. Show all date time;
 
 4. 
