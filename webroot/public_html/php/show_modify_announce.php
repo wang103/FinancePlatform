@@ -26,7 +26,11 @@ echo '
     <form action="modify_announcement.php?an=' . $announce_id .
     '" method="post">
     <p>
-    修改公告内容：<br>
+    修改公告：<br>
+    主题：<br>
+    <input type="text" name="title" required value="' . $row['title'] . '">
+    <br>
+    内容：<br>
     <textarea name="content" rows="6" cols="60" required>' .
     $row['content'] .
     '</textarea>

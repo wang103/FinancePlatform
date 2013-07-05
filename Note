@@ -27,6 +27,7 @@ PRIMARY KEY (email)
 CREATE TABLE announcements
 (
 announce_id INT NOT NULL AUTO_INCREMENT,
+title VARCHAR(511) NOT NULL,
 content TEXT NOT NULL,
 poster VARCHAR(255) NOT NULL,
 date DATETIME NOT NULL,

@@ -23,7 +23,7 @@ while ($row = mysql_fetch_array($result)) {
     $content = makeLinks($row['content']);
     
     echo '
-    <p>' .
+    <p>主题：' . $row['title'] . '<br>' .
     $content . '<br><br>' .
     '最后发布/修改时间：<i>' . $row['date'] . ' by ' . $row['poster'] . '</i>' .
     '</p>';
@@ -63,7 +63,9 @@ if (isset($_SESSION['STATUS']) && $_SESSION['STATUS'] == 0) {
     <hr style="height:5px;">
     <form action="php/insert_announcement.php" method="post">
     <p>
-    新公告内容：<br>
+    发布新公告：<br>
+    主题：<br> <input type="text" name="title" required> <br>
+    内容：<br>
     <textarea name="content" rows="6" cols="60" required></textarea>
     <br>
     <input type="submit" value="发布新公告"/>

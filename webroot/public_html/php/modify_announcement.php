@@ -13,9 +13,9 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
-$qry = 'UPDATE announcements SET content="' . $_POST['content'] .
-    '", poster="' . $_SESSION['LAST_NAME'] . $_SESSION['FIRST_NAME'] .
-    '", date=NOW() WHERE announce_id=' . $_GET['an'];
+$qry = 'UPDATE announcements SET title="' . $_POST['title'] . '", content="' .
+    $_POST['content'] . '", poster="' . $_SESSION['LAST_NAME'] .
+    $_SESSION['FIRST_NAME'] . '", date=NOW() WHERE announce_id=' . $_GET['an'];
 
 mysql_query('SET NAMES utf8');
 if (!mysql_query($qry, $con)) {
