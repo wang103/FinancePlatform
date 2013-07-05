@@ -12,7 +12,7 @@ require('utils.php');
 
 <label id="id_number">学号：</label> <input type="text" name="id_number" required readonly value="<?php echo $row['submitter_id_number']?>">
 
-<label id="date">日期：</label> <input type="date" name="date" required readonly value="<?php echo $row['date']?>">
+<label id="date">日期：</label> <input type="date" name="date" required readonly value="<?php echo $row['date_start']?>">
 
 <br>
 

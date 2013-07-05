@@ -57,7 +57,7 @@ while ($row = mysql_fetch_array($result)) {
 
     echo '
     <tr>
-        <td><p>' . $row['date'] . '</p></td>
+        <td><p>' . $row['date_start'] . '</p></td>
         <td><p>' . $row['submitter_name'] . '</p></td>
         <td><p>' . $row['amount'] . '</p></td>
         <td><p>';

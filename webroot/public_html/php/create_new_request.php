@@ -92,7 +92,7 @@ $note_optional = $_POST['note'];
 $request_status = 0;
 
 # Insert new request into the database.
-$sql = 'INSERT INTO requests (submitter_email, submitter_name, submitter_id_number, date, amount,' .
+$sql = 'INSERT INTO requests (submitter_email, submitter_name, submitter_id_number, date_start, amount,' .
     'have_budget, financial_assistant_name, page_number, subject, subject_other,' .
     'have_all_files, contract_company_name, contract_location, contract_bank_number,' .
     'contract_opener, receipt_same_as_actual, receipt_difference, professor_class,' .

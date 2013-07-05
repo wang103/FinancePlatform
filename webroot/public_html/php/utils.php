@@ -69,10 +69,15 @@ function makeLinks($string) {
     $result = '';
 
     foreach ($content_array as $content) {
-        if (substr($content, 0, 7) == "http://" ||
-            substr($content, 0, 8) == "https://" ||
-            substr($content, 0, 4) == "www.") {
-            $content = '<a href="' . $content . '">' . $content . '</a>';
+        if (strcasecmp(substr($content, 0, 7), "http://") == 0 ||
+            strcasecmp(substr($content, 0, 8), "https://") == 0 ||
+            strcasecmp(substr($content, 0, 4), "www.") == 0) {
+
+            if (strcasecmp(substr($content, 0, 4), "www.") == 0) {
+                $content = "http://" . $content;
+            }
+
+            $content = '<a href="' . $content . '" target="_blank">' . $content . '</a>';
         }
 
         $result = $result . ' ' . $content;
