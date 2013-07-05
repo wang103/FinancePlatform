@@ -5,6 +5,7 @@ session_start();
 
 # Connect to the database.
 require('../config.php');
+require('php/utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -18,7 +19,9 @@ $result = mysql_query('SELECT * FROM announcements ORDER BY announce_id DESC');
 
 $announce_empty = 1;
 while ($row = mysql_fetch_array($result)) {
-    $content = wordwrap($row['content'], 84, '<br>', true);
+    $content = wordwrap($content, 84, ' <br> ', false);
+    $content = makeLinks($row['content']);
+    
     echo '
     <p>' .
     $content . '<br><br>' .

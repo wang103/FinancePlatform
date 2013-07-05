@@ -63,4 +63,22 @@ function notifyWithEmail($from, $to, $subject, $message) {
 
     return 0;
 }
+
+function makeLinks($string) {
+    $content_array = explode(" ", $string);
+    $result = '';
+
+    foreach ($content_array as $content) {
+        if (substr($content, 0, 7) == "http://" ||
+            substr($content, 0, 8) == "https://" ||
+            substr($content, 0, 4) == "www.") {
+            $content = '<a href="' . $content . '">' . $content . '</a>';
+        }
+
+        $result = $result . ' ' . $content;
+    }
+    
+    $result = trim($result);
+    return $result;
+}
 ?>
