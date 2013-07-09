@@ -24,6 +24,8 @@ $_SESSION['last_url'] = explode("?", $_SERVER['REQUEST_URI'])[0];
 # Check if signed in.
 if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
     echo '<FONT COLOR="Red">请先登录再提交申请</FONT>';
+} elseif ($_SESSION['STATUS'] != 1 && $_SESSION['STATUS'] != 2) {
+    echo '<FONT COLOR="Red">只有学生可提交申请</FONT>';
 } else {
     include 'php/show_submit.php';
 }

@@ -25,6 +25,12 @@ if ($_POST['files'] != "yes") {
     die();
 }
 
+# Check submitter is a student.
+if ($_SESSION['STATUS'] != 1 && $_SESSION['STATUS'] != 2) {
+    echo 'error code: 4';
+    die();
+}
+
 require_once('../../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);

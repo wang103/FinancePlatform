@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-# Check if user is professor.
+# Check if user is the master professor.
 if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
     die();
 }
@@ -16,7 +16,7 @@ if (!$con) {
 mysql_select_db(DB_DATABASE, $con);
 
 $last_added_note = $_POST['last_added_note'];
-$request_status = 3;
+$request_status = 4;
 
 # Modify the row in the database.
 $sql = 'UPDATE requests SET last_added_note="' . $last_added_note . '", request_status=' . $request_status .

@@ -17,9 +17,38 @@ if (!isset($_SESSION['STATUS'])) {
 <?php
 session_start();
 
+# Connect to the database.
+require_once('../config.php');
+
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die('Could not connect: ' . mysql_error());
+}
+mysql_select_db(DB_DATABASE, $con);
+
+mysql_query('SET NAMES utf8');
+
 if ($_SESSION['STATUS'] == 0) {
     echo '<h3>所有报销申请</h3>';
     $qry = 'SELECT * FROM requests ORDER BY request_id DESC';
+} elseif ($_SESSION['STATUS'] == 3) {
+    echo '<h3>我的学生的报销申请</h3>';
+
+    $qry = 'SELECT * FROM requests WHERE ';
+    
+    $temp = mysql_query('SELECT * FROM advisors WHERE advisor_email="' . $_SESSION['EMAIL'] . '"');
+    $counter = 1;
+    while ($temp_row = mysql_fetch_array($temp)) {
+        if ($counter != 1) {
+            $qry = $qry . 'OR ';
+        }
+
+        $qry = $qry . 'submitter_email="' . $temp_row['student_email'] . '" ';
+
+        $counter = $counter + 1;
+    }
+    
+    $qry = $qry . 'ORDER BY request_id DESC';
 } else {
     echo '<h3>我的报销申请</h3>';
     $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] . '" ORDER BY request_id DESC';
@@ -34,18 +63,10 @@ if ($_SESSION['STATUS'] == 0) {
         <th>报销科目</th>
         <th>申请状态</th>
     </tr>
+
 <?php
-require_once('../config.php');
-
-$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-if (!$con) {
-    die('Could not connect: ' . mysql_error());
-}
-mysql_select_db(DB_DATABASE, $con);
-
-# Load all requests. Student can only see his/her requests, professor
-# can see all requests.
-mysql_query('SET NAMES utf8');
+# Load all requests. Student and student's professor can only see
+# the student's requests, master professor can see all requests.
 $result = mysql_query($qry);
 
 require_once('utils.php');

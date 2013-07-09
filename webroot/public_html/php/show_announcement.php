@@ -29,7 +29,8 @@ while ($row = mysql_fetch_array($result)) {
     '</p>';
     
     # If it's professor, allow modifying the post.
-    if (isset($_SESSION['STATUS']) && $_SESSION['STATUS'] == 0) {
+    if (isset($_SESSION['STATUS']) &&
+        ($_SESSION['STATUS'] == 0 || $_SESSION['STATUS'] == 3)) {
         # Pass the announcement id to php page using GET.
         echo '
             <input type="button" value="修改" class="btn" ' .
@@ -58,7 +59,8 @@ mysql_close($con);
 <!--If professor, show the new announcement entry-->
 <?php
 session_start();
-if (isset($_SESSION['STATUS']) && $_SESSION['STATUS'] == 0) {
+if (isset($_SESSION['STATUS']) &&
+    ($_SESSION['STATUS'] == 0 || $_SESSION['STATUS'] == 3)) {
     echo '
     <hr style="height:5px;">
     <form action="php/insert_announcement.php" method="post">

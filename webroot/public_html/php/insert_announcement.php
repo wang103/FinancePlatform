@@ -2,7 +2,8 @@
 session_start();
 
 # Check if user is professor.
-if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
+if (!isset($_SESSION['STATUS']) ||
+    ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3)) {
     die();
 }
 

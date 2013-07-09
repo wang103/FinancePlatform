@@ -37,9 +37,25 @@ mysql_select_db(DB_DATABASE, $con);
 # Load all unfinished requests for the user.
 mysql_query('SET NAMES utf8');
 if ($_SESSION['STATUS'] == 0) {
-    $qry = 'SELECT * FROM requests WHERE request_status=0 OR request_status=2 OR (request_status=1 AND submitter_email="' . $_SESSION['EMAIL'] . '") ORDER BY request_id DESC';
+    $qry = 'SELECT * FROM requests WHERE request_status=1 OR request_status=3 ORDER BY request_id DESC';
+} elseif ($_SESSION['STATUS'] == 3) {
+    $qry = 'SELECT * FROM requests WHERE ';
+    
+    $temp = mysql_query('SELECT * FROM advisors WHERE advisor_email="' . $_SESSION['EMAIL'] . '"');
+    $counter = 1;
+    while ($temp_row = mysql_fetch_array($temp)) {
+        if ($counter != 1) {
+            $qry = $qry . 'OR ';
+        }
+
+        $qry = $qry . 'submitter_email="' . $temp_row['student_email'] . '" ';
+        
+        $counter = $counter + 1;
+    }
+    
+    $qry = $qry . 'AND request_status=0 ORDER BY request_id DESC';
 } else {
-    $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] . '" AND request_status=1 ORDER BY request_id DESC';
+    $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] . '" AND request_status=2 ORDER BY request_id DESC';
 }
 $result = mysql_query($qry);
 
@@ -47,10 +63,12 @@ require_once('utils.php');
 
 while ($row = mysql_fetch_array($result)) {
     if ($row['request_status'] == 0) {
-        $dest_page = 'php/step_finish_net_report.php';
+        $dest_page = 'php/step_advisor_agree.php';
     } elseif ($row['request_status'] == 1) {
+        $dest_page = 'php/step_finish_net_report.php';
+    } elseif ($row['request_status'] == 2) {
         $dest_page = 'php/step_student_finish.php';
-    } else {    // status is 2
+    } else {    // status is 3
         $dest_page = 'php/step_professor_finish.php';
     }
     $dest_page = $dest_page . '?rn=' . $row['request_id'];
@@ -96,6 +114,11 @@ if (isset($_GET['status'])) {
         echo '
         <script>
         alert("报销完成!");
+        </script>';
+    } elseif ($_GET['status'] == 6) {
+        echo '
+        <script>
+        alert("申请通过。请等待主任老师完成网报。");
         </script>';
     }
 }

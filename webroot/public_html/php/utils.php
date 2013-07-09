@@ -39,12 +39,14 @@ function getSubjectNameFromIndex($subjectIndex, $othersName) {
 
 function getGeneralStatusFromIndex($statusIndex) {
     session_start();
-
+    
     if ($statusIndex == 0) {
-        echo "刚刚提交，等待老师完成网报";
+        echo "刚刚提交，等待负责老师同意";
     } else if ($statusIndex == 1) {
-        echo "网报完成，等待申请人完成报销";
+        echo "同意通过，等待老师完成网报";
     } else if ($statusIndex == 2) {
+        echo "网报完成，等待申请人完成报销";
+    } else if ($statusIndex == 3) {
         echo "报销完成，等待老师添加意见";
     } else {
         echo "此报销已完成";
@@ -54,19 +56,25 @@ function getGeneralStatusFromIndex($statusIndex) {
 function getStatusFromIndex($statusIndex) {
     session_start();
 
-    if ($statusIndex == 0) {
+    if ($statusIndex == 0) {i
+        if ($_SESSION['STATUS'] == 3) {
+            echo "点此查看及同意报销";
+        } else {
+            echo "等待负责老师同意";
+        }
+    } else if ($statusIndex == 1) {
         if ($_SESSION['STATUS'] == 0) {
             echo "修改或者完成网报";
         } else {
             echo "等待老师完成网报";
         }
-    } else if ($statusIndex == 1) {
-        if ($_SESSION['STATUS'] == 0) {
+    } else if ($statusIndex == 2) {
+        if ($_SESSION['STATUS'] == 1 || $_SESSION['STATUS'] == 2) {
             echo "点此完成报销";
         } else {
-            echo "点此完成报销";
+            echo "等待学生完成报销";
         }
-    } else if ($statusIndex == 2) {
+    } else if ($statusIndex == 3) {
         if ($_SESSION['STATUS'] == 0) {
             echo "点此添加意见";
         } else {

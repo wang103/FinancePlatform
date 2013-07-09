@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-# Check if user is professor.
+# Check if user is the master professor.
 if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
     echo 'error code: 0';
     die();
@@ -83,11 +83,11 @@ $note_optional = $_POST['note'];
 
 if ($_POST['submit_button'] == 1) {
     // Only save.
-    $request_status = 0;
+    $request_status = 1;
     $finished_status = 2;
 } else {
     // Save and finish net reporting.
-    $request_status = 1;
+    $request_status = 2;
     $finished_status = 3;
 }
 

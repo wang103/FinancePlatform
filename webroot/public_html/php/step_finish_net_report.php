@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-# Check if user is professor.
+# Check if user is the master professor.
 if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
     echo 'error code: 0';
     die();

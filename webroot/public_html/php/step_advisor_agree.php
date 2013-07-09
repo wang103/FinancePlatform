@@ -1,13 +1,14 @@
 <?php
 session_start();
 
-# Check if user is the master professor.
-if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
+# Check if user is a advisor professor.
+if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 3) {
     die();
 }
 
 # Connect to the database.
 require_once('../../config.php');
+require_once('utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -21,6 +22,12 @@ $result = mysql_query('SELECT * FROM requests WHERE request_id=' . $_GET['rn']);
 $row = mysql_fetch_array($result);
 
 mysql_close($con);
+
+# Check if user is the advisor.
+if (!isMyStudentsSubmission($row['submitter_email'], $_SESSION['EMAIL'])) {
+    echo 'error code: 0';
+    die();
+}
 ?>
 
 <html>
@@ -32,19 +39,16 @@ mysql_close($con);
 
 <body>
 
-<form name="add_last_note_form" action=<?php echo "professor_finish.php?rn=" . $row['request_id']?> method="post">
-<label id="last_added_note_label">添加教师意见（若无意见请直接点完成）：</label> <br>
-<textarea id="last_added_note_content" name="last_added_note" rows="6" cols="60"></textarea>
-<br>
-<input type="submit" value="完成">
-<input action="action" type="button" onclick="history.go(-1);" value="返回"/>
-</form>
-
-<hr>
+<form name="advisor_agree_form" action="advisor_agree.php" method="post">
 
 <?php
 require('common_interface_01.php');
 ?>
+
+<button type="submit" name="submit_button" value=2>同意此申请</button>
+<input action="action" type="button" onclick="history.go(-1);" value="返回"/>
+
+</form>
 
 </body>
 
