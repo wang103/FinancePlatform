@@ -28,6 +28,7 @@ mysql_close($con);
 
 # Check user name or if user is the advisor or if user is the master professor.
 if ($_SESSION['EMAIL'] != $row['submitter_email'] &&
+    $_SESSION['EMAIL'] != $row['transfered_email'] &&
     !isMyStudentsSubmission($row['submitter_email'], $_SESSION['EMAIL']) &&
     $_SESSION['STATUS'] != 0) {
     echo 'error code: 1';

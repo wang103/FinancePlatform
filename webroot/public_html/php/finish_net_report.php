@@ -98,17 +98,22 @@ if ($_POST['submit_button'] == 1) {
 
 # Modify the row in the database.
 $sql = 'UPDATE requests SET transfered_email=' . $transfered_email .
-    ', date_net_report_finished="' . $net_report_date . '", amount=' . $amount . ',' . 'have_budget=' .
-    $have_budget . ',' . 'financial_assistant_name="' .
-    $financial_assistant_name . '",' . 'page_number=' . $page_number . ',' . 'subject=' . $subject . ',' . 'subject_other="' .
-    $subject_other . '",' . 'have_all_files=' . $have_all_files . ',' . 'contract_company_name="' . $contract_company_name .
-    '",' . 'contract_location="' . $contract_location . '",' . 'contract_bank_number="' . $contract_bank_number . '",' .
-    'contract_opener="' . $contract_opener . '",' . 'receipt_same_as_actual=' . $receipt_same_as_actual . ',' .
-    'receipt_difference="' . $receipt_difference . '",' . 'professor_class="' . $professor_class . '",' . 'professor_name="' .
-    $professor_name . '",' . 'expanse_number="' . $expanse_number . '",' . 'expanse_name="' . $expanse_name . '",' .
-    'payment_option=' . $payment_option . ',' . 'payment_option_other="' . $payment_option_other . '",' . 'usage_optional="' .
-    $usage_optional . '",' . 'note_optional="' . $note_optional. '",' . 'request_status=' . $request_status .
-    ' WHERE request_id=' . $_POST['id'] . ';';
+    ', date_net_report_finished="' . $net_report_date . '", amount=' . $amount .
+    ',' . 'have_budget=' . $have_budget . ',' . 'financial_assistant_name="' .
+    $financial_assistant_name . '",' . 'page_number=' . $page_number . ',' .
+    'subject=' . $subject . ',' . 'subject_other="' . $subject_other . '",' .
+    'have_all_files=' . $have_all_files . ',' . 'contract_company_name="' .
+    $contract_company_name . '",' . 'contract_location="' . $contract_location .
+    '",' . 'contract_bank_number="' . $contract_bank_number . '",' .
+    'contract_opener="' . $contract_opener . '",' . 'receipt_same_as_actual=' .
+    $receipt_same_as_actual . ',' . 'receipt_difference="' .
+    $receipt_difference . '",' . 'professor_class="' . $professor_class . '",' .
+    'professor_name="' . $professor_name . '",' . 'expanse_number="' .
+    $expanse_number . '",' . 'expanse_name="' . $expanse_name . '",' .
+    'payment_option=' . $payment_option . ',' . 'payment_option_other="' .
+    $payment_option_other . '",' . 'usage_optional="' . $usage_optional . '",' .
+    'note_optional="' . $note_optional. '",' . 'request_status=' .
+    $request_status . ' WHERE request_id=' . $_POST['id'] . ';';
 
 mysql_query('SET NAMES utf8');
 if (!mysql_query($sql, $con)) {
@@ -120,7 +125,13 @@ if (SEND_EMAIL) {
     $sql = 'SELECT * FROM requests WHERE request_id=' . $_POST['id'];
     $result = mysql_query($sql, $con);
     $student = mysql_fetch_assoc($result);
-    notifyWithEmail($student['submitter_email'], 2);
+
+    if (isset($student['transfered_email'])) {
+        notifyWithEmail($student['transfered_email'], 5);
+        notifyWithEmail($student['submitter_email'], 6);
+    } else {
+        notifyWithEmail($student['submitter_email'], 2);
+    }
 }
 
 mysql_close($con);

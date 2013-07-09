@@ -56,8 +56,9 @@ if ($_SESSION['STATUS'] == 0) {
     
     $qry = $qry . 'AND request_status=0 ORDER BY request_id DESC';
 } else {
-    $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] .
-        '" AND request_status=2 ORDER BY request_id DESC';
+    $qry = 'SELECT * FROM requests WHERE request_status=2 AND ((submitter_email="' .
+       $_SESSION['EMAIL'] . '" AND transfered_email=NULL) OR transfered_email="' .
+       $_SESSION['EMAIL'] . '") ORDER BY request_id DESC';
 }
 $result = mysql_query($qry);
 
@@ -79,7 +80,15 @@ while ($row = mysql_fetch_array($result)) {
     <tr>
         <td><p>' . $row['request_id'] . '</p></td>
         <td><p>' . $row['date_start'] . '</p></td>
-        <td><p>' . $row['submitter_name'] . '</p></td>
+        <td><p>' . $row['submitter_name'];
+
+    if (isset($row['transfered_email'])) {
+        $sql_usr = mysql_query('SELECT * FROM users WHERE email="' . $row['transfered_email'] . '"');
+        $usr = mysql_fetch_array($sql_usr);
+        echo '=>' . $usr['last_name'] . $usr['first_name'];
+    }
+
+    echo '</p></td>
         <td><p>' . $row['amount'] . '</p></td>
         <td><p>';
     getSubjectNameFromIndex($row['subject'], $row['subject_other']);

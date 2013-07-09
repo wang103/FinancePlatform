@@ -36,14 +36,16 @@ if ($_SESSION['STATUS'] == 0) {
 
     $qry = 'SELECT * FROM requests WHERE ';
     
-    $temp = mysql_query('SELECT * FROM advisors WHERE advisor_email="' . $_SESSION['EMAIL'] . '"');
+    $temp = mysql_query('SELECT * FROM advisors WHERE advisor_email="' .
+        $_SESSION['EMAIL'] . '"');
     $counter = 1;
     while ($temp_row = mysql_fetch_array($temp)) {
         if ($counter != 1) {
             $qry = $qry . 'OR ';
         }
 
-        $qry = $qry . 'submitter_email="' . $temp_row['student_email'] . '" ';
+        $qry = $qry . 'submitter_email="' . $temp_row['student_email'] .
+            '" OR transfered_email="' . $temp_row['student_email'] . '" ';
 
         $counter = $counter + 1;
     }
@@ -51,7 +53,9 @@ if ($_SESSION['STATUS'] == 0) {
     $qry = $qry . 'ORDER BY request_id DESC';
 } else {
     echo '<h3>我的报销申请</h3>';
-    $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] . '" ORDER BY request_id DESC';
+    $qry = 'SELECT * FROM requests WHERE submitter_email="' .
+        $_SESSION['EMAIL'] . '" OR transfered_email="' . $_SESSION['EMAIL'] .
+        '" ORDER BY request_id DESC';
 }
 ?>
 
@@ -77,7 +81,15 @@ while ($row = mysql_fetch_array($result)) {
     <tr>
         <td><p>' . $row['request_id'] . '</p></td>
         <td><p><a href="php/show_reimbursement.php?rn=' . $row['request_id'] . '">' . $row['date_start'] . '</a></p></td>
-        <td><p>' . $row['submitter_name'] . '</p></td>
+        <td><p>' . $row['submitter_name'];
+    
+    if (isset($row['transfered_email'])) {
+        $sql_usr = mysql_query('SELECT * FROM users WHERE email="' . $row['transfered_email'] . '"');
+        $usr = mysql_fetch_array($sql_usr);
+        echo '=>' . $usr['last_name'] . $usr['first_name'];
+    }
+    
+    echo '</p></td>
         <td><p>' . $row['amount'] . '</p></td>
         <td><p>';
     getSubjectNameFromIndex($row['subject'], $row['subject_other']);

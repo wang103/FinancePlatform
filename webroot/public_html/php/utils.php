@@ -87,7 +87,7 @@ function getStatusFromIndex($statusIndex) {
 
 function notifyWithEmail($to, $status) {
     $subject = "财务平台提醒：";
-    $message = "请登录平台进行处理。";
+    $message = "请登录平台进行查看或处理。";
 
     if ($status == 0) {
         $subject .= "新的申请等待你的同意";
@@ -99,6 +99,10 @@ function notifyWithEmail($to, $status) {
         $subject .= "有报销等待你添加意见";
     } elseif ($status == 4) {
         $subject .= "报销完成";
+    } elseif ($status == 5) {
+        $subject .= "有申请已被转交给你";
+    } elseif ($status == 6) {
+        $subject .= "你的申请已被转交";
     } else {
         return 1;
     }
