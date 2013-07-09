@@ -144,8 +144,6 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 
 10. Support one advisor to multiple students.
 
-11. 
-
 ==================================================================
 
 TODO:
@@ -163,6 +161,7 @@ TODO:
 6. Make finance assistant a dropdown list.
 
 7. Master professor gives it back to different student/finance assistant.
+    Old student should know.
 
 8. Turn announcement list into links.
 

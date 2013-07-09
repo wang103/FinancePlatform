@@ -108,10 +108,15 @@ if (!mysql_query($sql, $con)) {
     die('Error: ' . mysql_error());
 }
 
-mysql_close($con);
-
 # Send a notification message to student.
+if (SEND_EMAIL) {
+    $sql = 'SELECT * FROM requests WHERE request_id=' . $_POST['id'];
+    $result = mysql_query($sql, $con);
+    $student = mysql_fetch_assoc($result);
+    notifyWithEmail($_SESSION['EMAIL'], $student['submitter_email'], 2);
+}
 
+mysql_close($con);
 
 # Set feedback to 2 if save-only, or 3 if save and net reporting,
 # so the last url can display a success message.

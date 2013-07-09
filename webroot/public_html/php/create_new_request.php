@@ -116,10 +116,15 @@ if (!mysql_query($sql, $con)) {
     die('Error: ' . mysql_error());
 }
 
-mysql_close($con);
-
 # Send a notification message to professor.
+if (SEND_EMAIL) {
+    $sql = 'SELECT * FROM advisors WHERE student_email="' . $_SESSION['EMAIL'] . '"';
+    $result = mysql_query($sql, $con);
+    $advisor_prof = mysql_fetch_assoc($result);
+    notifyWithEmail($_SESSION['EMAIL'], $advisor_prof['advisor_email'], 0);
+}
 
+mysql_close($con);
 
 # Set session var to 1 so the last url can display a success message.
 $last_url = $_SESSION['last_url'];

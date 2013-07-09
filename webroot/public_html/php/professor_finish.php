@@ -27,10 +27,15 @@ if (!mysql_query($sql, $con)) {
     die('Error: ' . mysql_error());
 }
 
-mysql_close($con);
-
 # Send a notification message to student.
+if (SEND_EMAIL) {
+    $sql = 'SELECT * FROM requests WHERE request_id=' . $_GET['rn'];
+    $result = mysql_query($sql, $con);
+    $student = mysql_fetch_assoc($result);
+    notifyWithEmail($_SESSION['EMAIL'], $student['submitter_email'], 4);
+}
 
+mysql_close($con);
 
 # Set feedback to 5, so the last url can display a success message.
 $last_url = $_SESSION['last_url'];
