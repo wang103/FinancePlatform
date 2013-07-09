@@ -150,13 +150,11 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 
 10. Support one advisor to multiple students.
 
+11. Links to two other platforms are stored in config.php
+
 ==================================================================
 
 TODO:
-
-1. Change account information.
-
-2. Linking to two other platforms.
 
 3. Add all date time.
 

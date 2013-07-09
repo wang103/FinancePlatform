@@ -9,7 +9,15 @@
 
 <?php
 session_start();
+
+require_once('../config.php');
 ?>
+
+<fieldset class="fieldset-auto-width">
+    <legend>快速链接</legend>
+    <a href=<?php echo '"' . INTEL_PLATFORM_URL . '"'?> target="_blank">查询知识产权平台</a>
+    <a href=<?php echo '"' . ASSET_PLATFORM_URL . '"'?> target="_blank">查询资产平台</a>
+</fieldset>
 
 <h3>新建报销申请</h3>
 
