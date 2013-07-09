@@ -7,7 +7,7 @@ if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
 }
 
 # Connect to the database.
-require('../../config.php');
+require_once('../../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {

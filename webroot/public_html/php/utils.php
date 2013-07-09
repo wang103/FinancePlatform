@@ -1,4 +1,24 @@
 <?php
+function isMyStudentsSubmission($studentEmail, $myEmail) {
+    # Connect to the database.
+    require_once('../../config.php');
+
+    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    if (!$con) {
+        die('Could not connect: ' . mysql_error());
+    }
+    mysql_select_db(DB_DATABASE, $con);
+
+    # Load advisor details.
+    mysql_query('SET NAMES utf8');
+    $result = mysql_query('SELECT * FROM advisors WHERE student_email="' . $studentEmail . '"');
+    $row = mysql_fetch_array($result);
+
+    mysql_close($con);
+
+    return $myEmail == $row['advisor_email'];
+}
+
 function getSubjectNameFromIndex($subjectIndex, $othersName) {
     if ($subjectIndex == 0) {
         echo "设备";

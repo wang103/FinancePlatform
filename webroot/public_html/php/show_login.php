@@ -7,11 +7,13 @@ if (isset($_SESSION['EMAIL']) && !empty($_SESSION['EMAIL'])) {
     $first_name = $_SESSION['FIRST_NAME'];
     $last_name = $_SESSION['LAST_NAME'];
     if ($_SESSION['STATUS'] == 0) {
-		$status = "教授";
+		$status = "财务主任/教授";
 	} elseif ($_SESSION['STATUS'] == 1) {
 		$status = "研究生";
-    } else {
+    } elseif ($_SESSION['STATUS'] == 2) {
         $status = "本科生";
+    } else {    // STATUS is 3.
+        $status = "教授";
     }
 
     echo '

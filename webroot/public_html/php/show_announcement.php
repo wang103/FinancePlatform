@@ -4,8 +4,8 @@
 session_start();
 
 # Connect to the database.
-require('../config.php');
-require('php/utils.php');
+require_once('../config.php');
+require_once('php/utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {

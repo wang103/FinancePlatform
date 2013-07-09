@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require('../../config.php');
+require_once('../../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {

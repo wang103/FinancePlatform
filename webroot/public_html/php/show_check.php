@@ -35,7 +35,7 @@ if ($_SESSION['STATUS'] == 0) {
         <th>申请状态</th>
     </tr>
 <?php
-require('../config.php');
+require_once('../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -48,7 +48,7 @@ mysql_select_db(DB_DATABASE, $con);
 mysql_query('SET NAMES utf8');
 $result = mysql_query($qry);
 
-require('utils.php');
+require_once('utils.php');
 
 while ($row = mysql_fetch_array($result)) {
     echo '

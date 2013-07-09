@@ -8,7 +8,8 @@ if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
 }
 
 # Connect to the database.
-require('../../config.php');
+require_once('../../config.php');
+require_once('utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -23,8 +24,10 @@ $row = mysql_fetch_array($result);
 
 mysql_close($con);
 
-# Check user name or if user is a professor.
-if ($_SESSION['EMAIL'] != $row['submitter_email'] && $_SESSION['STATUS'] != 0) {
+# Check user name or if user is the advisor or if user is the master professor.
+if ($_SESSION['EMAIL'] != $row['submitter_email'] &&
+    !isMyStudentsSubmission($row['submitter_email'], $_SESSION['EMAIL']) &&
+    $_SESSION['STATUS'] != 0) {
     echo 'error code: 1';
     die();
 }

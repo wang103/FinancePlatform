@@ -24,6 +24,15 @@ status INT(1) NOT NULL,
 PRIMARY KEY (email)
 );
 
+CREATE TABLE advisors
+(
+student_email VARCHAR(255) NOT NULL,
+advisor_email VARCHAR(255) NOT NULL,
+PRIMARY KEY (student_email),
+FOREIGN KEY (advisor_email) REFERENCES users(email),
+FOREIGN KEY (student_email) REFERENCES users(email)
+);
+
 CREATE TABLE announcements
 (
 announce_id INT NOT NULL AUTO_INCREMENT,
@@ -71,14 +80,39 @@ PRIMARY KEY (request_id),
 FOREIGN KEY (submitter_email) REFERENCES users(email)
 );
 
-// status: 0 -- professor, 1 -- grad student, 2 -- undergrad student
+// status: 0 -- master professor, 1 -- grad student, 2 -- undergrad student, 3 -- professor
 // request_status: 0 -- submitted, need professor to modify and finish net reporting,
 // 1 -- professor finished net reporting, need student to complete,
 // 2 -- student completed, professor didn't add comment,
 // 3 -- all completed, professor added comment.
 
 INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
+
 INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', '', 0);
+
+INSERT INTO users VALUES ('hypervisorII@hotmail.com', md5('tianyi'), '1', 'student', 'S1', 1);
+INSERT INTO users VALUES ('test2@hotmail.com', md5('tianyi'), '2', 'student', 'S1', 1);
+INSERT INTO users VALUES ('test3@hotmail.com', md5('tianyi'), '3', 'student', 'S1', 1);
+INSERT INTO users VALUES ('test4@hotmail.com', md5('tianyi'), '4', 'student', 'S1', 1);
+INSERT INTO users VALUES ('test5@hotmail.com', md5('tianyi'), '5', 'student', 'S1', 1);
+INSERT INTO users VALUES ('test6@hotmail.com', md5('tianyi'), '6', 'student', 'S1', 1);
+INSERT INTO users VALUES ('test7@hotmail.com', md5('tianyi'), '7', 'student', 'S1', 1);
+
+INSERT INTO users VALUES ('wang103@uiuc.edu', md5('tianyi'), '1', 'professor', '', 3);
+INSERT INTO users VALUES ('test22@hotmail.com', md5('tianyi'), '2', 'professor', '', 3);
+INSERT INTO users VALUES ('test33@hotmail.com', md5('tianyi'), '3', 'professor', '', 3);
+INSERT INTO users VALUES ('test44@hotmail.com', md5('tianyi'), '4', 'professor', '', 3);
+INSERT INTO users VALUES ('test55@hotmail.com', md5('tianyi'), '5', 'professor', '', 3);
+INSERT INTO users VALUES ('test66@hotmail.com', md5('tianyi'), '6', 'professor', '', 3);
+INSERT INTO users VALUES ('test77@hotmail.com', md5('tianyi'), '7', 'professor', '', 3);
+
+INSERT INTO advisors VALUES ('hypervisorII@hotmail.com', 'wang103@uiuc.edu');
+INSERT INTO advisors VALUES ('test2@hotmail.com', 'test22@hotmail.com');
+INSERT INTO advisors VALUES ('test3@hotmail.com', 'test33@hotmail.com');
+INSERT INTO advisors VALUES ('test4@hotmail.com', 'test44@hotmail.com');
+INSERT INTO advisors VALUES ('test5@hotmail.com', 'test55@hotmail.com');
+INSERT INTO advisors VALUES ('test6@hotmail.com', 'test66@hotmail.com');
+INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 
 3. There are 3 main interfaces: submit, process, and check.
     'submit' is mainly used by students to submit new reimbursement.
@@ -103,7 +137,10 @@ INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', 
 8. Seven student accounts, each corresponds to a professor, and one master
     professor.
 
-9. 
+9. Student and his/her advisor can only see the student's submission. Master
+    professor can see all.
+
+10. 
 
 ==================================================================
 
