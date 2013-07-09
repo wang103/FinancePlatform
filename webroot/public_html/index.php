@@ -41,6 +41,16 @@ include 'php/show_login.php';
 
 </div>
 
+<?php
+if (isset($_SESSION['feedback']) && $_SESSION['feedback'] == 7) {
+    echo '
+    <script>
+        alert("账户修改成功！");
+    </script>';
+    unset($_SESSION['feedback']);
+}
+?>
+
 </body>
 
 </html>

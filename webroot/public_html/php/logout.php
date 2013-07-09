@@ -5,6 +5,7 @@ session_start();
 unset($_SESSION['EMAIL']);
 unset($_SESSION['FIRST_NAME']);
 unset($_SESSION['LAST_NAME']);
+unset($_SESSION['ID_NUMBER']);
 unset($_SESSION['STATUS']);
 
 # Go back.

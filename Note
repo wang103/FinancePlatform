@@ -29,8 +29,12 @@ CREATE TABLE advisors
 student_email VARCHAR(255) NOT NULL,
 advisor_email VARCHAR(255) NOT NULL,
 PRIMARY KEY (student_email),
-FOREIGN KEY (advisor_email) REFERENCES users(email),
-FOREIGN KEY (student_email) REFERENCES users(email)
+FOREIGN KEY (advisor_email) REFERENCES users(email) 
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY (student_email) REFERENCES users(email) 
+ON UPDATE CASCADE
+ON DELETE CASCADE
 );
 
 CREATE TABLE announcements
@@ -77,7 +81,9 @@ note_optional TEXT,
 last_added_note TEXT,
 request_status INT(1) NOT NULL,
 PRIMARY KEY (request_id),
-FOREIGN KEY (submitter_email) REFERENCES users(email)
+FOREIGN KEY (submitter_email) REFERENCES users(email) 
+ON UPDATE CASCADE
+ON DELETE CASCADE
 );
 
 // status: 0 -- master professor, 1 -- grad student, 2 -- undergrad student, 3 -- professor

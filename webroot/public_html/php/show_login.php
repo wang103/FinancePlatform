@@ -28,7 +28,8 @@ if (isset($_SESSION['EMAIL']) && !empty($_SESSION['EMAIL'])) {
     <p id="login_p" align="left">
     <label id="login_label">身份：</label>' . $status . '
     </p>
-	<p id="login_p" align="center">
+    <p id="login_p" align="center">
+    <input type="button" onClick="location.href=\'php/show_modify_account.php\'" value="修改">
 	<input type="submit" value="登出">
     </p>
     </form>';
