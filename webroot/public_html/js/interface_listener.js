@@ -23,6 +23,18 @@ function receiptChanged(sel) {
     }
 }
 
+function transferChanged(sel) {
+    if (sel.value == "no") {
+        document.getElementById("transfer_label").style.display = 'none';
+        document.getElementById("transfer").style.display = 'none';
+        document.getElementById("transfer").required = false;
+    } else {
+        document.getElementById("transfer_label").style.display = 'block';
+        document.getElementById("transfer").style.display = 'block';
+        document.getElementById("transfer").required = true;
+    }
+}
+
 var passBudget = true;
 var passFiles = true;
 

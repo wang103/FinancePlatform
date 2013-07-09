@@ -163,3 +163,35 @@ require_once('utils.php');
 <textarea id="note_content" name="note" readonly rows="6" cols="60"> <?php echo $row['note_optional']?> </textarea>
 
 <br><br>
+
+<fieldset class="fieldset-auto-width">
+    <legend>转交</legend>
+
+    <label>是否转交给其他财务助理？</label>
+    <input type="radio" name="transfer_sel" onclick="transferChanged(this);" disabled='disabled' value="yes" <?php if(isset($row['transfered_email'])) echo "checked"?>>是
+    <input type="radio" name="transfer_sel" onclick="transferChanged(this);" disabled='disabled' value="no" <?php if(!isset($row['transfered_email'])) echo "checked"?>>否
+
+    <br>
+
+    <label id="transfer_label" <?php if(!isset($row['transfered_email'])) echo 'style="display: none"'?>>请选择：</label>
+    <select id="transfer" name="transfer" disabled='disabled' <?php if(!isset($row['transfered_email'])) echo 'style="display: none"'?> required>
+    <?php
+    while ($assit = mysql_fetch_array($assistants)) {
+        if ($assit['email'] != $row['submitter_email']) {
+            echo '<option ';
+
+            if (isset($row['transfered_email']) &&
+                $assit['email'] == $row['transfered_email']) {
+                echo 'selected="selected" ';
+            }
+
+            echo 'value="' . $assit['email'] . '">' .
+                $assit['last_name'] . $assit['first_name'] .
+                '</option>';
+        }
+    }
+    ?>
+    </select>
+</fieldset>
+
+<br><br>

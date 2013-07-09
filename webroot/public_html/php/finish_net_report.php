@@ -28,6 +28,10 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
+$transfered_email = 'NULL';
+if ($_POST['transfer_sel'] == "yes") {
+    $transfered_email = '"' . $_POST['transfer'] . '"';
+}
 $net_report_date = date('Y-m-d');
 $amount = $_POST['amount'];
 $have_budget = 1;
@@ -93,7 +97,8 @@ if ($_POST['submit_button'] == 1) {
 }
 
 # Modify the row in the database.
-$sql = 'UPDATE requests SET date_net_report_finished="' . $net_report_date . '", amount=' . $amount . ',' . 'have_budget=' .
+$sql = 'UPDATE requests SET transfered_email=' . $transfered_email .
+    ', date_net_report_finished="' . $net_report_date . '", amount=' . $amount . ',' . 'have_budget=' .
     $have_budget . ',' . 'financial_assistant_name="' .
     $financial_assistant_name . '",' . 'page_number=' . $page_number . ',' . 'subject=' . $subject . ',' . 'subject_other="' .
     $subject_other . '",' . 'have_all_files=' . $have_all_files . ',' . 'contract_company_name="' . $contract_company_name .

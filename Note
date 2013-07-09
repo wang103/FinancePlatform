@@ -53,6 +53,7 @@ request_id INT NOT NULL AUTO_INCREMENT,
 submitter_email VARCHAR(255),
 submitter_name VARCHAR(255),
 submitter_id_number VARCHAR(127),
+transfered_email VARCHAR(255),
 date_start DATE NOT NULL,
 date_advisor_agreed DATE,
 date_net_report_finished DATE,
@@ -83,6 +84,9 @@ last_added_note TEXT,
 request_status INT(1) NOT NULL,
 PRIMARY KEY (request_id),
 FOREIGN KEY (submitter_email) REFERENCES users(email) 
+ON UPDATE CASCADE
+ON DELETE CASCADE,
+FOREIGN KEY (transfered_email) REFERENCES users(email)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 );
@@ -156,13 +160,6 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 ==================================================================
 
 TODO:
-
-7. Master professor gives it back to different student/finance assistant.
-    Old student should know.
-
-11. In the summary, ability to sort with date or sort with finance assistant.
-
-
 
 4. Ability to add new flow.
 

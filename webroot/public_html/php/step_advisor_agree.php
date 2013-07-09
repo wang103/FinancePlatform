@@ -21,6 +21,8 @@ mysql_query('SET NAMES utf8');
 $result = mysql_query('SELECT * FROM requests WHERE request_id=' . $_GET['rn']);
 $row = mysql_fetch_array($result);
 
+$assistants = mysql_query('SELECT * FROM users WHERE status=1 OR status=2');
+
 mysql_close($con);
 
 # Check if user is the advisor.
