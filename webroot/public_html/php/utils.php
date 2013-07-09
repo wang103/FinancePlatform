@@ -85,7 +85,7 @@ function getStatusFromIndex($statusIndex) {
     }
 }
 
-function notifyWithEmail($from, $to, $status) {
+function notifyWithEmail($to, $status) {
     $subject = "财务平台提醒：";
     $message = "请登录平台进行处理。";
 
@@ -103,8 +103,7 @@ function notifyWithEmail($from, $to, $status) {
         return 1;
     }
 
-    $headers = "From:" . $from;
-    mail($to, $subject, $message, $headers);
+    mail($to, $subject, $message);
 
     return 0;
 }

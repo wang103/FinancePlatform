@@ -121,7 +121,7 @@ if (SEND_EMAIL) {
     $sql = 'SELECT * FROM advisors WHERE student_email="' . $_SESSION['EMAIL'] . '"';
     $result = mysql_query($sql, $con);
     $advisor_prof = mysql_fetch_assoc($result);
-    notifyWithEmail($_SESSION['EMAIL'], $advisor_prof['advisor_email'], 0);
+    notifyWithEmail($advisor_prof['advisor_email'], 0);
 }
 
 mysql_close($con);

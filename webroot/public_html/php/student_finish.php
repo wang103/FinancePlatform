@@ -38,15 +38,15 @@ if (!mysql_query($sql, $con)) {
     die('Error: ' . mysql_error());
 }
 
-mysql_close($con);
-
 # Send a notification message to student.
 if (SEND_EMAIL) {
     $sql = 'SELECT * FROM users WHERE status=0';
     $result = mysql_query($sql, $con);
     $master_prof = mysql_fetch_assoc($result);
-    notifyWithEmail($_SESSION['EMAIL'], $master_prof['email'], 3);
+    notifyWithEmail($master_prof['email'], 3);
 }
+
+mysql_close($con);
 
 # Set feedback to 4, so the last url can display a success message.
 $last_url = $_SESSION['last_url'];

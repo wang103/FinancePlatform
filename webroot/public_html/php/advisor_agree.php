@@ -51,7 +51,7 @@ if (SEND_EMAIL) {
     $sql = 'SELECT * FROM users WHERE status=0';
     $result = mysql_query($sql, $con);
     $master_prof = mysql_fetch_assoc($result);
-    notifyWithEmail($_SESSION['EMAIL'], $master_prof['email'], 1);
+    notifyWithEmail($master_prof['email'], 1);
 }
 
 mysql_close($con);

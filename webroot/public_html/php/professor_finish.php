@@ -32,7 +32,7 @@ if (SEND_EMAIL) {
     $sql = 'SELECT * FROM requests WHERE request_id=' . $_GET['rn'];
     $result = mysql_query($sql, $con);
     $student = mysql_fetch_assoc($result);
-    notifyWithEmail($_SESSION['EMAIL'], $student['submitter_email'], 4);
+    notifyWithEmail($student['submitter_email'], 4);
 }
 
 mysql_close($con);
