@@ -27,10 +27,12 @@ if ($_SESSION['EMAIL'] != $row['submitter_email']) {
     die();
 }
 
+$date_student = date('Y-m-d');
 $request_status = 3;
 
 # Modify the row in the database.
-$sql = 'UPDATE requests SET request_status=' . $request_status .
+$sql = 'UPDATE requests SET date_student_finished="' .
+    $date_student . '", request_status=' . $request_status .
     ' WHERE request_id=' . $_GET['rn'] . ';';
 
 mysql_query('SET NAMES utf8');

@@ -28,6 +28,7 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
+$net_report_date = date('Y-m-d');
 $amount = $_POST['amount'];
 $have_budget = 1;
 $financial_assistant_name = $_POST['finance_assist_name'];
@@ -92,7 +93,8 @@ if ($_POST['submit_button'] == 1) {
 }
 
 # Modify the row in the database.
-$sql = 'UPDATE requests SET amount=' . $amount . ',' . 'have_budget=' . $have_budget . ',' . 'financial_assistant_name="' .
+$sql = 'UPDATE requests SET date_net_report_finished="' . $net_report_date . '", amount=' . $amount . ',' . 'have_budget=' .
+    $have_budget . ',' . 'financial_assistant_name="' .
     $financial_assistant_name . '",' . 'page_number=' . $page_number . ',' . 'subject=' . $subject . ',' . 'subject_other="' .
     $subject_other . '",' . 'have_all_files=' . $have_all_files . ',' . 'contract_company_name="' . $contract_company_name .
     '",' . 'contract_location="' . $contract_location . '",' . 'contract_bank_number="' . $contract_bank_number . '",' .

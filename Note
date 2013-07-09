@@ -54,6 +54,7 @@ submitter_email VARCHAR(255),
 submitter_name VARCHAR(255),
 submitter_id_number VARCHAR(127),
 date_start DATE NOT NULL,
+date_advisor_agreed DATE,
 date_net_report_finished DATE,
 date_student_finished DATE,
 date_finished DATE,
@@ -156,19 +157,19 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 
 TODO:
 
-3. Add all date time.
+10. Show finance assistant, id, date in the summary.
+
+7. Master professor gives it back to different student/finance assistant.
+    Old student should know.
+
+11. In the summary, ability to sort with date or sort with finance assistant.
+
+
 
 4. Ability to add new flow.
 
 5. Some flows are special.
 
 6. Make finance assistant a dropdown list.
-
-7. Master professor gives it back to different student/finance assistant.
-    Old student should know.
-
-10. Show finance assistant, id in the summary.
-
-11. In the summary, ability to sort with date or sort with finance assistant.
 
 12. Special category.

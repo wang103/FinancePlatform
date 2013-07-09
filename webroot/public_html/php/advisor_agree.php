@@ -35,12 +35,14 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
+$agreed_date = date('Y-m-d');
 $request_status = 1;
 
 # Modify the row in the database.
 mysql_query('SET NAMES utf8');
-$sql = 'UPDATE requests SET request_status=' . $request_status .
-    ' WHERE request_id=' . $_GET['rn'] . ';';
+$sql = 'UPDATE requests SET date_advisor_agreed="' . $agreed_date .
+    '", request_status=' . $request_status . ' WHERE request_id=' .
+    $_GET['rn'] . ';';
 
 if (!mysql_query($sql, $con)) {
     die('Error: ' . mysql_error());

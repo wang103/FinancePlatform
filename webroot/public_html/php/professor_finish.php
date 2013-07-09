@@ -15,11 +15,13 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
+$date_professor = date('Y-m-d');
 $last_added_note = $_POST['last_added_note'];
 $request_status = 4;
 
 # Modify the row in the database.
-$sql = 'UPDATE requests SET last_added_note="' . $last_added_note . '", request_status=' . $request_status .
+$sql = 'UPDATE requests SET date_finished="' . $date_professor .
+    '", last_added_note="' . $last_added_note . '", request_status=' . $request_status .
     ' WHERE request_id=' . $_GET['rn'] . ';';
 
 mysql_query('SET NAMES utf8');
