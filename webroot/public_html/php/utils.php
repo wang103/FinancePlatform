@@ -56,7 +56,7 @@ function getGeneralStatusFromIndex($statusIndex) {
 function getStatusFromIndex($statusIndex) {
     session_start();
 
-    if ($statusIndex == 0) {i
+    if ($statusIndex == 0) {
         if ($_SESSION['STATUS'] == 3) {
             echo "点此查看及同意报销";
         } else {
