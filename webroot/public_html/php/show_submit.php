@@ -149,11 +149,12 @@ session_start();
 </form>
 
 <?php
-if (isset($_GET['status']) && $_GET['status'] == 1) {
+if (isset($_SESSION['feedback']) && $_SESSION['feedback'] == 1) {
     echo '
     <script>
         alert("提交报销申请成功！");
     </script>';
+    unset($_SESSION['feedback']);
 }
 ?>
 

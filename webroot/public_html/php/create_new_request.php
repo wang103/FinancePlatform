@@ -121,9 +121,10 @@ mysql_close($con);
 # Send a notification message to professor.
 
 
-# Set status to 1 so the last url can display a success message.
+# Set session var to 1 so the last url can display a success message.
 $last_url = $_SESSION['last_url'];
-header("location: " . $last_url . "?status=1");
+$_SESSION['feedback'] = 1;
+header("location: " . $last_url);
 
 die();
 ?>

@@ -43,9 +43,10 @@ mysql_close($con);
 # Send a notification message to student.
 
 
-# Set status to 4, so the last url can display a success message.
+# Set feedback to 4, so the last url can display a success message.
 $last_url = $_SESSION['last_url'];
-header("location: " . $last_url . "?status=4");
+$_SESSION['feedback'] = 4;
+header("location: " . $last_url);
 
 die();
 ?>

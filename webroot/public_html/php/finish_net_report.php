@@ -113,10 +113,11 @@ mysql_close($con);
 # Send a notification message to student.
 
 
-# Set status to 2 if save-only, or 3 if save and net reporting,
+# Set feedback to 2 if save-only, or 3 if save and net reporting,
 # so the last url can display a success message.
 $last_url = $_SESSION['last_url'];
-header("location: " . $last_url . "?status=" . $finished_status);
+$_SESSION['feedback'] = $finished_status;
+header("location: " . $last_url);
 
 die();
 ?>

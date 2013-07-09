@@ -39,7 +39,7 @@ if (!isMyStudentsSubmission($row['submitter_email'], $_SESSION['EMAIL'])) {
 
 <body>
 
-<form name="advisor_agree_form" action="advisor_agree.php" method="post">
+<form name="advisor_agree_form" action=<?php echo "advisor_agree.php?rn=" . $_GET['rn']?> method="post">
 
 <?php
 require('common_interface_01.php');

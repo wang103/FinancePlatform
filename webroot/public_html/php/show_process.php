@@ -71,7 +71,7 @@ while ($row = mysql_fetch_array($result)) {
     } else {    // status is 3
         $dest_page = 'php/step_professor_finish.php';
     }
-    $dest_page = $dest_page . '?rn=' . $row['request_id'];
+    $dest_page .= '?rn=' . $row['request_id'];
 
     echo '
     <tr>
@@ -94,33 +94,34 @@ mysql_close($con);
 </table>
 
 <?php
-if (isset($_GET['status'])) {
-    if ($_GET['status'] == 2) {
+if (isset($_SESSION['feedback'])) {
+    if ($_SESSION['feedback'] == 2) {
         echo '
         <script>
         alert("报销申请内容保存成功！");
         </script>';
-    } elseif ($_GET['status'] == 3) {
+    } elseif ($_SESSION['feedback'] == 3) {
         echo '
         <script>
         alert("报销申请网报成功！");
         </script>';
-    } elseif ($_GET['status'] == 4) {
+    } elseif ($_SESSION['feedback'] == 4) {
         echo '
         <script>
         alert("报销完成。请等待老师添加意见。");
         </script>';
-    } elseif ($_GET['status'] == 5) {
+    } elseif ($_SESSION['feedback'] == 5) {
         echo '
         <script>
         alert("报销完成!");
         </script>';
-    } elseif ($_GET['status'] == 6) {
+    } elseif ($_SESSION['feedback'] == 6) {
         echo '
         <script>
         alert("申请通过。请等待主任老师完成网报。");
         </script>';
     }
+    unset($_SESSION['feedback']);
 }
 ?>
 

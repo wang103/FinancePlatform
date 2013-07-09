@@ -21,15 +21,24 @@ mysql_query('SET NAMES utf8');
 $result = mysql_query('SELECT * FROM requests WHERE request_id=' . $_GET['rn']);
 $row = mysql_fetch_array($result);
 
+mysql_close($con);
+
 # Check if user is the advisor.
 if (!isMyStudentsSubmission($row['submitter_email'], $_SESSION['EMAIL'])) {
     echo 'error code: 0';
     die();
 }
 
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die('Could not connect: ' . mysql_error());
+}
+mysql_select_db(DB_DATABASE, $con);
+
 $request_status = 1;
 
 # Modify the row in the database.
+mysql_query('SET NAMES utf8');
 $sql = 'UPDATE requests SET request_status=' . $request_status .
     ' WHERE request_id=' . $_GET['rn'] . ';';
 
@@ -40,11 +49,12 @@ if (!mysql_query($sql, $con)) {
 mysql_close($con);
 
 # Send a notification message to student.
+notifyWithEmail($_SESSION['EMAIL'], $row['submitter_email'], 1);
 
-
-# Set status to 6, so the last url can display a success message.
+# Set feedback to 6, so the last url can display a success message.
 $last_url = $_SESSION['last_url'];
-header("location: " . $last_url . "?status=6");
+$_SESSION['feedback'] = 6;
+header("location: " . $last_url);
 
 die();
 ?>

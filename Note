@@ -149,6 +149,7 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 ==================================================================
 
 TODO:
+
 1. Change account information.
 
 2. Linking to two other platforms.
@@ -171,4 +172,6 @@ TODO:
 
 11. In the summary, ability to sort with date or sort with finance assistant.
 
-12. 
+12. Special category.
+
+13. 

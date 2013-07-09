@@ -3,19 +3,19 @@ function isMyStudentsSubmission($studentEmail, $myEmail) {
     # Connect to the database.
     require_once('../../config.php');
 
-    $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
-    if (!$con) {
+    $con1 = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+    if (!$con1) {
         die('Could not connect: ' . mysql_error());
     }
-    mysql_select_db(DB_DATABASE, $con);
+    mysql_select_db(DB_DATABASE, $con1);
 
     # Load advisor details.
     mysql_query('SET NAMES utf8');
     $result = mysql_query('SELECT * FROM advisors WHERE student_email="' . $studentEmail . '"');
     $row = mysql_fetch_array($result);
 
-    mysql_close($con);
-
+    mysql_close($con1);
+    
     return $myEmail == $row['advisor_email'];
 }
 
@@ -85,7 +85,24 @@ function getStatusFromIndex($statusIndex) {
     }
 }
 
-function notifyWithEmail($from, $to, $subject, $message) {
+function notifyWithEmail($from, $to, $status) {
+    $subject = "财务平台提醒：";
+    $message = "请登录平台进行处理。";
+
+    if ($status == 0) {
+        $subject .= "新的申请等待你的同意";
+    } elseif ($status == 1) {
+        $subject .= "新的申请等待你的网报";
+    } elseif ($status == 2) {
+        $subject .= "你的报销网报已经完成";
+    } elseif ($status == 3) {
+        $subject .= "有报销等待你添加意见";
+    } elseif ($status == 4) {
+        $subject .= "报销完成";
+    } else {
+        return 1;
+    }
+
     $headers = "From:" . $from;
     mail($to, $subject, $message, $headers);
 
