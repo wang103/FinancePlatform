@@ -1,10 +1,5 @@
 <html>
 
-<head>
-</head>
-
-<body>
-
 <?php
 # Connect to the database.
 require_once('../../config.php');
@@ -16,7 +11,7 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
-# Load announcements.
+# Load the announcement.
 mysql_query('SET NAMES utf8');
 $result = mysql_query('SELECT * FROM announcements WHERE announce_id = ' .
     $_GET['an'] . ' ORDER BY announce_id DESC');
@@ -28,6 +23,12 @@ $row = mysql_fetch_array($result);
 $content = nl2br($row['content']);
 $content = makeLinks($content);
 ?>
+
+<head>
+<title><?php echo $row['title']?></title>
+</head>
+
+<body>
 
 <h2><?php echo $row['title']?></h2>
 
