@@ -24,7 +24,9 @@ $qry = 'SELECT * FROM users WHERE email="' . $_SESSION['EMAIL'] .
 $result = mysql_query($qry, $con);
 
 if (mysql_num_rows($result) == 0) {
+    # Incorrect password.
     mysql_close($con);
+    header("location: wrong_password.php");
     die();
 }
 

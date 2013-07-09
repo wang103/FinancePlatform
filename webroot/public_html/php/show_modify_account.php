@@ -61,10 +61,16 @@ mysql_close($con);
 <input type="text" name="first_name" required value="<?php echo $_SESSION['FIRST_NAME']?>">
 </p>
 
-<p>
-<label id="id_number">学号：</label>
-<input type="text" name="id_number" required value="<?php echo $_SESSION['ID_NUMBER']?>">
-</p>
+<?php
+if ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3) {
+    echo '
+    <p>
+    <label id="id_number">学号：</label>
+    <input type="text" name="id_number" required value="' .
+    $_SESSION['ID_NUMBER'] . '">
+    </p>';
+}
+?>
 
 <p>
 <label id="new_pw">新密码：</label>
@@ -74,30 +80,34 @@ mysql_close($con);
 <input type="password" name="new_pw_again" value="">
 </p>
 
-<p>
-<label id="cur_advisor">当前负责老师：
 <?php
-if ($cur_advisor == false) {
-    echo '无';
-} else {
-    echo $cur_advisor['last_name'] . $cur_advisor['first_name'];
-}
-?></label>
+if ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3) {
+    echo '
+    <p>
+    <label id="cur_advisor">当前负责老师：';
 
-<label id="new_advisor">改变负责老师：</label>
-<select name="advisor" required>
-<?php
-while ($advisor_row = mysql_fetch_array($advisors)) {
-    echo '<option ';
-    if($cur_advisor_email==$advisor_row['email']) {
-        echo 'selected';
+    if ($cur_advisor == false) {
+        echo '无';
+    } else {
+        echo $cur_advisor['last_name'] . $cur_advisor['first_name'];
     }
-    echo ' value="' . $advisor_row['email'] . '">' . $advisor_row['last_name'] .
-        $advisor_row['first_name'] . '</option>';
+    echo '</label>
+
+    <label id="new_advisor">改变负责老师：</label>
+    <select name="advisor" required>';
+
+    while ($advisor_row = mysql_fetch_array($advisors)) {
+        echo '<option ';
+        if($cur_advisor_email==$advisor_row['email']) {
+            echo 'selected';
+        }
+        echo ' value="' . $advisor_row['email'] . '">' . $advisor_row['last_name'] .
+            $advisor_row['first_name'] . '</option>';
+    }
+
+    echo '</select></p>';
 }
 ?>
-</select>
-</p>
 
 <hr>
 
