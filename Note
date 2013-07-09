@@ -157,8 +157,6 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 
 TODO:
 
-10. Show finance assistant, id, date in the summary.
-
 7. Master professor gives it back to different student/finance assistant.
     Old student should know.
 

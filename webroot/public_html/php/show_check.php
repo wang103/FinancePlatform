@@ -57,6 +57,7 @@ if ($_SESSION['STATUS'] == 0) {
 
 <table border="1">
     <tr>
+        <th>流水号</th>
         <th>报销时间</th>
         <th>报销人</th>
         <th>金额（元)</th>
@@ -74,6 +75,7 @@ require_once('utils.php');
 while ($row = mysql_fetch_array($result)) {
     echo '
     <tr>
+        <td><p>' . $row['request_id'] . '</p></td>
         <td><p><a href="php/show_reimbursement.php?rn=' . $row['request_id'] . '">' . $row['date_start'] . '</a></p></td>
         <td><p>' . $row['submitter_name'] . '</p></td>
         <td><p>' . $row['amount'] . '</p></td>

@@ -58,6 +58,10 @@ document.getElementsByName("id")[0].readOnly = true;
 document.getElementsByName("name")[0].readOnly = true;
 document.getElementsByName("id_number")[0].readOnly = true;
 document.getElementsByName("date")[0].readOnly = true;
+document.getElementsByName("date1")[0].readOnly = true;
+document.getElementsByName("date2")[0].readOnly = true;
+document.getElementsByName("date3")[0].readOnly = true;
+document.getElementsByName("date4")[0].readOnly = true;
 </script>
 
 </body>

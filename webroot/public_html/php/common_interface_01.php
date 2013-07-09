@@ -12,7 +12,32 @@ require_once('utils.php');
 
 <label id="id_number">学号：</label> <input type="text" name="id_number" required readonly value="<?php echo $row['submitter_id_number']?>">
 
-<label id="date">日期：</label> <input type="date" name="date" required readonly value="<?php echo $row['date_start']?>">
+<br>
+
+<fieldset class="fieldset-auto-width">
+    <legend>日期</legend>
+
+    <p>    
+    <label id="date">提交：</label>
+    <input type="date" name="date" required readonly value="<?php echo $row['date_start']?>">
+
+    <label id="date1">负责老师通过：</label>
+    <input type="date" name="date1" required readonly value="<?php echo $row['date_advisor_agreed']?>">
+    </p>
+
+    <p>
+    <label id="date2">网报完成：</label>
+    <input type="date" name="date2" required readonly value="<?php echo $row['date_net_report_finished']?>">
+
+    <label id="date3">提交人完成：</label>
+    <input type="date" name="date3" required readonly value="<?php echo $row['date_student_finished']?>">
+    </p>
+
+    <p>
+    <label id="date4">报销完成：</label>
+    <input type="date" name="date4" required readonly value="<?php echo $row['date_finished']?>">
+    </p>
+</fieldset>
 
 <br>
 

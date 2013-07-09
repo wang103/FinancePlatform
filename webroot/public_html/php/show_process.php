@@ -19,6 +19,7 @@ if (!isset($_SESSION['STATUS'])) {
 需要处理的申请
 <table border="1">
     <tr>
+        <th>流水号</th>
         <th>报销时间</th>
         <th>报销人</th>
         <th>金额（元）</th>
@@ -55,7 +56,8 @@ if ($_SESSION['STATUS'] == 0) {
     
     $qry = $qry . 'AND request_status=0 ORDER BY request_id DESC';
 } else {
-    $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] . '" AND request_status=2 ORDER BY request_id DESC';
+    $qry = 'SELECT * FROM requests WHERE submitter_email="' . $_SESSION['EMAIL'] .
+        '" AND request_status=2 ORDER BY request_id DESC';
 }
 $result = mysql_query($qry);
 
@@ -75,6 +77,7 @@ while ($row = mysql_fetch_array($result)) {
 
     echo '
     <tr>
+        <td><p>' . $row['request_id'] . '</p></td>
         <td><p>' . $row['date_start'] . '</p></td>
         <td><p>' . $row['submitter_name'] . '</p></td>
         <td><p>' . $row['amount'] . '</p></td>
