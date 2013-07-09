@@ -5,7 +5,6 @@ session_start();
 
 # Connect to the database.
 require_once('../config.php');
-require_once('php/utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -17,14 +16,15 @@ mysql_select_db(DB_DATABASE, $con);
 mysql_query('SET NAMES utf8');
 $result = mysql_query('SELECT * FROM announcements ORDER BY announce_id DESC');
 
+mysql_close($con);
+
 $announce_empty = 1;
 while ($row = mysql_fetch_array($result)) {
-    $content = wordwrap($content, 84, ' <br> ', false);
-    $content = makeLinks($row['content']);
-    
     echo '
-    <p>主题：' . $row['title'] . '<br>' .
-    $content . '<br><br>' .
+    <p>
+    <a href="php/show_detailed_announce.php?an=' . $row['announce_id'] .
+    '" target="_blank">' . $row['title'] . '</a>
+    <br><br>' .
     '最后发布/修改时间：<i>' . $row['date'] . ' by ' . $row['poster'] . '</i>' .
     '</p>';
     
@@ -52,8 +52,6 @@ if ($announce_empty == 1) {
     <p>没有任何公告</p>
     ';
 }
-
-mysql_close($con);
 ?>
 
 <!--If professor, show the new announcement entry-->
