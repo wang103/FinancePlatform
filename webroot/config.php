@@ -1,15 +1,15 @@
 <?php
+/*
 define(DB_HOST, 'localhost');
 define(DB_DATABASE, 'reimbursement_db');
 define(DB_USER, 'root');
 define(DB_PASSWORD, 'tianyi');
+*/
 
-/*
-define(DB_HOST, '72.167.233.37');
+define(DB_HOST, '50.63.227.29');
 define(DB_DATABASE, 'reimbursement');
 define(DB_USER, 'reimbursement');
 define(DB_PASSWORD, 'Tianyi001!');
-*/
 
 define(SEND_EMAIL, false);
 
