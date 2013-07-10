@@ -6,7 +6,7 @@ header('Content-type: text/html; charset=utf-8');
 
 <head>
 <link rel='stylesheet' type='text/css' href='../css/style01.css'>
-<script src='../js/interface_listener.js'></script>
+<script src='js/interface_listener.js'></script>
 </head>
 
 <body>

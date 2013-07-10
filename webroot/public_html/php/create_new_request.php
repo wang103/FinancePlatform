@@ -72,8 +72,12 @@ if ($_POST['special'] == "yes") {
 $intel_platform_id = 'NULL';
 $asset_platform_id = 'NULL';
 if ($is_special == 1) {
-    $intel_platform_id = $_POST['special_int_intel'];
-    $asset_platform_id = $_POST['special_int_asset'];
+    if (isset($_POST['special_int_intel']) && strlen(trim($_POST['special_int_intel'])) > 0) {
+        $intel_platform_id = $_POST['special_int_intel'];
+    }
+    if (isset($_POST['special_int_asset']) && strlen(trim($_POST['special_int_asset'])) > 0) {
+        $asset_platform_id = $_POST['special_int_asset'];
+    }
 }
 $have_all_files = 1;
 $contract_company_name = $_POST['company_name'];
