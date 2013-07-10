@@ -1,4 +1,6 @@
 <?php
+header('Content-type: text/html; charset=utf-8');
+
 session_start();
 
 # Check if user is a advisor professor.
