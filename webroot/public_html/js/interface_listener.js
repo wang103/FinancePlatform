@@ -9,7 +9,58 @@ function subjectChanged(sel) {
         document.getElementById("other_subject_input").style.display = 'none';
         document.getElementById("other_subject_input").required = false;
     }
+
+    if (value == "equipment" || value == "material" ||
+            value == "software" || value == "others") {
+        turnOnSpecialSubject();
+    } else {
+        turnOffSpecialSubject();
+    }
 }
+
+function specialChanged(sel) {
+    if (sel.value == "no") {
+        turnOffSpecialSubject();
+    } else {
+        turnOnSpecialSubject();
+    }
+}
+
+/*---------- private ----------*/
+
+function turnOnSpecialSubject() {
+    document.getElementById("special_label_1").style.display = 'block';
+    document.getElementById("special_label_2").style.display = 'block';
+    document.getElementById("special_input_1").style.display = 'block';
+    document.getElementById("special_input_2").style.display = 'block';
+    
+    var elems = document.getElementsByName("special");
+    for (i = 0; i < elems.length; i++) {
+        if (elems[i].value == "yes") {
+            elems[i].checked = true;
+        } else {
+            elems[i].checked = false;
+        }
+    }
+}
+
+function turnOffSpecialSubject() {
+    document.getElementById("special_label_1").style.display = 'none';
+    document.getElementById("special_label_2").style.display = 'none';
+    document.getElementById("special_input_1").style.display = 'none';
+    document.getElementById("special_input_2").style.display = 'none';
+    
+    var elems = document.getElementsByName("special");
+    for (i = 0; i < elems.length; i++) {
+        if (elems[i].value == "yes") {
+            elems[i].checked = false;
+        } else {
+            elems[i].checked = true;
+        }
+    }
+}
+
+/*-----------------------------*/
 
 function receiptChanged(sel) {
     if (sel.value == "yes") {
@@ -20,20 +71,6 @@ function receiptChanged(sel) {
         document.getElementById("receipt_label").style.display = 'block';
         document.getElementById("receipt_content").style.display = 'block';
         document.getElementById("receipt_content").required = true;
-    }
-}
-
-function specialChanged(sel) {
-    if (sel.value == "no") {
-        document.getElementById("special_label_1").style.display = 'none';
-        document.getElementById("special_label_2").style.display = 'none';
-        document.getElementById("special_input_1").style.display = 'none';
-        document.getElementById("special_input_2").style.display = 'none';
-    } else {
-        document.getElementById("special_label_1").style.display = 'block';
-        document.getElementById("special_label_2").style.display = 'block';
-        document.getElementById("special_input_1").style.display = 'block';
-        document.getElementById("special_input_2").style.display = 'block';
     }
 }
 
