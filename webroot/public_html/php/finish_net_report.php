@@ -54,6 +54,17 @@ if ($_POST['class'] == "equipment") {
     $subject = 6;
     $subject_other = $_POST['other_subject'];
 }
+if ($_POST['special'] == "yes") {
+    $is_special = 1;
+} else {
+    $is_special = 0;
+}
+$intel_platform_id = 'NULL';
+$asset_platform_id = 'NULL';
+if ($is_special == 1) {
+    $intel_platform_id = $_POST['special_int_intel'];
+    $asset_platform_id = $_POST['special_int_asset'];
+}
 $have_all_files = 1;
 $contract_company_name = $_POST['company_name'];
 $contract_location = $_POST['company_location'];
@@ -102,6 +113,8 @@ $sql = 'UPDATE requests SET transfered_email=' . $transfered_email .
     ',' . 'have_budget=' . $have_budget . ',' . 'financial_assistant_name="' .
     $financial_assistant_name . '",' . 'page_number=' . $page_number . ',' .
     'subject=' . $subject . ',' . 'subject_other="' . $subject_other . '",' .
+    'is_special=' . $is_special . ',' . 'intel_platform_id=' . $intel_platform_id . ',' .
+    'asset_platform_id=' . $asset_platform_id . ',' .
     'have_all_files=' . $have_all_files . ',' . 'contract_company_name="' .
     $contract_company_name . '",' . 'contract_location="' . $contract_location .
     '",' . 'contract_bank_number="' . $contract_bank_number . '",' .

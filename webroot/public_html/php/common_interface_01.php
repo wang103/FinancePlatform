@@ -75,6 +75,26 @@ require_once('utils.php');
 <input id="other_subject_input" <?php if($row['subject']!=6) echo 'style="display: none"'?> type="text" name="other_subject" readonly value="<?php echo $row['subject_other']?>">
 </p>
 
+<fieldset class="fieldset-auto-width">
+    <legend>特殊科目</legend>
+
+    <label>是否为特殊科目？</label>
+    <input type="radio" name="special" onclick="specialChanged(this);" disabled='disabled' value="yes" <?php if($row['is_special']==1) echo "checked"?>>是
+    <input type="radio" name="special" onclick="specialChanged(this);" disabled='disabled' value="no" <?php if($row['is_special']==0) echo "checked"?>>不是
+
+    <p>
+    <label id="special_label_1" <?php if($row['is_special']==0) echo 'style="display: none"'?>>知识产权平台流水号：</label>
+    <input id="special_input_1" <?php if($row['is_special']==0) echo 'style="display: none"'?> type="text" name="special_int_intel" readonly value="<?php echo $row['intel_platform_id']?>">
+    </p>
+
+    <p>
+    <label id="special_label_2" <?php if($row['is_special']==0) echo 'style="display: none"'?>>资产平台流水号：</label>
+    <input id="special_input_2" <?php if($row['is_special']==0) echo 'style="display: none"'?> type="text" name="special_int_asset" readonly value="<?php echo $row['asset_platform_id']?>">
+    </p>
+</fieldset>
+
+<br><br>
+
 报销材料是否齐全（齐全才可提交报销申请）？
 <input type="radio" name="files" onclick="filesChanged(this);" disabled='disabled' value="yes" checked>是
 <input type="radio" name="files" onclick="filesChanged(this);" disabled='disabled' value="no">否

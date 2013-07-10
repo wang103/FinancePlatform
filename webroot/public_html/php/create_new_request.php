@@ -64,6 +64,17 @@ if ($_POST['class'] == "equipment") {
     $subject = 6;
     $subject_other = $_POST['other_subject'];
 }
+if ($_POST['special'] == "yes") {
+    $is_special = 1;
+} else {
+    $is_special = 0;
+}
+$intel_platform_id = 'NULL';
+$asset_platform_id = 'NULL';
+if ($is_special == 1) {
+    $intel_platform_id = $_POST['special_int_intel'];
+    $asset_platform_id = $_POST['special_int_asset'];
+}
 $have_all_files = 1;
 $contract_company_name = $_POST['company_name'];
 $contract_location = $_POST['company_location'];
@@ -99,14 +110,14 @@ $request_status = 0;
 
 # Insert new request into the database.
 $sql = 'INSERT INTO requests (submitter_email, submitter_name, submitter_id_number, date_start, amount,' .
-    'have_budget, financial_assistant_name, page_number, subject, subject_other,' .
+    'have_budget, financial_assistant_name, page_number, subject, subject_other, is_special, intel_platform_id, asset_platform_id,' .
     'have_all_files, contract_company_name, contract_location, contract_bank_number,' .
     'contract_opener, receipt_same_as_actual, receipt_difference, professor_class,' .
     'professor_name, expanse_number, expanse_name, payment_option, payment_option_other,' .
     'usage_optional, note_optional, request_status) VALUES (' .
     '"' . $submitter_email . '", "' . $submitter_name . '", "' . $submitter_id_number . '", "' . $submit_date . '", ' . $amount .
-    ', ' . $have_budget . ', "' . $financial_assistant_name . '", ' . $page_number . ', ' . $subject . ', "'. $subject_other .
-    '", ' . $have_all_files . ', "'. $contract_company_name . '", "' . $contract_location . '", "' . $contract_bank_number .
+    ', ' . $have_budget . ', "' . $financial_assistant_name . '", ' . $page_number . ', ' . $subject . ', "'. $subject_other . '", ' . $is_special . ', ' . $intel_platform_id . ', ' . $asset_platform_id .
+    ', ' . $have_all_files . ', "'. $contract_company_name . '", "' . $contract_location . '", "' . $contract_bank_number .
     '", "' . $contract_opener . '", ' . $receipt_same_as_actual . ', "' . $receipt_difference . '", "' . $professor_class .
     '", "' . $professor_name . '", "' . $expanse_number . '", "' . $expanse_name . '", ' . $payment_option . ', "' . $payment_option_other .
     '", "' . $usage_optional . '", "' . $note_optional . '", ' . $request_status . ')';

@@ -23,6 +23,20 @@ function receiptChanged(sel) {
     }
 }
 
+function specialChanged(sel) {
+    if (sel.value == "no") {
+        document.getElementById("special_label_1").style.display = 'none';
+        document.getElementById("special_label_2").style.display = 'none';
+        document.getElementById("special_input_1").style.display = 'none';
+        document.getElementById("special_input_2").style.display = 'none';
+    } else {
+        document.getElementById("special_label_1").style.display = 'block';
+        document.getElementById("special_label_2").style.display = 'block';
+        document.getElementById("special_input_1").style.display = 'block';
+        document.getElementById("special_input_2").style.display = 'block';
+    }
+}
+
 function transferChanged(sel) {
     if (sel.value == "no") {
         document.getElementById("transfer_label").style.display = 'none';

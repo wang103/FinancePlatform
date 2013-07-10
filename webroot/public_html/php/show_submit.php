@@ -64,6 +64,26 @@ require_once('../config.php');
 <input id="other_subject_input" style="display: none" type="text" name="other_subject">
 </p>
 
+<fieldset class="fieldset-auto-width">
+    <legend>特殊科目</legend>
+
+    <label>是否为特殊科目？</label>
+    <input type="radio" name="special" onclick="specialChanged(this);" value="yes" checked>是
+    <input type="radio" name="special" onclick="specialChanged(this);" value="no">不是
+
+    <p>
+    <label id="special_label_1">知识产权平台流水号：</label>
+    <input id="special_input_1" type="text" name="special_int_intel">
+    </p>
+
+    <p>
+    <label id="special_label_2">资产平台流水号：</label>
+    <input id="special_input_2" type="text" name="special_int_asset">
+    </p>
+</fieldset>
+
+<br><br>
+
 报销材料是否齐全（齐全才可提交报销申请）？
 <input type="radio" name="files" onclick="filesChanged(this);" value="yes" checked>是
 <input type="radio" name="files" onclick="filesChanged(this);" value="no">否
