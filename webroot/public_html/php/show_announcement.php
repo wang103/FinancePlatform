@@ -1,8 +1,10 @@
+<?php
+session_start();
+?>
+
 <h3>公告栏</h3>
 
 <?php
-session_start();
-
 # Connect to the database.
 require_once('../config.php');
 
@@ -56,7 +58,6 @@ if ($announce_empty == 1) {
 
 <!--If professor, show the new announcement entry-->
 <?php
-session_start();
 if (isset($_SESSION['STATUS']) &&
     ($_SESSION['STATUS'] == 0 || $_SESSION['STATUS'] == 3)) {
     echo '

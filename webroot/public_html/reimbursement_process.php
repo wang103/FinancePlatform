@@ -1,5 +1,6 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
+session_start();
 ?>
 
 <html>
@@ -14,7 +15,6 @@ header('Content-type: text/html; charset=utf-8');
 
 <!--Store the last visited page-->
 <?php
-session_start();
 $temp = explode("?", $_SERVER['REQUEST_URI']);
 $_SESSION['last_url'] = $temp[0];
 ?>

@@ -38,8 +38,6 @@ function getSubjectNameFromIndex($subjectIndex, $othersName) {
 }
 
 function getGeneralStatusFromIndex($statusIndex) {
-    session_start();
-    
     if ($statusIndex == 0) {
         echo "刚刚提交，等待负责老师同意";
     } else if ($statusIndex == 1) {
@@ -54,8 +52,6 @@ function getGeneralStatusFromIndex($statusIndex) {
 }
 
 function getStatusFromIndex($statusIndex) {
-    session_start();
-
     if ($statusIndex == 0) {
         if ($_SESSION['STATUS'] == 3) {
             echo "点此查看及同意报销";

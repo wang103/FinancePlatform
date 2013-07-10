@@ -1,6 +1,5 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
-
 session_start();
 
 if (!isset($_SESSION['STATUS'])) {
@@ -17,8 +16,6 @@ if (!isset($_SESSION['STATUS'])) {
 <body>
 
 <?php
-session_start();
-
 # Connect to the database.
 require_once('../config.php');
 
