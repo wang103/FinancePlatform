@@ -27,7 +27,7 @@ $assistants = mysql_query('SELECT * FROM users WHERE status=1 OR status=2');
 mysql_close($con);
 
 # Check if user is the advisor.
-if (!isMyStudentsSubmission($row['submitter_email'], $_SESSION['EMAIL'])) {
+if (!isMyStudentsSubmission($row['financial_assistant_email'], $_SESSION['EMAIL'])) {
     echo 'error code: 0';
     die();
 }

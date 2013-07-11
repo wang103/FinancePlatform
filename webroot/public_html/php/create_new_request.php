@@ -39,12 +39,12 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
-$submitter_email = $_SESSION['EMAIL'];
 $submitter_name = $_POST['name'];
 $submitter_id_number = $_POST['id_number'];
 $submit_date = $_POST['date'];
 $amount = $_POST['amount'];
 $have_budget = 1;
+$financial_assistant_email = $_SESSION['EMAIL'];
 $financial_assistant_name = $_POST['finance_assist_name'];
 $page_number = $_POST['pages'];
 $subject_other = "";
@@ -113,18 +113,24 @@ $note_optional = $_POST['note'];
 $request_status = 0;
 
 # Insert new request into the database.
-$sql = 'INSERT INTO requests (submitter_email, submitter_name, submitter_id_number, date_start, amount,' .
-    'have_budget, financial_assistant_name, page_number, subject, subject_other, is_special, intel_platform_id, asset_platform_id,' .
-    'have_all_files, contract_company_name, contract_location, contract_bank_number,' .
-    'contract_opener, receipt_same_as_actual, receipt_difference, professor_class,' .
-    'professor_name, expanse_number, expanse_name, payment_option, payment_option_other,' .
-    'usage_optional, note_optional, request_status) VALUES (' .
-    '"' . $submitter_email . '", "' . $submitter_name . '", "' . $submitter_id_number . '", "' . $submit_date . '", ' . $amount .
-    ', ' . $have_budget . ', "' . $financial_assistant_name . '", ' . $page_number . ', ' . $subject . ', "'. $subject_other . '", ' . $is_special . ', ' . $intel_platform_id . ', ' . $asset_platform_id .
-    ', ' . $have_all_files . ', "'. $contract_company_name . '", "' . $contract_location . '", "' . $contract_bank_number .
-    '", "' . $contract_opener . '", ' . $receipt_same_as_actual . ', "' . $receipt_difference . '", "' . $professor_class .
-    '", "' . $professor_name . '", "' . $expanse_number . '", "' . $expanse_name . '", ' . $payment_option . ', "' . $payment_option_other .
-    '", "' . $usage_optional . '", "' . $note_optional . '", ' . $request_status . ')';
+$sql = 'INSERT INTO requests (submitter_name, submitter_id_number, date_start, ' .
+    'amount, have_budget, financial_assistant_email, financial_assistant_name, ' .
+    'page_number, subject, subject_other, is_special, intel_platform_id, ' .
+    'asset_platform_id, have_all_files, contract_company_name, contract_location, ' .
+    'contract_bank_number, contract_opener, receipt_same_as_actual, ' .
+    'receipt_difference, professor_class, professor_name, expanse_number, ' .
+    'expanse_name, payment_option, payment_option_other, usage_optional, ' .
+    'note_optional, request_status) VALUES (' .
+    '"' . $submitter_name . '", "' . $submitter_id_number . '", "' . $submit_date .
+    '", ' . $amount . ', ' . $have_budget . ', "' . $financial_assistant_email .
+    '", "' . $financial_assistant_name . '", ' . $page_number . ', ' . $subject .
+    ', "'. $subject_other . '", ' . $is_special . ', ' . $intel_platform_id .
+    ', ' . $asset_platform_id . ', ' . $have_all_files . ', "'. $contract_company_name .
+    '", "' . $contract_location . '", "' . $contract_bank_number . '", "' . $contract_opener .
+    '", ' . $receipt_same_as_actual . ', "' . $receipt_difference . '", "' . $professor_class .
+    '", "' . $professor_name . '", "' . $expanse_number . '", "' . $expanse_name .
+    '", ' . $payment_option . ', "' . $payment_option_other . '", "' . $usage_optional .
+    '", "' . $note_optional . '", ' . $request_status . ')';
 
 mysql_query('SET NAMES utf8');
 if (!mysql_query($sql, $con)) {

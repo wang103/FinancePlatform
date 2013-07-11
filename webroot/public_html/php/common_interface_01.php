@@ -8,11 +8,11 @@ require_once('utils.php');
 <label id="id">申请流水号：</label> <input type="text" name="id" required readonly value="<?php echo $row['request_id']?>">
 </p>
 
-<label id="name">姓名：</label> <input type="text" name="name" required readonly value="<?php echo $row['submitter_name']?>">
+<p>
+<label id="name">申请人姓名：</label> <input type="text" name="name" required readonly value="<?php echo $row['submitter_name']?>">
 
-<label id="id_number">学号：</label> <input type="text" name="id_number" required readonly value="<?php echo $row['submitter_id_number']?>">
-
-<br>
+<label id="id_number">申请人学号：</label> <input type="text" name="id_number" required readonly value="<?php echo $row['submitter_id_number']?>">
+</p>
 
 <fieldset class="fieldset-auto-width">
     <legend>日期</legend>
@@ -197,7 +197,7 @@ require_once('utils.php');
     <select id="transfer" name="transfer" disabled='disabled' <?php if(!isset($row['transfered_email'])) echo 'style="display: none"'?> required>
     <?php
     while ($assit = mysql_fetch_array($assistants)) {
-        if ($assit['email'] != $row['submitter_email']) {
+        if ($assit['email'] != $row['financial_assistant_email']) {
             echo '<option ';
 
             if (isset($row['transfered_email']) &&

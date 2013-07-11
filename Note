@@ -50,7 +50,6 @@ PRIMARY KEY (announce_id)
 CREATE TABLE requests
 (
 request_id INT NOT NULL AUTO_INCREMENT,
-submitter_email VARCHAR(255),
 submitter_name VARCHAR(255),
 submitter_id_number VARCHAR(127),
 transfered_email VARCHAR(255),
@@ -61,6 +60,7 @@ date_student_finished DATE,
 date_finished DATE,
 amount INT NOT NULL,
 have_budget INT(1) NOT NULL,
+financial_assistant_email VARCHAR(255),
 financial_assistant_name VARCHAR(255),
 page_number INT NOT NULL,
 subject INT NOT NULL,
@@ -86,7 +86,7 @@ note_optional TEXT,
 last_added_note TEXT,
 request_status INT(1) NOT NULL,
 PRIMARY KEY (request_id),
-FOREIGN KEY (submitter_email) REFERENCES users(email) 
+FOREIGN KEY (financial_assistant_email) REFERENCES users(email) 
 ON UPDATE CASCADE
 ON DELETE CASCADE,
 FOREIGN KEY (transfered_email) REFERENCES users(email)

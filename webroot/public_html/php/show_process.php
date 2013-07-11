@@ -49,14 +49,14 @@ if ($_SESSION['STATUS'] == 0) {
             $qry = $qry . 'OR ';
         }
 
-        $qry = $qry . 'submitter_email="' . $temp_row['student_email'] . '" ';
+        $qry = $qry . 'financial_assistant_email="' . $temp_row['student_email'] . '" ';
         
         $counter = $counter + 1;
     }
     
     $qry = $qry . 'AND request_status=0 ORDER BY request_id DESC';
 } else {
-    $qry = 'SELECT * FROM requests WHERE request_status=2 AND ((submitter_email="' .
+    $qry = 'SELECT * FROM requests WHERE request_status=2 AND ((financial_assistant_email="' .
        $_SESSION['EMAIL'] . '" AND transfered_email IS NULL) OR transfered_email="' .
        $_SESSION['EMAIL'] . '") ORDER BY request_id DESC';
 }

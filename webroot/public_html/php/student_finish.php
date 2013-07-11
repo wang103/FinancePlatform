@@ -22,7 +22,7 @@ $result = mysql_query('SELECT * FROM requests WHERE request_id=' . $_GET['rn']);
 $row = mysql_fetch_array($result);
 
 # Check for user name.
-if ($_SESSION['EMAIL'] != $row['submitter_email'] &&
+if ($_SESSION['EMAIL'] != $row['financial_assistant_email'] &&
     $_SESSION['EMAIL'] != $row['transfered_email']) {
     echo 'error code: 1';
     die();

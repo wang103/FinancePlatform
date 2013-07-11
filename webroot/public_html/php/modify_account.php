@@ -42,30 +42,44 @@ $pw = md5($pw);
 $advisor_email = $_POST['advisor'];
 
 # Update user information.
-$qry = 'UPDATE users SET email="' . $email . '", password="' . $pw . '", first_name="' .
-    $first_name . '", last_name="' . $last_name . '", id_number="' . $id_number .
-    '" WHERE email="' . $_SESSION['EMAIL'] . '"';
+if ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3) {
+    # Student.
+    $qry = 'UPDATE users SET email="' . $email . '", password="' . $pw . '", first_name="' .
+        $first_name . '", last_name="' . $last_name . '", id_number="' . $id_number .
+        '" WHERE email="' . $_SESSION['EMAIL'] . '"';
+} else {
+    # Professor.
+    $qry = 'UPDATE users SET email="' . $email . '", password="' . $pw . '", first_name="' .
+        $first_name . '", last_name="' . $last_name .
+        '" WHERE email="' . $_SESSION['EMAIL'] . '"';
+}
 
 if (!mysql_query($qry, $con)) {
     die('Error: ' . mysql_error());
 }
 
 # Update advisor.
-$qry = 'UPDATE advisors SET advisor_email="' . $advisor_email .
-    '" WHERE student_email="' . $email . '"';
+if ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3) {
+    # Student.
+    $qry = 'UPDATE advisors SET advisor_email="' . $advisor_email .
+        '" WHERE student_email="' . $email . '"';
 
-if (!mysql_query($qry, $con)) {
-    die('Error: ' . mysql_error());
+    if (!mysql_query($qry, $con)) {
+        die('Error: ' . mysql_error());
+    }
 }
 
 # Update rows in requests.
-$qry = 'UPDATE requests SET submitter_name="' . $last_name . $first_name .
-    '", submitter_id_number="' . $id_number . '" WHERE submitter_email="' .
-    $email . '"';
+if ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3) {
+    # Student.
+    $qry = 'UPDATE requests SET financial_assistant_name="' . $last_name . $first_name .
+        '" WHERE financial_assistant_email="' . $email . '"';
 
-if (!mysql_query($qry, $con)) {
-    die('Error: ' . mysql_error());
+    if (!mysql_query($qry, $con)) {
+        die('Error: ' . mysql_error());
+    }
 }
+
 mysql_close($con);
 
 $_SESSION['EMAIL'] = $email;

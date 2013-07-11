@@ -28,6 +28,8 @@ if (!$con) {
 }
 mysql_select_db(DB_DATABASE, $con);
 
+$name = $_POST['name'];
+$id_number = $_POST['id_number'];
 $transfered_email = 'NULL';
 if ($_POST['transfer_sel'] == "yes") {
     $transfered_email = '"' . $_POST['transfer'] . '"';
@@ -108,7 +110,8 @@ if ($_POST['submit_button'] == 1) {
 }
 
 # Modify the row in the database.
-$sql = 'UPDATE requests SET transfered_email=' . $transfered_email .
+$sql = 'UPDATE requests SET submitter_name="' . $name . '", submitter_id_number="' .
+    $id_number . '", transfered_email=' . $transfered_email .
     ', date_net_report_finished="' . $net_report_date . '", amount=' . $amount .
     ',' . 'have_budget=' . $have_budget . ',' . 'financial_assistant_name="' .
     $financial_assistant_name . '",' . 'page_number=' . $page_number . ',' .
@@ -141,9 +144,9 @@ if (SEND_EMAIL) {
 
     if (isset($student['transfered_email'])) {
         notifyWithEmail($student['transfered_email'], 5);
-        notifyWithEmail($student['submitter_email'], 6);
+        notifyWithEmail($student['financial_assistant_email'], 6);
     } else {
-        notifyWithEmail($student['submitter_email'], 2);
+        notifyWithEmail($student['financial_assistant_email'], 2);
     }
 }
 

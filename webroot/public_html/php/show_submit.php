@@ -24,13 +24,13 @@ require_once('../config.php');
 <h3>新建报销申请</h3>
 
 <form action="php/create_new_request.php" method="post">
-<label id="name">姓名：</label> <input type="text" name="name" required readonly value="<?php echo $_SESSION['LAST_NAME'] . $_SESSION['FIRST_NAME']?>">
+<label id="name">申请人姓名：</label> <input type="text" name="name" required>
 
-<label id="id_number">学号：</label> <input type="text" name="id_number" required readonly value="<?php echo $_SESSION['ID_NUMBER']?>">
+<label id="id_number">申请人学号：</label> <input type="text" name="id_number" required>
 
+<p>
 <label id="date">日期：</label> <input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>">
-
-<br>
+</p>
 
 <p>报销金额：<input type="number" name="amount" min=0.0 step=0.01 required>元</p>
 
@@ -41,7 +41,7 @@ require_once('../config.php');
 </p>
 
 <p>
-财务助理姓名：<input type="text" name="finance_assist_name" required>
+财务助理姓名：<input type="text" name="finance_assist_name" required readonly value="<?php echo $_SESSION['LAST_NAME'] . $_SESSION['FIRST_NAME']?>">
 </p>
 
 <p>

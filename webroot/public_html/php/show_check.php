@@ -42,7 +42,7 @@ if ($_SESSION['STATUS'] == 0) {
             $qry = $qry . 'OR ';
         }
 
-        $qry = $qry . 'submitter_email="' . $temp_row['student_email'] .
+        $qry = $qry . 'financial_assistant_email="' . $temp_row['student_email'] .
             '" OR transfered_email="' . $temp_row['student_email'] . '" ';
 
         $counter = $counter + 1;
@@ -51,7 +51,7 @@ if ($_SESSION['STATUS'] == 0) {
     $qry = $qry . 'ORDER BY request_id DESC';
 } else {
     echo '<h3>我的报销申请</h3>';
-    $qry = 'SELECT * FROM requests WHERE submitter_email="' .
+    $qry = 'SELECT * FROM requests WHERE financial_assistant_email="' .
         $_SESSION['EMAIL'] . '" OR transfered_email="' . $_SESSION['EMAIL'] .
         '" ORDER BY request_id DESC';
 }
