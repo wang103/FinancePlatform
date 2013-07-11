@@ -125,7 +125,11 @@ function notifyWithEmail($to, $status) {
         return 1;
     }
 
-    mail($to, $subject, $message);
+    $header = 'MIME-Version: 1.0' . '\r\n' .
+        'Content-type: text/plain;' .
+        'charset=UTF-8' . '\r\n';
+
+    mail($to, $subject, $message, $header);
 
     return 0;
 }
