@@ -117,6 +117,7 @@ ALTER TABLE requests ENGINE=InnoDB;
 // 4 -- all completed, professor added comment.
 // 5 -- advisor didn't agree, reimbursement permanently stopped.
 // 6 -- master professor didn't agree, reimbursement permanenetly stopped.
+// 7 -- student canceled, reimbursement permanently stopped.
 
 INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
 

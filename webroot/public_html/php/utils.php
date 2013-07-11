@@ -53,6 +53,8 @@ function getGeneralStatusFromIndex($statusIndex) {
         echo "报销永久终止，负责老师没有同意";
     } else if ($statusIndex == 6) {
         echo "报销永久终止，财务主任没有同意";
+    } else if ($statusIndex == 7) {
+        echo "报销永久终止，财务助理取消申请";
     }
 }
 
@@ -87,6 +89,8 @@ function getStatusFromIndex($statusIndex) {
         echo "报销永久终止，负责老师没有同意";
     } else if ($statusIndex == 6) {
         echo "报销永久终止，财务主任没有同意";
+    } else if ($statusIndex == 7) {
+        echo "报销永久终止，财务助理取消申请";
     }
 }
 
@@ -115,6 +119,8 @@ function notifyWithEmail($to, $status) {
         $subject .= "你的申请已被负责老师驳回";
     } elseif ($status == 8) {
         $subject .= "你的申请已被财务主任驳回";
+    } elseif ($status == 9) {
+        $subject .= "某报销申请被助理取消";
     } else {
         return 1;
     }

@@ -106,6 +106,19 @@ mysql_close($con);
 ?>
 </table>
 
+<?php
+if (isset($_SESSION['feedback'])) {
+    if ($_SESSION['feedback'] == 9) {
+        echo '
+        <script>
+        alert("报销申请已被永久取消！");
+        </script>';
+    }
+
+    unset($_SESSION['feedback']);
+}
+?>
+
 </body>
 
 </html>

@@ -58,6 +58,19 @@ require('common_interface_01.php');
 
 <input action="action" type="button" onclick="history.go(-1);" value="返回"/>
 
+<?php
+# Give student a chance to delete the request before net reporting
+# is done.
+if (($_SESSION['STATUS'] == 1 || $_SESSION['STATUS'] == 2) &&
+    $row['request_status'] < 2) {
+    echo '
+        <input action="action" value="取消申请" type="button" ' .
+        'onclick="if(confirm(\'确定永久取消这个申请？\'))location=\'cancel_request.php?rn=' .
+        $row['request_id'] . '\';return false;" />
+        ';
+}
+?>
+
 </body>
 
 </html>
