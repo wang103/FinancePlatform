@@ -31,6 +31,7 @@ mysql_close($con);
 if ($_SESSION['EMAIL'] != $row['financial_assistant_email'] &&
     $_SESSION['EMAIL'] != $row['transfered_email'] &&
     !isMyStudentsSubmission($row['financial_assistant_email'], $_SESSION['EMAIL']) &&
+    !isMyStudentsSubmission($row['transfered_email'], $_SESSION['EMAIL']) &&
     $_SESSION['STATUS'] != 0) {
     echo 'error code: 1';
     die();
