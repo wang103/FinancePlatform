@@ -17,9 +17,9 @@ if (!$con) {
 mysql_select_db(DB_DATABASE, $con);
 
 # Insert new announcement into the database.
-$sql = 'INSERT INTO announcements (title, content, poster, date) VALUES ("' .
-    $_POST['title'] . '", "' . $_POST['content'] . '", "' . $_SESSION['LAST_NAME'] .
-    $_SESSION['FIRST_NAME'] . '", NOW())';
+$sql = 'INSERT INTO announcements (title, content, poster_email, poster, date) VALUES ("' .
+    $_POST['title'] . '", "' . $_POST['content'] . '", "' . $_SESSION['EMAIL'] . '", "' .
+    $_SESSION['LAST_NAME'] . $_SESSION['FIRST_NAME'] . '", NOW())';
 
 mysql_query('SET NAMES utf8');
 if (!mysql_query($sql, $con)) {

@@ -42,9 +42,13 @@ CREATE TABLE announcements
 announce_id INT NOT NULL AUTO_INCREMENT,
 title VARCHAR(511) NOT NULL,
 content TEXT NOT NULL,
+poster_email VARCHAR(255) NOT NULL,
 poster VARCHAR(255) NOT NULL,
 date DATETIME NOT NULL,
-PRIMARY KEY (announce_id)
+PRIMARY KEY (announce_id),
+FOREIGN KEY (poster_email) REFERENCES users(email)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 );
 
 CREATE TABLE requests
