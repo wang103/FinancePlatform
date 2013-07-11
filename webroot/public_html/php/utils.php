@@ -46,8 +46,12 @@ function getGeneralStatusFromIndex($statusIndex) {
         echo "网报完成，等待申请人完成报销";
     } else if ($statusIndex == 3) {
         echo "报销完成，等待老师添加意见";
-    } else {
+    } else if ($statusIndex == 4) {
         echo "此报销已完成";
+    } else if ($statusIndex == 5) {
+        echo "报销永久终止，负责老师没有同意";
+    } else if ($statusIndex == 6) {
+        echo "报销永久终止，财务主任没有同意";
     }
 }
 
@@ -76,8 +80,12 @@ function getStatusFromIndex($statusIndex) {
         } else {
             echo "等待老师添加意见";
         }
-    } else {
+    } else if ($statusIndex == 4) {
         echo "此报销已完成";
+    } else if ($statusIndex == 5) {
+        echo "报销永久终止，负责老师没有同意";
+    } else if ($statusIndex == 6) {
+        echo "报销永久终止，财务主任没有同意";
     }
 }
 
@@ -99,6 +107,10 @@ function notifyWithEmail($to, $status) {
         $subject .= "有申请已被转交给你";
     } elseif ($status == 6) {
         $subject .= "你的申请已被转交";
+    } elseif ($status == 7) {
+        $subject .= "你的申请已被负责老师驳回";
+    } elseif ($status == 8) {
+        $subject .= "你的申请已被财务主任驳回";
     } else {
         return 1;
     }

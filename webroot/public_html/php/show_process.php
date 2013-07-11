@@ -134,7 +134,13 @@ if (isset($_SESSION['feedback'])) {
         <script>
         alert("申请通过。请等待主任老师完成网报。");
         </script>';
+    } elseif ($_SESSION['feedback'] == 8) {
+        echo '
+        <script>
+        alert("申请不通过。此申请永久终止。");
+        </script>';
     }
+
     unset($_SESSION['feedback']);
 }
 ?>

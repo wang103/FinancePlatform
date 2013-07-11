@@ -98,13 +98,20 @@ ON UPDATE CASCADE
 ON DELETE CASCADE
 );
 
-// status: 0 -- master professor, 1 -- grad student, 2 -- undergrad student, 3 -- professor
+// status:
+// 0 -- master professor
+// 1 -- grad student
+// 2 -- undergrad student
+// 3 -- professor
+
 // request_status:
 // 0 -- submitted, need advisor to agree.
 // 1 -- advisor agreed, need professor to modify and finish net reporting.
 // 2 -- professor finished net reporting, need student to complete.
 // 3 -- student completed, professor didn't add comment.
 // 4 -- all completed, professor added comment.
+// 5 -- advisor didn't agree, reimbursement permanently stopped.
+// 6 -- master professor didn't agree, reimbursement permanenetly stopped.
 
 INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
 

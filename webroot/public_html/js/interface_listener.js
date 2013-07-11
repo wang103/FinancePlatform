@@ -1,3 +1,10 @@
+function askConfirm(text, formId) {
+    if (confirm(text)) {
+        document.getElementById(formId).submit();
+    }
+    return false;
+}
+
 function subjectChanged(sel) {
     var value = sel.options[sel.selectedIndex].value;
     if (value == "others") {

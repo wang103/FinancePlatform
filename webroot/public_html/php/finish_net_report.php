@@ -103,7 +103,11 @@ if ($_POST['payment_option'] == "post") {
 $usage_optional = $_POST['usage'];
 $note_optional = $_POST['note'];
 
-if ($_POST['submit_button'] == 1) {
+if ($_POST['submit_button'] == 0) {
+    // Didn't agree.
+    $request_status = 6;
+    $finished_status = 8;
+} elseif ($_POST['submit_button'] == 1) {
     // Only save.
     $request_status = 1;
     $finished_status = 2;
@@ -141,22 +145,27 @@ if (!mysql_query($sql, $con)) {
 }
 
 # Send a notification message to student.
-if (SEND_EMAIL) {
+if (SEND_EMAIL && $request_status != 1) {
     $sql = 'SELECT * FROM requests WHERE request_id=' . $_POST['id'];
     $result = mysql_query($sql, $con);
     $student = mysql_fetch_assoc($result);
 
-    if (isset($student['transfered_email'])) {
-        notifyWithEmail($student['transfered_email'], 5);
-        notifyWithEmail($student['financial_assistant_email'], 6);
+    if ($request_status == 6) {
+        notifyWithEmail($student['financial_assistant_email'], 8);
     } else {
-        notifyWithEmail($student['financial_assistant_email'], 2);
+        if (isset($student['transfered_email'])) {
+            notifyWithEmail($student['transfered_email'], 5);
+            notifyWithEmail($student['financial_assistant_email'], 6);
+        } else {
+            notifyWithEmail($student['financial_assistant_email'], 2);
+        }
     }
 }
 
 mysql_close($con);
 
-# Set feedback to 2 if save-only, or 3 if save and net reporting,
+# Set feedback to 8 if didn't agree, to 2 if save-only,
+# or to 3 if save and net reporting,
 # so the last url can display a success message.
 $last_url = $_SESSION['last_url'];
 $_SESSION['feedback'] = $finished_status;

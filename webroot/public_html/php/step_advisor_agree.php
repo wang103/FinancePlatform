@@ -42,12 +42,13 @@ if (!isMyStudentsSubmission($row['financial_assistant_email'], $_SESSION['EMAIL'
 
 <body>
 
-<form name="advisor_agree_form" action=<?php echo "advisor_agree.php?rn=" . $_GET['rn']?> method="post">
+<form id="advisor_agree_form" name="advisor_agree_form" action=<?php echo "advisor_agree.php?rn=" . $_GET['rn']?> method="post">
 
 <?php
 require('common_interface_01.php');
 ?>
 
+<button type="submit" name="submit_button" value=1>不同意此申请</button>
 <button type="submit" name="submit_button" value=2>同意此申请</button>
 <input action="action" type="button" onclick="history.go(-1);" value="返回"/>
 

@@ -36,7 +36,17 @@ if (!$con) {
 mysql_select_db(DB_DATABASE, $con);
 
 $agreed_date = date('Y-m-d');
-$request_status = 1;
+
+# Check if advisor agreed.
+if ($_POST['submit_button'] == 1) {
+    // Didn't agree.
+    $request_status = 5;
+    $_SESSION['feedback'] = 8;
+} else {
+    // Agreed.
+    $request_status = 1;
+    $_SESSION['feedback'] = 6;
+}
 
 # Modify the row in the database.
 mysql_query('SET NAMES utf8');
@@ -50,17 +60,25 @@ if (!mysql_query($sql, $con)) {
 
 # Send a notification message to student.
 if (SEND_EMAIL) {
-    $sql = 'SELECT * FROM users WHERE status=0';
-    $result = mysql_query($sql, $con);
-    $master_prof = mysql_fetch_assoc($result);
-    notifyWithEmail($master_prof['email'], 1);
+    if ($request_status == 1) {
+        $sql = 'SELECT * FROM users WHERE status=0';
+        $result = mysql_query($sql, $con);
+        $master_prof = mysql_fetch_assoc($result);
+        
+        notifyWithEmail($master_prof['email'], 1);
+    } else {
+        $sql = 'SELECT * FROM requests WHERE request_id=' . $_GET['rn'];
+        $result = mysql_query($sql, $con);
+        $student = mysql_fetch_assoc($result);
+
+        notifyWithEmail($student['financial_assistant_email'], 7);
+    }
 }
 
 mysql_close($con);
 
-# Set feedback to 6, so the last url can display a success message.
+# Set feedback, so the last url can display a success message.
 $last_url = $_SESSION['last_url'];
-$_SESSION['feedback'] = 6;
 header("location: " . $last_url);
 
 die();

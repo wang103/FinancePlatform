@@ -23,7 +23,7 @@ require_once('../config.php');
 
 <h3>新建报销申请</h3>
 
-<form action="php/create_new_request.php" method="post">
+<form id="new_request_form" action="php/create_new_request.php" method="post">
 <label id="name">申请人姓名：</label> <input type="text" name="name" required>
 
 <label id="id_number">申请人学号：</label> <input type="text" name="id_number" required>
@@ -175,7 +175,7 @@ require_once('../config.php');
 
 <br><br>
 
-<input id="submit_button" type="submit" value="提交报销申请">
+<button type="submit" name="submit_button">提交报销申请</button>
 </form>
 
 <?php

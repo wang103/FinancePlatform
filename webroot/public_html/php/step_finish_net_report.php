@@ -36,12 +36,13 @@ mysql_close($con);
 
 <body>
 
-<form name="net_report_form" action="finish_net_report.php" method="post">
+<form id="net_report_form" name="net_report_form" action="finish_net_report.php" method="post">
 
 <?php
 require('common_interface_01.php');
 ?>
 
+<button type="submit" name="submit_button" value=0>不同意此申请</button>
 <button type="submit" name="submit_button" value=1>保存</button>
 <button type="submit" name="submit_button" value=2>保存并完成网报</button>
 <input action="action" type="button" onclick="history.go(-1);" value="返回"/>
