@@ -35,7 +35,13 @@ if (SEND_EMAIL) {
     $sql = 'SELECT * FROM requests WHERE request_id=' . $_GET['rn'];
     $result = mysql_query($sql, $con);
     $student = mysql_fetch_assoc($result);
-    notifyWithEmail($student['financial_assistant_email'], 4);
+
+    if (isset($student['transfered_email']) &&
+        strlen(trim($student['transfered_email'])) > 0) {
+        notifyWithEmail($student['transfered_email'], 4);
+    } else {
+        notifyWithEmail($student['financial_assistant_email'], 4);
+    }
 }
 
 mysql_close($con);
