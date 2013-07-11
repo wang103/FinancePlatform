@@ -13,6 +13,26 @@ session_start();
 
 <?php
 require_once('../config.php');
+
+$con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
+if (!$con) {
+    die('Could not connect: ' . mysql_error());
+}
+mysql_select_db(DB_DATABASE, $con);
+
+mysql_query('SET NAMES utf8');
+$result = mysql_query('SELECT * FROM advisors WHERE student_email="' .
+    $_SESSION['EMAIL'] . '"');
+
+$row = mysql_fetch_array($result);
+$advisor_email = $row['advisor_email'];
+
+$result = mysql_query('SELECT * FROM users WHERE email="' .
+    $advisor_email . '"');
+$row = mysql_fetch_array($result);
+$advisor_name = $row['last_name'] . $row['first_name'];
+
+mysql_close($con);
 ?>
 
 <fieldset class="fieldset-auto-width">
@@ -130,7 +150,7 @@ require_once('../config.php');
     <input type="text" name="professor_class" required>
 
     <label id="professor_name_label">导师姓名：</label>
-    <input type="text" name="professor_name" required>
+    <input type="text" name="professor_name" required value="<?php echo $advisor_name;?>">
 </fieldset>
 
 <br><br>
