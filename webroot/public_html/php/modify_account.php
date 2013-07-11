@@ -77,6 +77,20 @@ if ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3) {
     if (!mysql_query($qry, $con)) {
         die('Error: ' . mysql_error());
     }
+} else {
+    # Professor.
+    $chk_qry = 'SELECT * FROM advisors WHERE advisor_email="' .
+        $_SESSION['EMAIL'] . '"';
+    $chk_result = mysql_query($chk_qry, $con);
+
+    if (mysql_num_rows($chk_result) != 0) {
+        $qry = 'UPDATE advisors SET advisor_email="' . $email .
+            '" WHERE advisor_email="' . $_SESSION['EMAIL'] . '"';
+
+        if (!mysql_query($qry, $con)) {
+            die('Error: ' . mysql_error());
+        }
+    }
 }
 
 # Update rows in requests.
