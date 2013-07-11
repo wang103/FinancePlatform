@@ -80,6 +80,17 @@ if ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3) {
     }
 }
 
+# Update rows in announcements.
+if ($_SESSION['STATUS'] == 0 || $_SESSION['STATUS'] == 3) {
+    # Professor.
+    $qry = 'UPDATE announcements SET poster="' . $last_name . $first_name .
+        '" WHERE poster_email="' . $email . '"';
+
+    if (!mysql_query($qry, $con)) {
+        die('Error: ' . mysql_error());
+    }
+}
+
 mysql_close($con);
 
 $_SESSION['EMAIL'] = $email;
