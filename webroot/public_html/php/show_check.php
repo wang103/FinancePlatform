@@ -62,6 +62,7 @@ if ($_SESSION['STATUS'] == 0) {
         <th>流水号</th>
         <th>报销时间</th>
         <th>报销人</th>
+        <th>财务助理</th>
         <th>金额（元)</th>
         <th>报销科目</th>
         <th>申请状态</th>
@@ -79,14 +80,15 @@ while ($row = mysql_fetch_array($result)) {
     <tr>
         <td><p>' . $row['request_id'] . '</p></td>
         <td><p><a href="php/show_reimbursement.php?rn=' . $row['request_id'] . '">' . $row['date_start'] . '</a></p></td>
-        <td><p>' . $row['submitter_name'];
+        <td><p>' . $row['submitter_name'] . '</p></td>
+        <td><p>' . $row['financial_assistant_name'];
     
     if (isset($row['transfered_email'])) {
         $sql_usr = mysql_query('SELECT * FROM users WHERE email="' . $row['transfered_email'] . '"');
         $usr = mysql_fetch_array($sql_usr);
         echo '=>' . $usr['last_name'] . $usr['first_name'];
     }
-    
+
     echo '</p></td>
         <td><p>' . $row['amount'] . '</p></td>
         <td><p>';
