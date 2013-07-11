@@ -8,7 +8,7 @@ if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
 }
 
 # Check user name.
-if (($_SESSION['LAST_NAME'] . $_SESSION['FIRST_NAME']) != $_POST['name']) {
+if (($_SESSION['LAST_NAME'] . $_SESSION['FIRST_NAME']) != $_POST['finance_assist_name']) {
     echo 'error code: 1';
     die();
 }
