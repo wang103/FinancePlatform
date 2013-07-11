@@ -34,7 +34,6 @@ if ($row['financial_assistant_email'] != $_SESSION['EMAIL']) {
 $request_status = 7;
 
 # Modify the row in the database.
-mysql_query('SET NAMES utf8');
 $sql = 'UPDATE requests SET request_status=' . $request_status .
     ' WHERE request_id=' . $_GET['rn'] . ';';
 
@@ -54,7 +53,7 @@ if (SEND_EMAIL) {
         $result = mysql_query($sql, $con);
         $master_prof = mysql_fetch_assoc($result);
      
-        notifyWithEmail($master_prof['email'], 1);
+        notifyWithEmail($master_prof['email'], 9);
     }
 }
 
