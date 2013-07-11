@@ -1,7 +1,8 @@
 <?php
+require_once('../../config.php');
+
 function isMyStudentsSubmission($studentEmail, $myEmail) {
     # Connect to the database.
-    require_once('../../config.php');
 
     $con1 = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
     if (!$con1) {
@@ -91,7 +92,8 @@ function getStatusFromIndex($statusIndex) {
 
 function notifyWithEmail($to, $status) {
     $subject = "财务平台提醒：";
-    $message = "请登录平台进行查看或处理。";
+    $message = "请登录平台进行查看或处理：\n" .
+        HOME_URL;
 
     if ($status == 0) {
         $subject .= "新的申请等待你的同意";

@@ -13,6 +13,8 @@ define(DB_PASSWORD, 'Tianyi001!');
 
 define(SEND_EMAIL, false);
 
+define(HOME_URL, 'http://tianyiwang.info/reimbursement/webroot/public_html');
+
 define(INTEL_PLATFORM_URL, 'http://www.google.com');
 define(ASSET_PLATFORM_URL, 'http://www.baidu.com');
 ?>
