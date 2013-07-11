@@ -58,6 +58,7 @@ for (var i = 0, fLen = f.length; i < fLen; i++) {
 }
 
 document.getElementsByName("id")[0].readOnly = true;
+document.getElementsByName("finance_assist_name")[0].readOnly = true;
 document.getElementsByName("date")[0].readOnly = true;
 document.getElementsByName("date1")[0].readOnly = true;
 document.getElementsByName("date2")[0].readOnly = true;
