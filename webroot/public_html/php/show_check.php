@@ -32,13 +32,15 @@ if ($_SESSION['STATUS'] == 0) {
 } elseif ($_SESSION['STATUS'] == 3) {
     echo '<h3>我的学生的报销申请</h3>';
 
-    $qry = 'SELECT * FROM requests WHERE ';
+    $qry = 'SELECT * FROM requests ';
     
     $temp = mysql_query('SELECT * FROM advisors WHERE advisor_email="' .
         $_SESSION['EMAIL'] . '"');
     $counter = 1;
     while ($temp_row = mysql_fetch_array($temp)) {
-        if ($counter != 1) {
+        if ($counter == 1) {
+            $qry = $qry . 'WHERE (';
+        } else {
             $qry = $qry . 'OR ';
         }
 
@@ -47,8 +49,13 @@ if ($_SESSION['STATUS'] == 0) {
 
         $counter = $counter + 1;
     }
-    
-    $qry = $qry . 'ORDER BY request_id DESC';
+
+    if ($counter > 1) {
+        $qry = $qry . ') ORDER BY request_id DESC';
+    } else {
+        // Make return result empty on purpose.
+        $qry = 'SELECT * FROM requests WHERE request_status=666'; 
+    }
 } else {
     echo '<h3>我的报销申请</h3>';
     $qry = 'SELECT * FROM requests WHERE financial_assistant_email="' .
