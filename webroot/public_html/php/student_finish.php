@@ -9,6 +9,7 @@ if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
 
 # Connect to the database.
 require_once('../../config.php');
+require_once('utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {

@@ -172,3 +172,7 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 11. Links to two other platforms are stored in config.php.
 
 12. Equipment, material, software, and mayby other are special subject.
+
+13. Professors can terminate a request.
+
+14. Students can delete request before mater professor processed it.
