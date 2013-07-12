@@ -98,7 +98,8 @@ function notifyWithEmail($to, $status) {
     require_once('../../config.php');
 
     $subject = "财务平台提醒：";
-    $message = "请登录平台进行查看或处理：\n" .
+    $message = "(Chinese:)请登录平台进行查看或处理：\n" .
+        "(English:)Please sign in the financial platform to check or process:\n" .
         HOME_URL;
 
     if ($status == 0) {
@@ -125,9 +126,14 @@ function notifyWithEmail($to, $status) {
         return 1;
     }
 
+    $subject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+
     $header = 'MIME-Version: 1.0' . '\r\n' .
-        'Content-type: text/plain;' .
-        'charset=UTF-8' . '\r\n';
+        'Content-type: text/html;' .
+        'charset=UTF-8;' .
+        'format=flowed' . '\r\n' .
+        'Content-Transfer-Encoding: 8Bit\r\n' .
+        'X-Mailer: PHP/' . phpversion();
 
     mail($to, $subject, $message, $header);
 
