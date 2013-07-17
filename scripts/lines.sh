@@ -1,1 +1,1 @@
-git ls-files | xargs wc -l
+git ls-files | egrep '\.php|\.html|\.js|\.css' | xargs wc -l
