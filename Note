@@ -1,18 +1,17 @@
-1. Set up LAMP (http://fedorasolved.org/server-solutions/lamp-stack)
-    port: 3306
-    protocol: tcp
+1. 数据库的结构:
+此网上平台用到了4个表，分别是：
+users, advisors, announcements, 和requests。
 
-2. Database details:
+第一步，建立数据库：
+CREATE DATABASE reimbursement;
 
-mysqladmin -u root password tianyi
-mysql -u root -p
+第二步，为了支持中文，此项目的文字编码一律使用UTF-8，在此将数据库的编码改为UTF-8:
+ALTER DATABASE reimbursement DEFAULT CHARACTER SET 'utf8';
 
-CREATE DATABASE reimbursement_db;
+第三步，选择建好的数据库：
+USE reimbursement;
 
-ALTER DATABASE reimbursement_db DEFAULT CHARACTER SET 'utf8';
-
-USE reimbursement_db;
-
+第四步，建立4个表：
 CREATE TABLE users
 (
 email VARCHAR(255) NOT NULL,
@@ -98,16 +97,62 @@ ON UPDATE CASCADE
 ON DELETE CASCADE
 );
 
-ALTER TABLE users ENGINE=InnoDB;
-ALTER TABLE advisors ENGINE=InnoDB;
-ALTER TABLE announcements ENGINE=InnoDB;
-ALTER TABLE requests ENGINE=InnoDB;
+表的说明：
+---------------------------------------------------------------
+users: 存储所有的用户。
 
-// status:
-// 0 -- master professor
-// 1 -- grad student
-// 2 -- undergrad student
-// 3 -- professor
+email, password为邮箱地址和密码，用来登录。
+first_name, last_name为用户的真实姓名。
+id_number为学号，只有学生有，教师为空。
+status是用户身份。0代表财务主任老师，1代表研究生（财务助理），
+    2代表本科生，3代表负责财务助理的老师。
+---------------------------------------------------------------
+advisors: 存储财务助理与负责老师的关系。
+
+student_email是财务助理的登录邮箱地址。
+advisor_email是负责老师的登录邮箱地址。
+---------------------------------------------------------------
+announcements: 存储所有的公告。
+
+announce_id是自动生成的编号。
+title和content是标题和内容。
+poster_email和poster是发布人的邮箱地址和姓名。
+date是发布时间。
+---------------------------------------------------------------
+requests: 存储所有的申请。
+
+request_id是自动生成的流水号。
+submitter_name和submitter_id_number是申请人的名字和学号。
+financial_assistant_email和financial_assistant_name是财务助理的邮箱和名字。
+transfered_email是转交给的财务助理的邮箱。如果没有转交则为NULL。
+date_start，date_advisor_agreed，date_net_report_finished，
+date_student_finished，和date_finished分别为申请开始日期，负责老师同意日期，
+网报完成日期，助理完成报销日期，和财务主任填写玩回馈的日期。
+amount是总金额。
+have_budget代表是否有预算。是为1，否为0。
+page_number为申请材料总页数。
+subject
+subject_other
+is_special
+intel_platform_id
+asset_platform_id
+have_all_files
+contract_company_name
+contract_location
+contract_bank_number
+contract_opener
+receipt_same_as_actual
+receipt_difference
+professor_class
+professor_name
+expanse_number
+expanse_name
+payment_option 
+payment_option_other
+usage_optional
+note_optional
+last_added_note
+request_status
 
 // request_status:
 // 0 -- submitted, need advisor to agree.
@@ -119,8 +164,14 @@ ALTER TABLE requests ENGINE=InnoDB;
 // 6 -- master professor didn't agree, reimbursement permanenetly stopped.
 // 7 -- student canceled, reimbursement permanently stopped.
 
+第五布，将搜索引擎改为InnoDB。
+ALTER TABLE users ENGINE=InnoDB;
+ALTER TABLE advisors ENGINE=InnoDB;
+ALTER TABLE announcements ENGINE=InnoDB;
+ALTER TABLE requests ENGINE=InnoDB;
 INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
 
+例子--添加用户：
 INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', '', 0);
 
 INSERT INTO users VALUES ('hypervisorII@hotmail.com', md5('tianyi'), '1', 'student', 'S1', 1);
@@ -139,6 +190,7 @@ INSERT INTO users VALUES ('test55@hotmail.com', md5('tianyi'), '5', 'professor',
 INSERT INTO users VALUES ('test66@hotmail.com', md5('tianyi'), '6', 'professor', '', 3);
 INSERT INTO users VALUES ('test77@hotmail.com', md5('tianyi'), '7', 'professor', '', 3);
 
+例子--添加财务助理和负责老师的关系：
 INSERT INTO advisors VALUES ('hypervisorII@hotmail.com', 'wang103@uiuc.edu');
 INSERT INTO advisors VALUES ('test2@hotmail.com', 'test22@hotmail.com');
 INSERT INTO advisors VALUES ('test3@hotmail.com', 'test33@hotmail.com');
@@ -147,7 +199,8 @@ INSERT INTO advisors VALUES ('test5@hotmail.com', 'test55@hotmail.com');
 INSERT INTO advisors VALUES ('test6@hotmail.com', 'test66@hotmail.com');
 INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 
-3. There are 3 main interfaces: submit, process, and check.
+2. 界面简介：
+总共有4个主界面，分别为首页，提交界面，处理界面，及查看界面。
     'submit' is mainly used by students to submit new reimbursement.
     'process' is mainly used by professors to process reimbursement submitted
         by students.
@@ -184,5 +237,3 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 14. Students can delete request before mater professor processed it.
 
 15. There is a email reminding system.
-
-16. MySQL engine must be Inno-DB, it can't be MyISAM.
