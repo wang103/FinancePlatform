@@ -32,7 +32,7 @@ if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
 } elseif ($_SESSION['STATUS'] != 1 && $_SESSION['STATUS'] != 2) {
     echo '<FONT COLOR="Red">只有学生可提交申请</FONT>';
 } else {
-    include 'php/show_submit.php';
+    include './php/show_submit.php';
 }
 ?>
 </div>
@@ -40,14 +40,14 @@ if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
 <!--Left: Navigation Bar-->
 <div id='layout_left' class='column'>
 <?php
-include 'show_navi.html';
+include './show_navi.html';
 ?>
 </div>
 
 <!--Right: Log In-->
 <div id='layout_right' class='column'>
 <?php
-include 'php/show_login.php';
+include './php/show_login.php';
 ?>
 </div>
 

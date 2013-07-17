@@ -9,8 +9,8 @@ if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
 }
 
 # Connect to the database.
-require_once('../../config.php');
-require_once('utils.php');
+require_once(dirname(__FILE__) . '/../../config.php');
+require_once(dirname(__FILE__) . '/utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -48,7 +48,7 @@ if ($_SESSION['EMAIL'] != $row['financial_assistant_email'] &&
 <body>
 
 <?php
-require('common_interface_01.php');
+require(dirname(__FILE__) . '/common_interface_01.php');
 ?>
 
 <label id="last_added_note_label">教师意见：</label> <br>

@@ -9,8 +9,8 @@ if (!isset($_SESSION['STATUS']) ||
 }
 
 # Connect to the database.
-require_once('../../config.php');
-require_once('utils.php');
+require_once(dirname(__FILE__) . '/../../config.php');
+require_once(dirname(__FILE__) . '/utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {

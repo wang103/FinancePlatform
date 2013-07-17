@@ -2,7 +2,7 @@
 
 function isMyStudentsSubmission($studentEmail, $myEmail) {
     # Connect to the database.
-    require_once('../../config.php');
+    require_once(dirname(__FILE__) . '/../../config.php');
 
     $con1 = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
     if (!$con1) {
@@ -95,7 +95,7 @@ function getStatusFromIndex($statusIndex) {
 }
 
 function notifyWithEmail($to, $status) {
-    require_once('../../config.php');
+    require_once(dirname(__FILE__) . '/../../config.php');
 
     $subject = "财务平台提醒：";
     $message = "(Chinese:)请登录平台进行查看或处理：\n" .

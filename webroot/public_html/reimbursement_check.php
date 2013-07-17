@@ -30,7 +30,7 @@ $_SESSION['last_url'] = $temp[0];
 if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
     echo '<FONT COLOR="Red">请先登录再查看申请</FONT>';
 } else {
-    include 'php/show_check.php';
+    include './php/show_check.php';
 }
 ?>
 </div>
@@ -38,14 +38,14 @@ if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
 <!--Left: Navigation Bar-->
 <div id='layout_left' class='column'>
 <?php
-include 'show_navi.html';
+include './show_navi.html';
 ?>
 </div>
 
 <!--Right: Log In-->
 <div id='layout_right' class='column'>
 <?php
-include 'php/show_login.php';
+include './php/show_login.php';
 ?>
 </div>
 

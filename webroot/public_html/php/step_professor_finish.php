@@ -8,7 +8,7 @@ if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
 }
 
 # Connect to the database.
-require_once('../../config.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -46,7 +46,7 @@ mysql_close($con);
 <hr>
 
 <?php
-require('common_interface_01.php');
+require(dirname(__FILE__) . '/common_interface_01.php');
 ?>
 
 </body>

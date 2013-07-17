@@ -28,7 +28,7 @@ if (!isset($_SESSION['STATUS'])) {
         <th>申请状态</th>
     </tr>
 <?php
-require_once('../config.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -71,7 +71,7 @@ if ($_SESSION['STATUS'] == 0) {
 }
 $result = mysql_query($qry);
 
-require_once('utils.php');
+require_once(dirname(__FILE__) . '/utils.php');
 
 while ($row = mysql_fetch_array($result)) {
     if ($row['request_status'] == 0) {

@@ -50,21 +50,21 @@ $_SESSION['last_url'] = $temp[0];
 <!--Middle: Current Page's Contents-->
 <div id='layout_middle' class='column'>
 <?php
-include 'php/show_announcement.php';
+include './php/show_announcement.php';
 ?>
 </div>
 
 <!--Left: Navigation Bar-->
 <div id='layout_left' class='column'>
 <?php
-include 'show_navi.html';
+include './show_navi.html';
 ?>
 </div>
 
 <!--Right: Log In-->
 <div id='layout_right' class='column'>
 <?php
-include 'php/show_login.php';
+include './php/show_login.php';
 ?>
 </div>
 

@@ -9,7 +9,7 @@ if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
 }
 
 # Connect to the database.
-require_once('../../config.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -44,7 +44,7 @@ if ($_SESSION['EMAIL'] != $row['financial_assistant_email'] &&
 <body>
 
 <?php
-require('common_interface_01.php');
+require(dirname(__FILE__) . '/common_interface_01.php');
 ?>
 
 <input action="action" type="button" onclick='<?php echo 'location.href="student_finish.php?rn=' . $row['request_id'] . '"'?>' value="完成报销"/>

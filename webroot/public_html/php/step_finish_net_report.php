@@ -9,7 +9,7 @@ if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 0) {
 }
 
 # Connect to the database.
-require_once('../../config.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -39,7 +39,7 @@ mysql_close($con);
 <form id="net_report_form" name="net_report_form" action="finish_net_report.php" method="post">
 
 <?php
-require('common_interface_01.php');
+require(dirname(__FILE__) . '/common_interface_01.php');
 ?>
 
 <button type="submit" name="submit_button" value=0>不同意此申请</button>

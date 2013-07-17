@@ -8,8 +8,8 @@ if (!isset($_SESSION['STATUS']) || $_SESSION['STATUS'] != 3) {
 }
 
 # Connect to the database.
-require_once('../../config.php');
-require_once('utils.php');
+require_once(dirname(__FILE__) . '/../../config.php');
+require_once(dirname(__FILE__) . '/utils.php');
 
 $con = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD);
 if (!$con) {
@@ -45,7 +45,7 @@ if (!isMyStudentsSubmission($row['financial_assistant_email'], $_SESSION['EMAIL'
 <form id="advisor_agree_form" name="advisor_agree_form" action=<?php echo "advisor_agree.php?rn=" . $_GET['rn']?> method="post">
 
 <?php
-require('common_interface_01.php');
+require(dirname(__FILE__) . '/common_interface_01.php');
 ?>
 
 <button type="submit" name="submit_button" value=1>不同意此申请</button>
