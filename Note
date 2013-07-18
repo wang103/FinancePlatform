@@ -249,7 +249,9 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 14. 网页的"holygrail"设计代码来自于Matthew Levine:
     http://alistapart.com/article/holygrail
 
-15. 文件介绍：
+15. 运行scripts/里的脚本时当前目录必须是FinancePlatform/。
+
+16. 文件介绍：
 FinancePlatform/
     Note        （此文档笔记）
     README.md   （简单的README文档）
