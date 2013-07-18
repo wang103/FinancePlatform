@@ -1,5 +1,5 @@
 1. 数据库的结构:
-此网上平台用到了4个表，分别是：
+此网上平台用到了4个表，名字分别是：
 users, advisors, announcements, 和requests。
 
 第一步，建立数据库：

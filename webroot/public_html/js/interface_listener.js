@@ -26,7 +26,7 @@ function specialChanged(sel) {
     }
 }
 
-/*---------- private ----------*/
+/*---------- private function start ----------*/
 
 function turnOnSpecialSubject() {
     document.getElementById("special_label_1").style.display = 'block';
@@ -60,7 +60,7 @@ function turnOffSpecialSubject() {
     }
 }
 
-/*-----------------------------*/
+/*---------- private function end ----------*/
 
 function receiptChanged(sel) {
     if (sel.value == "yes") {
