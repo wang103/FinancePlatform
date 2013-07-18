@@ -4,6 +4,7 @@ users, advisors, announcements, 和requests。
 
 第一步，建立数据库：
 CREATE DATABASE reimbursement;
+mysqladmin -u root password XXXXXXXX
 
 第二步，为了支持中文，此项目的文字编码一律使用UTF-8，在此将数据库的编码改为UTF-8:
 ALTER DATABASE reimbursement DEFAULT CHARACTER SET 'utf8';
@@ -214,14 +215,12 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 4. config.php contains sensitive information, and should be placed outside the
     public directory. It's permission should be set to something like 644.
 
-5. Only professors can modify the announcement list.
+5. 只有教授可以修改公告栏。
 
-6. Three-column HTML: http://alistapart.com/article/holygrail
+7. 每一个新的申请都会自动生成一个独一无二的流水号。
 
-7. An unique number is generated for each request.
-
-8. Seven student accounts, each corresponds to a professor, and one master
-    professor.
+8. 一般情况下，此系统包含7个财务助理账号，对应的7个负责老师账号，和一个
+    财务主任的账号。
 
 9. Student and his/her advisor can only see the student's submission. Master
     professor can see all.
