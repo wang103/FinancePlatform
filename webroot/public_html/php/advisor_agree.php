@@ -1,4 +1,5 @@
 <?php
+header('Content-type: text/html; charset=utf-8');
 session_start();
 
 # Check if user is a advisor professor.
@@ -49,7 +50,6 @@ if ($_POST['submit_button'] == 1) {
 }
 
 # Modify the row in the database.
-mysql_query('SET NAMES utf8');
 $sql = 'UPDATE requests SET date_advisor_agreed="' . $agreed_date .
     '", request_status=' . $request_status . ' WHERE request_id=' .
     $_GET['rn'] . ';';

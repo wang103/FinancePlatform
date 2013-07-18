@@ -98,8 +98,7 @@ function notifyWithEmail($to, $status) {
     require_once(dirname(__FILE__) . '/../../config.php');
 
     $subject = "财务平台提醒：";
-    $message = "(Chinese:)请登录平台进行查看或处理：\n" .
-        "(English:)Please sign in the financial platform to check or process:\n" .
+    $message = "请登录平台进行查看或处理：\n" .
         HOME_URL;
 
     if ($status == 0) {
