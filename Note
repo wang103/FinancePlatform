@@ -1,7 +1,7 @@
                           笔记
-=====================================================================
+======================================================================
 有关此项目的一切文件及代码在: www.github.com/wang103/FinancePlatform
-=====================================================================
+======================================================================
 
 1. 数据库的结构:
 此网上平台用到了4个表，名字分别是：
@@ -10,10 +10,11 @@ users, advisors, announcements, 和requests。
 第一步，建立数据库：
 CREATE DATABASE reimbursement;
 
-第二步，为了支持中文，此项目的文字编码一律使用UTF-8，在此将数据库的编码改为UTF-8:
+第二步，为了支持中文，此项目的文字编码一律使用UTF-8，
+在此将数据库的编码改为UTF-8:
 ALTER DATABASE reimbursement DEFAULT CHARACTER SET 'utf8';
 
-第三步，选择建好的数据库：
+第三步，选择刚建好的数据库：
 USE reimbursement;
 
 第四步，建立4个表：
@@ -111,7 +112,7 @@ email, password为邮箱地址和密码，用来登录。
 first_name, last_name为用户的真实姓名。
 id_number为学号，只有学生有，教师为空。
 status是用户身份。0代表财务主任老师，1代表研究生（财务助理），
-    2代表本科生，3代表负责财务助理的老师。
+    2代表本科生（目前无用），3代表负责老师。
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 advisors: 存储财务助理与负责老师的关系。
@@ -133,18 +134,18 @@ requests: 存储所有的申请。
 request_id是自动生成的流水号。
 submitter_name和submitter_id_number是申请人的名字和学号。
 financial_assistant_email和financial_assistant_name是财务助理的邮箱和名字。
-transfered_email是转交给的财务助理的邮箱。如果没有申请转交则为NULL。
+transfered_email是转交给的财务助理的邮箱。如果申请没有转交则为NULL。
 date_start，date_advisor_agreed，date_net_report_finished，
 date_student_finished，和date_finished分别为申请开始日期，负责老师同意日期，
-网报完成日期，助理完成报销日期，和财务主任填写玩回馈的日期。
+网报完成日期，财务助理完成报销日期，和财务主任填写完回馈的日期。
 amount是总金额。
-have_budget代表是否有预算。是为1，否为0。
+have_budget代表是否有预算。是为1，否为0。没有预算无法提交。
 page_number为申请材料总页数。
 subject代表报销科目。如果科目是其他的话，subject_other为具体科目名称。
 is_special代表是否是特殊科目。是为1，否为0。
-如果是特殊科目的话，intel_platform_id和asset_platform_id分别是知识产权平台
-的申请流水号和资产平台的申请流水号。
-have_all_files代表申请材料是否齐全。是为1，否为0。
+如果是特殊科目的话，需要从其他平台查找流水号并填写上：intel_platform_id和
+asset_platform_id分别是知识产权平台的申请流水号和资产平台的申请流水号。
+have_all_files代表申请材料是否齐全。是为1，否为0。不齐全无法提交。
 contract_company_name，contract_location，contract_bank_number，和contract_opener
 分别为公司名称，公司地区，银行卡号，和开户行。
 receipt_same_as_actual代表发票内容是否和实际内容一致。是为1，否为0。如果不一致，
@@ -157,20 +158,19 @@ note_optional为备注。
 last_added_note为财务主任在报销完成后对此报销添加的回馈意见。
 request_status代表此报销当前的状态：
     0 -- 刚刚提交，需要负责老师同意。
-    1 -- 负责老师已同意，需要主任完成网报。
-    2 -- 主任完成网报，需要财务助理完成报销。
-    3 -- 财务助理完成报销，需要主任对此报销添加回馈意见。
+    1 -- 负责老师已同意，需要财务主任完成网报。
+    2 -- 财务主任完成网报，需要财务助理完成报销。
+    3 -- 财务助理完成报销，需要财务主任对此报销添加回馈意见。
     4 -- 此报销顺利完成。
     5 -- 负责老师没有同意，报销永久终止。
     6 -- 财务主任没有同意，报销永久终止。
     7 -- 财务助理将报销申请取消，报销永久终止。
 
-第五部，将数据库引擎改为InnoDB，因为InnoDB比MyISAM对Foreign Key的支持更好。
+第五步，将数据库引擎改为InnoDB（InnoDB比起MyISAM对Foreign Key的支持更好）：
 ALTER TABLE users ENGINE=InnoDB;
 ALTER TABLE advisors ENGINE=InnoDB;
 ALTER TABLE announcements ENGINE=InnoDB;
 ALTER TABLE requests ENGINE=InnoDB;
-INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
 
 到此为止，数据库已建立完毕。此时可依照下面的例子添加用户，及添加财务助理和负责老师的关系。
 
@@ -185,7 +185,7 @@ INSERT INTO users VALUES ('test5@hotmail.com', md5('tianyi'), '崖子', '无', '
 INSERT INTO users VALUES ('test6@hotmail.com', md5('tianyi'), '不同', '包', '000006', 1);
 INSERT INTO users VALUES ('test7@hotmail.com', md5('tianyi'), '摩智', '鸠', '000007', 1);
 
-INSERT INTO users VALUES ('test22@hotmail.com', md5('tianyi'), '志平', '伊', '', 3);
+INSERT INTO users VALUES ('test11@hotmail.com', md5('tianyi'), '志平', '伊', '', 3);
 INSERT INTO users VALUES ('test22@hotmail.com', md5('tianyi'), '冠英', '陆', '', 3);
 INSERT INTO users VALUES ('test33@hotmail.com', md5('tianyi'), '处一', '王', '', 3);
 INSERT INTO users VALUES ('test44@hotmail.com', md5('tianyi'), '克', '欧阳', '', 3);
@@ -206,31 +206,31 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 总共有4个主界面，分别为首页，提交界面，处理界面，及查看界面。
     首页显示所有公告。
     提交界面用来给财务助理提交新的报销申请。
-    处理界面显示所有当前用户需要处理的报销。
+    处理界面只显示所有当前用户需要处理的报销。
     查看界面显示所有当前用户有权查看的报销。
 
 3. config.php 包含数据库登录信息，为安全起见，将此文件放置在public_html的
     外面，并且将此文件的权限设为644。
 
-4. 只有教授可以修改公告栏，包括添加，修改，及删除任意公告。
+4. 只有教授身份的用户可以修改公告栏，包括添加，修改，及删除任意公告。
 
 5. 每一个新的报销申请都会自动生成一个独一无二的流水号。
 
 6. 一般情况下，此系统包含多个财务助理账号，及对应的多个负责老师账号，和一个
     财务主任的账号。
 
-7. 用户权限：
+7. 用户权限说明：
     A. 只有财务助理可以提交报销申请。
     B. 财务主任有权看到所有申请。
     C. 财务助理A提交的申请，A和他/她的负责老师有权看到。
     D. 若财务助理A提交的申请被转交给了财务助理B，那么A，A的负责老师，B，
         和B的负责老师都可以看到该申请。
 
-8. 次系统支持一个负责老师对应多个财务助理学生。
+8. 此系统支持一个负责老师对应多个财务助理学生。
 
-9. config.php的内容（这些变量放在这里方便修改）:
+9. config.php的内容（这些变量放在这里为了方便修改）:
     DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD分别数据库IP地址，数据库
-    名称，用户名，和密码。
+    名称，登录用户名，和登录密码。
     SEND_EMAIL: true的话将开启邮件提醒功能。false的话则不开启此功能。
     HOME_URL：此财务平台的网站地址。
     INTEL_PLATFORM_URL和ASSET_PLATFORM_URL：知识产权平台和资产平台的
@@ -238,8 +238,8 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 
 10. 设备，材料，软件为特殊报销科目，需要填写知识产权流水号或是资产流水号。
 
-11. 负责老师有权不同意他/她的财务助理提交的申请。财务主任有权不同意任何的
-    申请。
+11. 负责老师（在负责老师同意阶段）有权不同意他/她的财务助理提交的申请。
+    财务主任（在网报阶段）有权不同意任何的申请。
 
 12. 在财务主任完成网报之前，财务助理有权终止报销申请。
 
