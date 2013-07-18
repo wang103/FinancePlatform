@@ -1,10 +1,14 @@
+                          笔记
+=====================================================================
+有关此项目的一切文件及代码在: www.github.com/wang103/FinancePlatform
+=====================================================================
+
 1. 数据库的结构:
 此网上平台用到了4个表，名字分别是：
 users, advisors, announcements, 和requests。
 
 第一步，建立数据库：
 CREATE DATABASE reimbursement;
-mysqladmin -u root password XXXXXXXX
 
 第二步，为了支持中文，此项目的文字编码一律使用UTF-8，在此将数据库的编码改为UTF-8:
 ALTER DATABASE reimbursement DEFAULT CHARACTER SET 'utf8';
@@ -100,6 +104,7 @@ ON DELETE CASCADE
 
 表的说明：
 ---------------------------------------------------------------
+---------------------------------------------------------------
 users: 存储所有的用户。
 
 email, password为邮箱地址和密码，用来登录。
@@ -108,10 +113,12 @@ id_number为学号，只有学生有，教师为空。
 status是用户身份。0代表财务主任老师，1代表研究生（财务助理），
     2代表本科生，3代表负责财务助理的老师。
 ---------------------------------------------------------------
+---------------------------------------------------------------
 advisors: 存储财务助理与负责老师的关系。
 
 student_email是财务助理的登录邮箱地址。
 advisor_email是负责老师的登录邮箱地址。
+---------------------------------------------------------------
 ---------------------------------------------------------------
 announcements: 存储所有的公告。
 
@@ -120,79 +127,74 @@ title和content是标题和内容。
 poster_email和poster是发布人的邮箱地址和姓名。
 date是发布时间。
 ---------------------------------------------------------------
+---------------------------------------------------------------
 requests: 存储所有的申请。
 
 request_id是自动生成的流水号。
 submitter_name和submitter_id_number是申请人的名字和学号。
 financial_assistant_email和financial_assistant_name是财务助理的邮箱和名字。
-transfered_email是转交给的财务助理的邮箱。如果没有转交则为NULL。
+transfered_email是转交给的财务助理的邮箱。如果没有申请转交则为NULL。
 date_start，date_advisor_agreed，date_net_report_finished，
 date_student_finished，和date_finished分别为申请开始日期，负责老师同意日期，
 网报完成日期，助理完成报销日期，和财务主任填写玩回馈的日期。
 amount是总金额。
 have_budget代表是否有预算。是为1，否为0。
 page_number为申请材料总页数。
-subject
-subject_other
-is_special
-intel_platform_id
-asset_platform_id
-have_all_files
-contract_company_name
-contract_location
-contract_bank_number
-contract_opener
-receipt_same_as_actual
-receipt_difference
-professor_class
-professor_name
-expanse_number
-expanse_name
-payment_option 
-payment_option_other
-usage_optional
-note_optional
-last_added_note
-request_status
+subject代表报销科目。如果科目是其他的话，subject_other为具体科目名称。
+is_special代表是否是特殊科目。是为1，否为0。
+如果是特殊科目的话，intel_platform_id和asset_platform_id分别是知识产权平台
+的申请流水号和资产平台的申请流水号。
+have_all_files代表申请材料是否齐全。是为1，否为0。
+contract_company_name，contract_location，contract_bank_number，和contract_opener
+分别为公司名称，公司地区，银行卡号，和开户行。
+receipt_same_as_actual代表发票内容是否和实际内容一致。是为1，否为0。如果不一致，
+receipt_difference为不一致的具体内容。
+professor_class和professor_name分别为负责老师的导师组组别和老师的名字。
+expanse_number和expanse_name分别为经费卡编号和经费卡名称。
+payment_option代表支付方式。如果方式是其他的话，payment_option_other为具体方式名称。
+usage_optional为用途。
+note_optional为备注。
+last_added_note为财务主任在报销完成后对此报销添加的回馈意见。
+request_status代表此报销当前的状态：
+    0 -- 刚刚提交，需要负责老师同意。
+    1 -- 负责老师已同意，需要主任完成网报。
+    2 -- 主任完成网报，需要财务助理完成报销。
+    3 -- 财务助理完成报销，需要主任对此报销添加回馈意见。
+    4 -- 此报销顺利完成。
+    5 -- 负责老师没有同意，报销永久终止。
+    6 -- 财务主任没有同意，报销永久终止。
+    7 -- 财务助理将报销申请取消，报销永久终止。
 
-// request_status:
-// 0 -- submitted, need advisor to agree.
-// 1 -- advisor agreed, need professor to modify and finish net reporting.
-// 2 -- professor finished net reporting, need student to complete.
-// 3 -- student completed, professor didn't add comment.
-// 4 -- all completed, professor added comment.
-// 5 -- advisor didn't agree, reimbursement permanently stopped.
-// 6 -- master professor didn't agree, reimbursement permanenetly stopped.
-// 7 -- student canceled, reimbursement permanently stopped.
-
-第五布，将搜索引擎改为InnoDB。
+第五部，将数据库引擎改为InnoDB，因为InnoDB比MyISAM对Foreign Key的支持更好。
 ALTER TABLE users ENGINE=InnoDB;
 ALTER TABLE advisors ENGINE=InnoDB;
 ALTER TABLE announcements ENGINE=InnoDB;
 ALTER TABLE requests ENGINE=InnoDB;
 INSERT INTO users VALUES ('wang103@illinois.edu', md5('tianyi'), '天意', '王', 'A1', 1);
 
+到此为止，数据库已建立完毕。此时可依照下面的例子添加用户，及添加财务助理和负责老师的关系。
+
 例子--添加用户：
-INSERT INTO users VALUES ('wang103uiuc@gmail.com', md5('bailin'), '琳', '柏', '', 0);
+INSERT INTO users VALUES ('super@hotmail.com', md5('tianyi'), '琳', '柏', '', 0);
 
-INSERT INTO users VALUES ('hypervisorII@hotmail.com', md5('tianyi'), '1', 'student', 'S1', 1);
-INSERT INTO users VALUES ('test2@hotmail.com', md5('tianyi'), '2', 'student', 'S1', 1);
-INSERT INTO users VALUES ('test3@hotmail.com', md5('tianyi'), '3', 'student', 'S1', 1);
-INSERT INTO users VALUES ('test4@hotmail.com', md5('tianyi'), '4', 'student', 'S1', 1);
-INSERT INTO users VALUES ('test5@hotmail.com', md5('tianyi'), '5', 'student', 'S1', 1);
-INSERT INTO users VALUES ('test6@hotmail.com', md5('tianyi'), '6', 'student', 'S1', 1);
-INSERT INTO users VALUES ('test7@hotmail.com', md5('tianyi'), '7', 'student', 'S1', 1);
+INSERT INTO users VALUES ('test1@hotmail.com', md5('tianyi'), '春秋', '丁', '000001', 1);
+INSERT INTO users VALUES ('test2@hotmail.com', md5('tianyi'), '夫人', '马', '000002', 1);
+INSERT INTO users VALUES ('test3@hotmail.com', md5('tianyi'), '波恶', '风', '000003', 1);
+INSERT INTO users VALUES ('test4@hotmail.com', md5('tianyi'), '语嫣', '王', '000004', 1);
+INSERT INTO users VALUES ('test5@hotmail.com', md5('tianyi'), '崖子', '无', '000005', 1);
+INSERT INTO users VALUES ('test6@hotmail.com', md5('tianyi'), '不同', '包', '000006', 1);
+INSERT INTO users VALUES ('test7@hotmail.com', md5('tianyi'), '摩智', '鸠', '000007', 1);
 
-INSERT INTO users VALUES ('wang103@uiuc.edu', md5('tianyi'), '1', 'professor', '', 3);
-INSERT INTO users VALUES ('test22@hotmail.com', md5('tianyi'), '2', 'professor', '', 3);
-INSERT INTO users VALUES ('test33@hotmail.com', md5('tianyi'), '3', 'professor', '', 3);
-INSERT INTO users VALUES ('test44@hotmail.com', md5('tianyi'), '4', 'professor', '', 3);
-INSERT INTO users VALUES ('test55@hotmail.com', md5('tianyi'), '5', 'professor', '', 3);
-INSERT INTO users VALUES ('test66@hotmail.com', md5('tianyi'), '6', 'professor', '', 3);
-INSERT INTO users VALUES ('test77@hotmail.com', md5('tianyi'), '7', 'professor', '', 3);
+INSERT INTO users VALUES ('test22@hotmail.com', md5('tianyi'), '志平', '伊', '', 3);
+INSERT INTO users VALUES ('test22@hotmail.com', md5('tianyi'), '冠英', '陆', '', 3);
+INSERT INTO users VALUES ('test33@hotmail.com', md5('tianyi'), '处一', '王', '', 3);
+INSERT INTO users VALUES ('test44@hotmail.com', md5('tianyi'), '克', '欧阳', '', 3);
+INSERT INTO users VALUES ('test55@hotmail.com', md5('tianyi'), '超风', '梅', '', 3);
+INSERT INTO users VALUES ('test66@hotmail.com', md5('tianyi'), '长老', '简', '', 3);
+INSERT INTO users VALUES ('test77@hotmail.com', md5('tianyi'), '药师', '黄', '', 3);
 
 例子--添加财务助理和负责老师的关系：
-INSERT INTO advisors VALUES ('hypervisorII@hotmail.com', 'wang103@uiuc.edu');
+INSERT INTO advisors VALUES ('test1@hotmail.com', 'test11@hotmail.com');
 INSERT INTO advisors VALUES ('test2@hotmail.com', 'test22@hotmail.com');
 INSERT INTO advisors VALUES ('test3@hotmail.com', 'test33@hotmail.com');
 INSERT INTO advisors VALUES ('test4@hotmail.com', 'test44@hotmail.com');
@@ -202,37 +204,118 @@ INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
 
 2. 界面简介：
 总共有4个主界面，分别为首页，提交界面，处理界面，及查看界面。
-    'submit' is mainly used by students to submit new reimbursement.
-    'process' is mainly used by professors to process reimbursement submitted
-        by students.
-    'check' is used by everyone to check all sort of reimburments, such as:
-        submitted by me
-        processed by me
-        other reimbursement requests
-    
-    Identity will be checked before any action can be granted.
+    首页显示所有公告。
+    提交界面用来给财务助理提交新的报销申请。
+    处理界面显示所有当前用户需要处理的报销。
+    查看界面显示所有当前用户有权查看的报销。
 
-4. config.php contains sensitive information, and should be placed outside the
-    public directory. It's permission should be set to something like 644.
+3. config.php 包含数据库登录信息，为安全起见，将此文件放置在public_html的
+    外面，并且将此文件的权限设为644。
 
-5. 只有教授可以修改公告栏。
+4. 只有教授可以修改公告栏，包括添加，修改，及删除任意公告。
 
-7. 每一个新的申请都会自动生成一个独一无二的流水号。
+5. 每一个新的报销申请都会自动生成一个独一无二的流水号。
 
-8. 一般情况下，此系统包含7个财务助理账号，对应的7个负责老师账号，和一个
+6. 一般情况下，此系统包含多个财务助理账号，及对应的多个负责老师账号，和一个
     财务主任的账号。
 
-9. Student and his/her advisor can only see the student's submission. Master
-    professor can see all.
+7. 用户权限：
+    A. 只有财务助理可以提交报销申请。
+    B. 财务主任有权看到所有申请。
+    C. 财务助理A提交的申请，A和他/她的负责老师有权看到。
+    D. 若财务助理A提交的申请被转交给了财务助理B，那么A，A的负责老师，B，
+        和B的负责老师都可以看到该申请。
 
-10. Support one advisor to multiple students.
+8. 次系统支持一个负责老师对应多个财务助理学生。
 
-11. Links to two other platforms are stored in config.php.
+9. config.php的内容（这些变量放在这里方便修改）:
+    DB_HOST, DB_DATABASE, DB_USER, DB_PASSWORD分别数据库IP地址，数据库
+    名称，用户名，和密码。
+    SEND_EMAIL: true的话将开启邮件提醒功能。false的话则不开启此功能。
+    HOME_URL：此财务平台的网站地址。
+    INTEL_PLATFORM_URL和ASSET_PLATFORM_URL：知识产权平台和资产平台的
+        网站地址。
 
-12. Equipment, material, software, and mayby other are special subject.
+10. 设备，材料，软件为特殊报销科目，需要填写知识产权流水号或是资产流水号。
 
-13. Professors can terminate a request.
+11. 负责老师有权不同意他/她的财务助理提交的申请。财务主任有权不同意任何的
+    申请。
 
-14. Students can delete request before mater professor processed it.
+12. 在财务主任完成网报之前，财务助理有权终止报销申请。
 
-15. There is a email reminding system.
+13. 此平台有邮件提醒功能。当某位用户有新的申请需要处理的时候，平台系统会
+    自动发出提醒邮件到该用户的邮箱。
+
+14. 网页的"holygrail"设计代码来自于Matthew Levine:
+    http://alistapart.com/article/holygrail
+
+15. 文件介绍：
+FinancePlatform/
+    Note        （此文档笔记）
+    README.md   （简单的README文档）
+    doc/        （包含有关此项目的所有需求分析）
+    scripts/    （包含一些对开发时有用的脚本）
+        lines.sh        （计算源代码总行数，需要安装git方可使用）
+        move.sh         （自动将所有网站代码移至/var/www/html)
+    webroot/            （全部网站代码）
+        config.php      （包含一些变量在此方便随时修改）
+        public_html/    （对外开放的全部网站代码）
+            index.php                   （主页面）
+            reimbursement_submit.php    （提交页面）
+            reimbursement_process.php   （处理页面）
+            reimbursement_check.php     （查看页面）
+            show_navi.html              （网站上的导航栏）
+            css/                        （包含css文件）
+                style00.css                     （将4个主要页面分为3个柱子）
+                style01.css                     （修饰common_interface_01.php）
+                style02.css                     （修饰HTML的表格：php/show_process.php和php/show_check.php）
+                style03.css                     （修饰修改账号信息的界面：php/show_modify_account.php）
+            js/                         （包含javascript文件）
+                interface_listener.js           （对用户在common_interface_01.php上的操作作出反应）
+                validate_form.js                （对将要提交的Form进行初步审核，过了方可提交给服务器）
+            video/
+                (^=.=^) nyan~~
+            php/                        （包含PHP文件）
+                show_login.php                  （显示：登录界面）
+                login.php                       （功能：登录）
+                logout.php                      （功能：登出）
+                login_failed.php                （显示：登录失败）
+                wrong_password.php              （显示：密码错误）
+
+                show_modify_account.php         （显示：修改账户信息界面）
+                modify_account.php              （功能：修改账户信息）
+
+                show_submit.php                 （显示：提交界面）
+                show_process.php                （显示：处理界面）
+                show_check.php                  （显示：查看界面）
+
+                show_reimbursement.php          （显示：某一个报销申请的所有信息。若此报销还没有被
+                                                财务主任完成网报，财务助理可取消此申请）
+                cancel_request.php              （功能：财务助理取消申请）
+
+                show_announcement.php           （显示：所有的公告）
+                show_detailed_announce.php      （显示：某一个公告的具体内容）
+                show_modify_announce.php        （显示：修改某一个公告的界面）
+                insert_announcement.php         （功能：添加公告）
+                modify_announcement.php         （功能：修改公告）
+                delete_announcement.php         （功能：删除公告）
+
+                create_new_request.php          （功能：添加新的报销申请）
+
+                step_advisor_agree.php          （显示：负责老师同意界面）
+                advisor_agree.php               （功能：负责老师同意，可以不同意）
+                
+                step_finish_net_report.php      （显示：财务主任完成网报界面）
+                finish_net_report.php           （功能：财务主任完成网报，可以不同意，修改报销内容，
+                                                或保存）
+
+                step_student_finish.php         （显示：财务助理完成申请界面）
+                student_finish.php              （功能：财务助理完成申请）
+
+                step_professor_finish.php       （显示：财务主任添加建议界面）
+                professor_finish.php            （功能：财务主任添加建议）
+
+                utils.php                       （帮助：一些常用到的代码集中于此）
+
+                common_interface_01.php         （显示：报销的具体内容在多个地方都需要显示，
+                                                所以集中放在这里）
