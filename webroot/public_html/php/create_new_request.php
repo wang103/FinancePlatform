@@ -3,7 +3,7 @@ header('Content-type: text/html; charset=utf-8');
 session_start();
 
 # Check user signed in.
-if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
+if (!isset($_SESSION['USERNAME']) || empty($_SESSION['USERNAME'])) {
     echo 'error code: 0';
     die();
 }
@@ -47,7 +47,7 @@ $submitter_id_number = $_POST['id_number'];
 $submit_date = $_POST['date'];
 $amount = $_POST['amount'];
 $have_budget = 1;
-$financial_assistant_email = $_SESSION['EMAIL'];
+$financial_assistant_username = $_SESSION['USERNAME'];
 $financial_assistant_name = $_POST['finance_assist_name'];
 $page_number = $_POST['pages'];
 $subject_other = "";
@@ -117,7 +117,7 @@ $request_status = 0;
 
 # Insert new request into the database.
 $sql = 'INSERT INTO requests (submitter_name, submitter_id_number, date_start, ' .
-    'amount, have_budget, financial_assistant_email, financial_assistant_name, ' .
+    'amount, have_budget, financial_assistant_username, financial_assistant_name, ' .
     'page_number, subject, subject_other, is_special, intel_platform_id, ' .
     'asset_platform_id, have_all_files, contract_company_name, contract_location, ' .
     'contract_bank_number, contract_opener, receipt_same_as_actual, ' .
@@ -125,7 +125,7 @@ $sql = 'INSERT INTO requests (submitter_name, submitter_id_number, date_start, '
     'expanse_name, payment_option, payment_option_other, usage_optional, ' .
     'note_optional, request_status) VALUES (' .
     '"' . $submitter_name . '", "' . $submitter_id_number . '", "' . $submit_date .
-    '", ' . $amount . ', ' . $have_budget . ', "' . $financial_assistant_email .
+    '", ' . $amount . ', ' . $have_budget . ', "' . $financial_assistant_username .
     '", "' . $financial_assistant_name . '", ' . $page_number . ', ' . $subject .
     ', "'. $subject_other . '", ' . $is_special . ', ' . $intel_platform_id .
     ', ' . $asset_platform_id . ', ' . $have_all_files . ', "'. $contract_company_name .
@@ -142,10 +142,15 @@ if (!mysql_query($sql, $con)) {
 
 # Send a notification message to professor.
 if (SEND_EMAIL) {
-    $sql = 'SELECT * FROM advisors WHERE student_email="' . $_SESSION['EMAIL'] . '"';
+    $sql = 'SELECT * FROM advisors WHERE student_username="' . $_SESSION['USERNAME'] . '"';
     $result = mysql_query($sql, $con);
     $advisor_prof = mysql_fetch_assoc($result);
-    notifyWithEmail($advisor_prof['advisor_email'], 0);
+
+    $sql = 'SELECT * FROM users WHERE username="' . $advisor_prof['advisor_username'] . '"';
+    $result = mysql_query($sql, $con);
+    $advisor_prof = mysql_fetch_assoc($result);
+
+    notifyWithEmail($advisor_prof['email'], 0);
 }
 
 mysql_close($con);

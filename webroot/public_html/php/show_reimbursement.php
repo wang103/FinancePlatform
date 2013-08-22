@@ -3,7 +3,7 @@ header('Content-type: text/html; charset=utf-8');
 session_start();
 
 # Check user signed in.
-if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
+if (!isset($_SESSION['USERNAME']) || empty($_SESSION['USERNAME'])) {
     echo 'error code: 0';
     die();
 }
@@ -28,10 +28,10 @@ $assistants = mysql_query('SELECT * FROM users WHERE status=1 OR status=2');
 mysql_close($con);
 
 # Check user name or if user is the advisor or if user is the master professor.
-if ($_SESSION['EMAIL'] != $row['financial_assistant_email'] &&
-    $_SESSION['EMAIL'] != $row['transfered_email'] &&
-    !isMyStudentsSubmission($row['financial_assistant_email'], $_SESSION['EMAIL']) &&
-    !isMyStudentsSubmission($row['transfered_email'], $_SESSION['EMAIL']) &&
+if ($_SESSION['USERNAME'] != $row['financial_assistant_username'] &&
+    $_SESSION['USERNAME'] != $row['transfered_username'] &&
+    !isMyStudentsSubmission($row['financial_assistant_username'], $_SESSION['USERNAME']) &&
+    !isMyStudentsSubmission($row['transfered_username'], $_SESSION['USERNAME']) &&
     $_SESSION['STATUS'] != 0) {
     echo 'error code: 1';
     die();

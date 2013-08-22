@@ -3,7 +3,7 @@ header('Content-type: text/html; charset=utf-8');
 session_start();
 
 # Check user signed in.
-if (!isset($_SESSION['EMAIL']) || empty($_SESSION['EMAIL'])) {
+if (!isset($_SESSION['USERNAME']) || empty($_SESSION['USERNAME'])) {
     echo 'error code: 0';
     die();
 }
@@ -24,8 +24,8 @@ $result = mysql_query('SELECT * FROM requests WHERE request_id=' . $_GET['rn']);
 $row = mysql_fetch_array($result);
 
 # Check for user name.
-if ($_SESSION['EMAIL'] != $row['financial_assistant_email'] &&
-    $_SESSION['EMAIL'] != $row['transfered_email']) {
+if ($_SESSION['USERNAME'] != $row['financial_assistant_username'] &&
+    $_SESSION['USERNAME'] != $row['transfered_username']) {
     echo 'error code: 1';
     die();
 }

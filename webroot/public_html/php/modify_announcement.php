@@ -18,7 +18,7 @@ mysql_select_db(DB_DATABASE, $con);
 
 # Update the announcement from the table.
 $qry = 'UPDATE announcements SET title="' . $_POST['title'] . '", content="' .
-    $_POST['content'] . '", poster_email="' . $_SESSION['EMAIL'] . '", poster="' .
+    $_POST['content'] . '", poster_username="' . $_SESSION['USERNAME'] . '", poster="' .
     $_SESSION['LAST_NAME'] . $_SESSION['FIRST_NAME'] .
     '", date=NOW() WHERE announce_id=' . $_GET['an'];
 

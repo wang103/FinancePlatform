@@ -37,11 +37,21 @@ if (SEND_EMAIL) {
     $result = mysql_query($sql, $con);
     $student = mysql_fetch_assoc($result);
 
-    if (isset($student['transfered_email']) &&
-        strlen(trim($student['transfered_email'])) > 0) {
-        notifyWithEmail($student['transfered_email'], 4);
+    if (isset($student['transfered_username']) &&
+        strlen(trim($student['transfered_username'])) > 0) {
+        $sql = 'SELECT * FROM users WHERE username="' .
+            $student['transfered_username'] . '"';
+        $result = mysql_query($sql, $con);
+        $student = mysql_fetch_assoc($result);
+
+        notifyWithEmail($student['email'], 4);
     } else {
-        notifyWithEmail($student['financial_assistant_email'], 4);
+        $sql = 'SELECT * FROM users WHERE username="' .
+            $student['financial_assistant_username'] . '"';
+        $result = mysql_query($sql, $con);
+        $student = mysql_fetch_assoc($result);
+
+        notifyWithEmail($student['email'], 4);
     }
 }
 

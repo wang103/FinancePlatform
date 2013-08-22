@@ -1,6 +1,6 @@
 <?php
 
-function isMyStudentsSubmission($studentEmail, $myEmail) {
+function isMyStudentsSubmission($studentUsername, $myUsername) {
     # Connect to the database.
     require_once(dirname(__FILE__) . '/../../config.php');
 
@@ -12,12 +12,12 @@ function isMyStudentsSubmission($studentEmail, $myEmail) {
 
     # Load advisor details.
     mysql_query('SET NAMES utf8');
-    $result = mysql_query('SELECT * FROM advisors WHERE student_email="' . $studentEmail . '"');
+    $result = mysql_query('SELECT * FROM advisors WHERE student_username="' . $studentUsername . '"');
     $row = mysql_fetch_array($result);
 
     mysql_close($con1);
     
-    return $myEmail == $row['advisor_email'];
+    return $myUsername == $row['advisor_username'];
 }
 
 function getSubjectNameFromIndex($subjectIndex, $othersName) {

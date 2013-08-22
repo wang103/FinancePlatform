@@ -32,9 +32,15 @@ mysql_select_db(DB_DATABASE, $con);
 
 $name = $_POST['name'];
 $id_number = $_POST['id_number'];
-$transfered_email = 'NULL';
+$transfered_username = 'NULL';
+$transfered_name = 'NULL';
 if ($_POST['transfer_sel'] == "yes") {
-    $transfered_email = '"' . $_POST['transfer'] . '"';
+    $transfered_username = '"' . $_POST['transfer'] . '"';
+
+    $sql = 'SELECT * FROM users WHERE username="' . $_POST['transfer'] . '"';
+    $result = mysql_query($sql, $con);
+    $student = mysql_fetch_assoc($result);
+    $transfered_name = '"' . $student['email'] . '"'
 }
 $net_report_date = date('Y-m-d');
 $amount = $_POST['amount'];
@@ -121,16 +127,16 @@ if ($_POST['submit_button'] == 0) {
 
 # Modify the row in the database.
 $sql = 'UPDATE requests SET submitter_name="' . $name . '", submitter_id_number="' .
-    $id_number . '", transfered_email=' . $transfered_email .
-    ', date_net_report_finished="' . $net_report_date . '", amount=' . $amount .
-    ',' . 'have_budget=' . $have_budget . ',' . 'financial_assistant_name="' .
-    $financial_assistant_name . '",' . 'page_number=' . $page_number . ',' .
-    'subject=' . $subject . ',' . 'subject_other="' . $subject_other . '",' .
-    'is_special=' . $is_special . ',' . 'intel_platform_id=' . $intel_platform_id . ',' .
-    'asset_platform_id=' . $asset_platform_id . ',' .
-    'have_all_files=' . $have_all_files . ',' . 'contract_company_name="' .
-    $contract_company_name . '",' . 'contract_location="' . $contract_location .
-    '",' . 'contract_bank_number="' . $contract_bank_number . '",' .
+    $id_number . '", transfered_username=' . $transfered_username .
+    ', transfered_name=' . $transfered_name . ', date_net_report_finished="' .
+    $net_report_date . '", amount=' . $amount . ',' . 'have_budget=' . $have_budget .
+    ',' . 'financial_assistant_name="' . $financial_assistant_name . '",' .
+    'page_number=' . $page_number . ',' . 'subject=' . $subject . ',' .
+    'subject_other="' . $subject_other . '",' . 'is_special=' . $is_special . ',' .
+    'intel_platform_id=' . $intel_platform_id . ',' . 'asset_platform_id=' .
+    $asset_platform_id . ',' . 'have_all_files=' . $have_all_files . ',' .
+    'contract_company_name="' . $contract_company_name . '",' . 'contract_location="' .
+    $contract_location . '",' . 'contract_bank_number="' . $contract_bank_number . '",' .
     'contract_opener="' . $contract_opener . '",' . 'receipt_same_as_actual=' .
     $receipt_same_as_actual . ',' . 'receipt_difference="' .
     $receipt_difference . '",' . 'professor_class="' . $professor_class . '",' .
@@ -151,15 +157,25 @@ if (SEND_EMAIL && $request_status != 1) {
     $sql = 'SELECT * FROM requests WHERE request_id=' . $_POST['id'];
     $result = mysql_query($sql, $con);
     $student = mysql_fetch_assoc($result);
-
+    
+    $sql = 'SELECT * FROM users WHERE username="' .
+        $student['financial_assistant_username'] . '"';
+    $result = mysql_query($sql, $con);
+    $student1 = mysql_fetch_assoc($result);
+    
     if ($request_status == 6) {
-        notifyWithEmail($student['financial_assistant_email'], 8);
+        notifyWithEmail($student1['email'], 8);
     } else {
-        if (isset($student['transfered_email'])) {
-            notifyWithEmail($student['transfered_email'], 5);
-            notifyWithEmail($student['financial_assistant_email'], 6);
+        if (isset($student['transfered_username'])) {
+            $sql = 'SELECT * FROM users WHERE username="' .
+                $student['transfered_username'] . '"';
+            $result = mysql_query($sql, $con);
+            $student2 = mysql_fetch_assoc($result);
+
+            notifyWithEmail($student2['email'], 5);
+            notifyWithEmail($student1['email'], 6);
         } else {
-            notifyWithEmail($student['financial_assistant_email'], 2);
+            notifyWithEmail($student1['email'], 2);
         }
     }
 }

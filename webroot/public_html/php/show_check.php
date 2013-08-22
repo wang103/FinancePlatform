@@ -34,8 +34,8 @@ if ($_SESSION['STATUS'] == 0) {
 
     $qry = 'SELECT * FROM requests ';
     
-    $temp = mysql_query('SELECT * FROM advisors WHERE advisor_email="' .
-        $_SESSION['EMAIL'] . '"');
+    $temp = mysql_query('SELECT * FROM advisors WHERE advisor_username="' .
+        $_SESSION['USERNAME'] . '"');
     $counter = 1;
     while ($temp_row = mysql_fetch_array($temp)) {
         if ($counter == 1) {
@@ -44,8 +44,8 @@ if ($_SESSION['STATUS'] == 0) {
             $qry = $qry . 'OR ';
         }
 
-        $qry = $qry . 'financial_assistant_email="' . $temp_row['student_email'] .
-            '" OR transfered_email="' . $temp_row['student_email'] . '" ';
+        $qry = $qry . 'financial_assistant_username="' . $temp_row['student_username'] .
+            '" OR transfered_username="' . $temp_row['student_username'] . '" ';
 
         $counter = $counter + 1;
     }
@@ -58,8 +58,8 @@ if ($_SESSION['STATUS'] == 0) {
     }
 } else {
     echo '<h3>我的报销申请</h3>';
-    $qry = 'SELECT * FROM requests WHERE financial_assistant_email="' .
-        $_SESSION['EMAIL'] . '" OR transfered_email="' . $_SESSION['EMAIL'] .
+    $qry = 'SELECT * FROM requests WHERE financial_assistant_username="' .
+        $_SESSION['USERNAME'] . '" OR transfered_username="' . $_SESSION['USERNAME'] .
         '" ORDER BY request_id DESC';
 }
 ?>
@@ -90,10 +90,8 @@ while ($row = mysql_fetch_array($result)) {
         <td><p>' . $row['submitter_name'] . '</p></td>
         <td><p>' . $row['financial_assistant_name'];
     
-    if (isset($row['transfered_email'])) {
-        $sql_usr = mysql_query('SELECT * FROM users WHERE email="' . $row['transfered_email'] . '"');
-        $usr = mysql_fetch_array($sql_usr);
-        echo '=>' . $usr['last_name'] . $usr['first_name'];
+    if (isset($row['transfered_name'])) {
+        echo '=>' . $row['transfered_name'];
     }
 
     echo '</p></td>

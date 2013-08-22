@@ -25,7 +25,7 @@ $row = mysql_fetch_array($result);
 mysql_close($con);
 
 # Check if user is the advisor.
-if (!isMyStudentsSubmission($row['financial_assistant_email'], $_SESSION['EMAIL'])) {
+if (!isMyStudentsSubmission($row['financial_assistant_username'], $_SESSION['USERNAME'])) {
     echo 'error code: 0';
     die();
 }

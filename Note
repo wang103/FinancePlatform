@@ -20,24 +20,25 @@ USE reimbursement;
 第四步，建立4个表：
 CREATE TABLE users
 (
+username VARCHAR(255) NOT NULL,
 email VARCHAR(255) NOT NULL,
 password VARCHAR(255) NOT NULL,
 first_name VARCHAR(255) NOT NULL,
 last_name VARCHAR(255) NOT NULL,
 id_number VARCHAR(127),
 status INT(1) NOT NULL,
-PRIMARY KEY (email)
+PRIMARY KEY (username)
 );
 
 CREATE TABLE advisors
 (
-student_email VARCHAR(255) NOT NULL,
-advisor_email VARCHAR(255) NOT NULL,
-PRIMARY KEY (student_email),
-CONSTRAINT FOREIGN KEY (advisor_email) REFERENCES users(email) 
+student_username VARCHAR(255) NOT NULL,
+advisor_username VARCHAR(255) NOT NULL,
+PRIMARY KEY (student_username),
+CONSTRAINT FOREIGN KEY (advisor_username) REFERENCES users(username)
 ON UPDATE CASCADE
 ON DELETE CASCADE,
-CONSTRAINT FOREIGN KEY (student_email) REFERENCES users(email) 
+CONSTRAINT FOREIGN KEY (student_username) REFERENCES users(username) 
 ON UPDATE CASCADE
 ON DELETE CASCADE
 );
@@ -47,11 +48,11 @@ CREATE TABLE announcements
 announce_id INT NOT NULL AUTO_INCREMENT,
 title VARCHAR(511) NOT NULL,
 content TEXT NOT NULL,
-poster_email VARCHAR(255) NOT NULL,
+poster_username VARCHAR(255) NOT NULL,
 poster VARCHAR(255) NOT NULL,
 date DATETIME NOT NULL,
 PRIMARY KEY (announce_id),
-CONSTRAINT FOREIGN KEY (poster_email) REFERENCES users(email)
+CONSTRAINT FOREIGN KEY (poster_username) REFERENCES users(username)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 );
@@ -61,7 +62,8 @@ CREATE TABLE requests
 request_id INT NOT NULL AUTO_INCREMENT,
 submitter_name VARCHAR(255) NOT NULL,
 submitter_id_number VARCHAR(127),
-transfered_email VARCHAR(255),
+transfered_username VARCHAR(255),
+transfered_name VARCHAR(255),
 date_start DATE NOT NULL,
 date_advisor_agreed DATE,
 date_net_report_finished DATE,
@@ -69,8 +71,8 @@ date_student_finished DATE,
 date_finished DATE,
 amount INT NOT NULL,
 have_budget INT(1) NOT NULL,
-financial_assistant_email VARCHAR(255),
-financial_assistant_name VARCHAR(255),
+financial_assistant_username VARCHAR(255) NOT NULL,
+financial_assistant_name VARCHAR(255) NOT NULL,
 page_number INT NOT NULL,
 subject INT NOT NULL,
 subject_other VARCHAR(127),
@@ -95,10 +97,10 @@ note_optional TEXT,
 last_added_note TEXT,
 request_status INT(1) NOT NULL,
 PRIMARY KEY (request_id),
-CONSTRAINT FOREIGN KEY (financial_assistant_email) REFERENCES users(email) 
+CONSTRAINT FOREIGN KEY (financial_assistant_username) REFERENCES users(username)
 ON UPDATE CASCADE
 ON DELETE CASCADE,
-CONSTRAINT FOREIGN KEY (transfered_email) REFERENCES users(email)
+CONSTRAINT FOREIGN KEY (transfered_username) REFERENCES users(username)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 );
@@ -108,7 +110,8 @@ ON DELETE CASCADE
 ---------------------------------------------------------------
 users: 存储所有的用户。
 
-email, password为邮箱地址和密码，用来登录。
+username, password为登录用户名和密码。
+email为邮箱地址，用来发送提醒邮件。
 first_name, last_name为用户的真实姓名。
 id_number为学号，只有学生有，教师为空。
 status是用户身份。0代表财务主任老师，1代表研究生（财务助理），
@@ -117,15 +120,15 @@ status是用户身份。0代表财务主任老师，1代表研究生（财务助
 ---------------------------------------------------------------
 advisors: 存储财务助理与负责老师的关系。
 
-student_email是财务助理的登录邮箱地址。
-advisor_email是负责老师的登录邮箱地址。
+student_username是财务助理的登录用户名。
+advisor_username是负责老师的登录用户名。
 ---------------------------------------------------------------
 ---------------------------------------------------------------
 announcements: 存储所有的公告。
 
 announce_id是自动生成的编号。
 title和content是标题和内容。
-poster_email和poster是发布人的邮箱地址和姓名。
+poster_username和poster是发布人的用户名和姓名。
 date是发布时间。
 ---------------------------------------------------------------
 ---------------------------------------------------------------
@@ -133,8 +136,9 @@ requests: 存储所有的申请。
 
 request_id是自动生成的流水号。
 submitter_name和submitter_id_number是申请人的名字和学号。
-financial_assistant_email和financial_assistant_name是财务助理的邮箱和名字。
-transfered_email是转交给的财务助理的邮箱。如果申请没有转交则为NULL。
+financial_assistant_username和financial_assistant_name是财务助理的用户名和名字。
+transfered_username和transfered_name是转交给的财务助理的用户名和名字。
+如果申请没有转交则为NULL。
 date_start，date_advisor_agreed，date_net_report_finished，
 date_student_finished，和date_finished分别为申请开始日期，负责老师同意日期，
 网报完成日期，财务助理完成报销日期，和财务主任填写完回馈的日期。
@@ -175,32 +179,32 @@ ALTER TABLE requests ENGINE=InnoDB;
 到此为止，数据库已建立完毕。此时可依照下面的例子添加用户，及添加财务助理和负责老师的关系。
 
 例子--添加用户：
-INSERT INTO users VALUES ('super@hotmail.com', md5('tianyi'), '琳', '柏', '', 0);
+INSERT INTO users VALUES ('super', 'super@hotmail.com', md5('tianyi'), '琳', '柏', '', 0);
 
-INSERT INTO users VALUES ('test1@hotmail.com', md5('tianyi'), '春秋', '丁', '000001', 1);
-INSERT INTO users VALUES ('test2@hotmail.com', md5('tianyi'), '夫人', '马', '000002', 1);
-INSERT INTO users VALUES ('test3@hotmail.com', md5('tianyi'), '波恶', '风', '000003', 1);
-INSERT INTO users VALUES ('test4@hotmail.com', md5('tianyi'), '语嫣', '王', '000004', 1);
-INSERT INTO users VALUES ('test5@hotmail.com', md5('tianyi'), '崖子', '无', '000005', 1);
-INSERT INTO users VALUES ('test6@hotmail.com', md5('tianyi'), '不同', '包', '000006', 1);
-INSERT INTO users VALUES ('test7@hotmail.com', md5('tianyi'), '摩智', '鸠', '000007', 1);
+INSERT INTO users VALUES ('test1', 'test1@hotmail.com', md5('tianyi'), '春秋', '丁', '000001', 1);
+INSERT INTO users VALUES ('test2', 'test2@hotmail.com', md5('tianyi'), '夫人', '马', '000002', 1);
+INSERT INTO users VALUES ('test3', 'test3@hotmail.com', md5('tianyi'), '波恶', '风', '000003', 1);
+INSERT INTO users VALUES ('test4', 'test4@hotmail.com', md5('tianyi'), '语嫣', '王', '000004', 1);
+INSERT INTO users VALUES ('test5', 'test5@hotmail.com', md5('tianyi'), '崖子', '无', '000005', 1);
+INSERT INTO users VALUES ('test6', 'test6@hotmail.com', md5('tianyi'), '不同', '包', '000006', 1);
+INSERT INTO users VALUES ('test7', 'test7@hotmail.com', md5('tianyi'), '摩智', '鸠', '000007', 1);
 
-INSERT INTO users VALUES ('test11@hotmail.com', md5('tianyi'), '志平', '伊', '', 3);
-INSERT INTO users VALUES ('test22@hotmail.com', md5('tianyi'), '冠英', '陆', '', 3);
-INSERT INTO users VALUES ('test33@hotmail.com', md5('tianyi'), '处一', '王', '', 3);
-INSERT INTO users VALUES ('test44@hotmail.com', md5('tianyi'), '克', '欧阳', '', 3);
-INSERT INTO users VALUES ('test55@hotmail.com', md5('tianyi'), '超风', '梅', '', 3);
-INSERT INTO users VALUES ('test66@hotmail.com', md5('tianyi'), '长老', '简', '', 3);
-INSERT INTO users VALUES ('test77@hotmail.com', md5('tianyi'), '药师', '黄', '', 3);
+INSERT INTO users VALUES ('test11', 'test11@hotmail.com', md5('tianyi'), '志平', '伊', '', 3);
+INSERT INTO users VALUES ('test22', 'test22@hotmail.com', md5('tianyi'), '冠英', '陆', '', 3);
+INSERT INTO users VALUES ('test33', 'test33@hotmail.com', md5('tianyi'), '处一', '王', '', 3);
+INSERT INTO users VALUES ('test44', 'test44@hotmail.com', md5('tianyi'), '克', '欧阳', '', 3);
+INSERT INTO users VALUES ('test55', 'test55@hotmail.com', md5('tianyi'), '超风', '梅', '', 3);
+INSERT INTO users VALUES ('test66', 'test66@hotmail.com', md5('tianyi'), '长老', '简', '', 3);
+INSERT INTO users VALUES ('test77', 'test77@hotmail.com', md5('tianyi'), '药师', '黄', '', 3);
 
 例子--添加财务助理和负责老师的关系：
-INSERT INTO advisors VALUES ('test1@hotmail.com', 'test11@hotmail.com');
-INSERT INTO advisors VALUES ('test2@hotmail.com', 'test22@hotmail.com');
-INSERT INTO advisors VALUES ('test3@hotmail.com', 'test33@hotmail.com');
-INSERT INTO advisors VALUES ('test4@hotmail.com', 'test44@hotmail.com');
-INSERT INTO advisors VALUES ('test5@hotmail.com', 'test55@hotmail.com');
-INSERT INTO advisors VALUES ('test6@hotmail.com', 'test66@hotmail.com');
-INSERT INTO advisors VALUES ('test7@hotmail.com', 'test77@hotmail.com');
+INSERT INTO advisors VALUES ('test1', 'test11');
+INSERT INTO advisors VALUES ('test2', 'test22');
+INSERT INTO advisors VALUES ('test3', 'test33');
+INSERT INTO advisors VALUES ('test4', 'test44');
+INSERT INTO advisors VALUES ('test5', 'test55');
+INSERT INTO advisors VALUES ('test6', 'test66');
+INSERT INTO advisors VALUES ('test7', 'test77');
 
 2. 界面简介：
 总共有4个主界面，分别为首页，提交界面，处理界面，及查看界面。

@@ -22,14 +22,14 @@ if (!$con) {
 mysql_select_db(DB_DATABASE, $con);
 
 mysql_query('SET NAMES utf8');
-$result = mysql_query('SELECT * FROM advisors WHERE student_email="' .
-    $_SESSION['EMAIL'] . '"');
+$result = mysql_query('SELECT * FROM advisors WHERE student_username="' .
+    $_SESSION['USERNAME'] . '"');
 
 $row = mysql_fetch_array($result);
-$advisor_email = $row['advisor_email'];
+$advisor_username = $row['advisor_username'];
 
-$result = mysql_query('SELECT * FROM users WHERE email="' .
-    $advisor_email . '"');
+$result = mysql_query('SELECT * FROM users WHERE username="' .
+    $advisor_username . '"');
 $row = mysql_fetch_array($result);
 $advisor_name = $row['last_name'] . $row['first_name'];
 
@@ -45,7 +45,7 @@ mysql_close($con);
 <h3>新建报销申请</h3>
 
 <form id="new_request_form" name="new_request_form" action="php/create_new_request.php"
-onsubmit="return validateSubmitNewRequestForm()" method="post">
+onsubmit="return validateSubmitRequestForm('new_request_form')" method="post">
 
 <label id="name">申请人姓名：</label> <input type="text" name="name" required>
 

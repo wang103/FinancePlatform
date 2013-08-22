@@ -12,8 +12,8 @@ function validateModifyAccountForm() {
     }
 }
 
-function validateSubmitNewRequestForm() {
-    var form = document.forms["new_request_form"];
+function validateSubmitRequestForm(form_name) {
+    var form = document.forms[form_name];
 
     var name = form["name"].value;
     if (name == null || name == "") {

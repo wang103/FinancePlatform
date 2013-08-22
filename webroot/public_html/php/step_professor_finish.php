@@ -35,12 +35,15 @@ mysql_close($con);
 
 <body>
 
-<form name="add_last_note_form" action=<?php echo "professor_finish.php?rn=" . $row['request_id']?> method="post">
+<form name="add_last_note_form" action=<?php echo "professor_finish.php?rn=" . $row['request_id']?>
+onsubmit="return validateSubmitRequestForm('add_last_note_form')" method="post">
+
 <label id="last_added_note_label">添加教师意见（若无意见请直接点完成）：</label> <br>
 <textarea id="last_added_note_content" name="last_added_note" rows="6" cols="60"></textarea>
 <br>
 <input type="submit" value="完成">
 <input action="action" type="button" onclick="history.go(-1);" value="返回"/>
+
 </form>
 
 <hr>

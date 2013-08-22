@@ -25,7 +25,7 @@ $result = mysql_query('SELECT * FROM requests WHERE request_id=' . $_GET['rn']);
 $row = mysql_fetch_array($result);
 
 # Check if user is the financial assistant.
-if ($row['financial_assistant_email'] != $_SESSION['EMAIL']) {
+if ($row['financial_assistant_username'] != $_SESSION['USERNAME']) {
     mysql_close($con);
 
     echo 'error code: 1';
@@ -44,10 +44,15 @@ if (!mysql_query($sql, $con)) {
 
 # Send a notification message to student.
 if (SEND_EMAIL) {
-    $sql = 'SELECT * FROM advisors WHERE student_email="' . $_SESSION['EMAIL'] . '"';
+    $sql = 'SELECT * FROM advisors WHERE student_username="' . $_SESSION['USERNAME'] . '"';
     $result = mysql_query($sql, $con);
     $advisor_prof = mysql_fetch_assoc($result);
-    notifyWithEmail($advisor_prof['advisor_email'], 9);
+
+    $sql = 'SELECT * FROM users WHERE username="' . $advisor_prof['advisor_username'] . '"';
+    $result = mysql_query($sql, $con);
+    $advisor_prof = mysql_fetch_assoc($result);
+
+    notifyWithEmail($advisor_prof['email'], 9);
 
     if ($row['request_status'] == 1) {
         $sql = 'SELECT * FROM users WHERE status=0';

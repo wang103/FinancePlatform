@@ -2,7 +2,8 @@
 <?php
 session_start();
 
-if (isset($_SESSION['EMAIL']) && !empty($_SESSION['EMAIL'])) {
+if (isset($_SESSION['USERNAME']) && !empty($_SESSION['USERNAME'])) {
+    $username = $_SESSION['USERNAME'];
     $email = $_SESSION['EMAIL'];
     $first_name = $_SESSION['FIRST_NAME'];
     $last_name = $_SESSION['LAST_NAME'];
@@ -18,7 +19,10 @@ if (isset($_SESSION['EMAIL']) && !empty($_SESSION['EMAIL'])) {
 
     echo '
     <h4>账户信息</h4>
-	<form name="logout_form" action="php/logout.php" method="post">
+    <form name="logout_form" action="php/logout.php" method="post">
+    <p id="login_p" align="left">
+    <label id="login_label">用户名：</label>' . $username . '
+    </p>
 	<p id="login_p" align="left">
 	<label id="login_label">邮箱：</label>' . $email . '
 	</p>
@@ -39,10 +43,10 @@ else {
     <h4>请登录账户</h4>
 	<form name="login_form" action="php/login.php" method="post">
 	<p id="login_p" align="left">
-	<label id="login_label">邮箱地址（email）:</label> <input id="login_input" type="email" name="email" required>
+	<label id="login_label">用户名:</label> <input id="login_input" type="text" name="username" required>
 	</p>
 	<p id="login_p" align="left">
-	<label id="login_label">密码（password）:</label> <input id="login_input" type="password" name="pwd" required>
+	<label id="login_label">密码:</label> <input id="login_input" type="password" name="pwd" required>
 	</p>
 	<p id="login_p" align="center">
 	<input type="submit" value="登录">

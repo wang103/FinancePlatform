@@ -11,14 +11,14 @@ mysql_select_db(DB_DATABASE, $con);
 
 # Escape special characters.
 if (!get_magic_quotes_gpc()) {
-    $email = mysql_real_escape_string($_POST['email']);
+    $username = mysql_real_escape_string($_POST['username']);
 } else {
-    $email = $_POST['email'];
+    $username = $_POST['username'];
 }
 $pwd = $_POST['pwd'];
 
 #Check against the database.
-$qry = "SELECT * FROM users WHERE email='" . $email . "' AND password='" . md5($pwd) . "'"; 
+$qry = "SELECT * FROM users WHERE username='" . $username . "' AND password='" . md5($pwd) . "'"; 
 mysql_query('SET NAMES utf8');
 $login_result = mysql_query($qry);
 
@@ -32,7 +32,8 @@ if (mysql_num_rows($login_result) > 0) {
     # Login successful.
     $member = mysql_fetch_assoc($login_result);
 
-    $_SESSION['EMAIL'] = $email;
+    $_SESSION['USERNAME'] = $username;
+    $_SESSION['EMAIL'] = $member['email'];
     $_SESSION['FIRST_NAME'] = $member['first_name'];
     $_SESSION['LAST_NAME'] = $member['last_name'];
     $_SESSION['ID_NUMBER'] = $member['id_number'];

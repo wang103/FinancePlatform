@@ -2,6 +2,7 @@
 session_start();
 
 # Unset the varibales stored in the session.
+unset($_SESSION['USERNAME']);
 unset($_SESSION['EMAIL']);
 unset($_SESSION['FIRST_NAME']);
 unset($_SESSION['LAST_NAME']);

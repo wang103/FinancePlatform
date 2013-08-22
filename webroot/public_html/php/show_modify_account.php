@@ -3,7 +3,7 @@ header('Content-type: text/html; charset=utf-8');
 session_start();
 
 // Check if signed in.
-if (!isset($_SESSION['EMAIL'])) {
+if (!isset($_SESSION['USERNAME'])) {
     die();
 }
 
@@ -18,15 +18,15 @@ mysql_select_db(DB_DATABASE, $con);
 
 # Load user details.
 mysql_query('SET NAMES utf8');
-$result = mysql_query('SELECT * FROM advisors WHERE student_email="' .
-    $_SESSION['EMAIL'] . '"');
+$result = mysql_query('SELECT * FROM advisors WHERE student_username="' .
+    $_SESSION['USERNAME'] . '"');
 $row = mysql_fetch_array($result);
 
-$cur_advisor_email = $row['advisor_email'];
+$cur_advisor_username = $row['advisor_username'];
 $cur_advisor = false;
 
-if (isset($cur_advisor_email) && strlen($cur_advisor_email) > 0) {
-    $result = mysql_query('SELECT * FROM users WHERE email="' . $cur_advisor_email . '"');
+if (isset($cur_advisor_username) && strlen($cur_advisor_username) > 0) {
+    $result = mysql_query('SELECT * FROM users WHERE username="' . $cur_advisor_username . '"');
     $cur_advisor = mysql_fetch_array($result);
 }
 
@@ -45,7 +45,11 @@ mysql_close($con);
 
 <body>
 
-<h3>修改个人信息</h3>
+<h3>修改个人信息（
+<?php
+echo $_SESSION['USERNAME'];
+?>
+)</h3>
 
 <form name="modify_account_form" action="modify_account.php" onsubmit="return validateModifyAccountForm()" method="post">
 
@@ -99,10 +103,10 @@ if ($_SESSION['STATUS'] != 0 && $_SESSION['STATUS'] != 3) {
 
     while ($advisor_row = mysql_fetch_array($advisors)) {
         echo '<option ';
-        if($cur_advisor_email==$advisor_row['email']) {
+        if($cur_advisor_username == $advisor_row['username']) {
             echo 'selected';
         }
-        echo ' value="' . $advisor_row['email'] . '">' . $advisor_row['last_name'] .
+        echo ' value="' . $advisor_row['username'] . '">' . $advisor_row['last_name'] .
             $advisor_row['first_name'] . '</option>';
     }
 

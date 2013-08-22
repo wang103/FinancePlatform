@@ -22,12 +22,10 @@ mysql_query('SET NAMES utf8');
 $result = mysql_query('SELECT * FROM requests WHERE request_id=' . $_GET['rn']);
 $row = mysql_fetch_array($result);
 
-$assistants = mysql_query('SELECT * FROM users WHERE status=1 OR status=2');
-
 mysql_close($con);
 
 # Check if user is the advisor.
-if (!isMyStudentsSubmission($row['financial_assistant_email'], $_SESSION['EMAIL'])) {
+if (!isMyStudentsSubmission($row['financial_assistant_username'], $_SESSION['USERNAME'])) {
     echo 'error code: 0';
     die();
 }
@@ -42,7 +40,8 @@ if (!isMyStudentsSubmission($row['financial_assistant_email'], $_SESSION['EMAIL'
 
 <body>
 
-<form id="advisor_agree_form" name="advisor_agree_form" action=<?php echo "advisor_agree.php?rn=" . $_GET['rn']?> method="post">
+<form id="advisor_agree_form" name="advisor_agree_form" action=<?php echo "advisor_agree.php?rn=" . $_GET['rn']?>
+onsubmit="return validateSubmitRequestForm('advisor_agree_form')" method="post">
 
 <?php
 require(dirname(__FILE__) . '/common_interface_01.php');

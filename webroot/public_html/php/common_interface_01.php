@@ -188,24 +188,24 @@ require_once(dirname(__FILE__) . '/utils.php');
     <legend>转交</legend>
 
     <label>是否转交给其他财务助理？</label>
-    <input type="radio" name="transfer_sel" onclick="transferChanged(this);" disabled='disabled' value="yes" <?php if(isset($row['transfered_email'])) echo "checked"?>>是
-    <input type="radio" name="transfer_sel" onclick="transferChanged(this);" disabled='disabled' value="no" <?php if(!isset($row['transfered_email'])) echo "checked"?>>否
+    <input type="radio" name="transfer_sel" onclick="transferChanged(this);" disabled='disabled' value="yes" <?php if(isset($row['transfered_username'])) echo "checked"?>>是
+    <input type="radio" name="transfer_sel" onclick="transferChanged(this);" disabled='disabled' value="no" <?php if(!isset($row['transfered_username'])) echo "checked"?>>否
 
     <br>
 
-    <label id="transfer_label" <?php if(!isset($row['transfered_email'])) echo 'style="display: none"'?>>请选择：</label>
-    <select id="transfer" name="transfer" disabled='disabled' <?php if(!isset($row['transfered_email'])) echo 'style="display: none"'?> required>
+    <label id="transfer_label" <?php if(!isset($row['transfered_username'])) echo 'style="display: none"'?>>请选择：</label>
+    <select id="transfer" name="transfer" disabled='disabled' <?php if(!isset($row['transfered_username'])) echo 'style="display: none"'?> required>
     <?php
     while ($assit = mysql_fetch_array($assistants)) {
-        if ($assit['email'] != $row['financial_assistant_email']) {
+        if ($assit['username'] != $row['financial_assistant_username']) {
             echo '<option ';
 
-            if (isset($row['transfered_email']) &&
-                $assit['email'] == $row['transfered_email']) {
+            if (isset($row['transfered_username']) &&
+                $assit['username'] == $row['transfered_username']) {
                 echo 'selected="selected" ';
             }
 
-            echo 'value="' . $assit['email'] . '">' .
+            echo 'value="' . $assit['username'] . '">' .
                 $assit['last_name'] . $assit['first_name'] .
                 '</option>';
         }
