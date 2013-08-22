@@ -138,7 +138,7 @@ onsubmit="return validateSubmitRequestForm('new_request_form')" method="post">
     <input type="text" name="professor_class">
 
     <label id="professor_name_label">导师姓名：</label>
-    <input type="text" name="professor_name" value="<?php echo $advisor_name;?>">
+    <input type="text" name="professor_name" readonly value="<?php echo $advisor_name;?>">
 </fieldset>
 
 <br><br>

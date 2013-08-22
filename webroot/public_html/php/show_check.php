@@ -70,6 +70,7 @@ if ($_SESSION['STATUS'] == 0) {
         <th>报销时间</th>
         <th>报销人</th>
         <th>财务助理</th>
+        <th>负责老师</th>
         <th>金额（元)</th>
         <th>报销科目</th>
         <th>申请状态</th>
@@ -95,6 +96,7 @@ while ($row = mysql_fetch_array($result)) {
     }
 
     echo '</p></td>
+        <td><p>' . $row['professor_name'] . '</p></td>
         <td><p>' . $row['amount'] . '</p></td>
         <td><p>';
     getSubjectNameFromIndex($row['subject'], $row['subject_other']);
