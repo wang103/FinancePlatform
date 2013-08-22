@@ -40,7 +40,7 @@ if ($_POST['transfer_sel'] == "yes") {
     $sql = 'SELECT * FROM users WHERE username="' . $_POST['transfer'] . '"';
     $result = mysql_query($sql, $con);
     $student = mysql_fetch_assoc($result);
-    $transfered_name = '"' . $student['email'] . '"'
+    $transfered_name = '"' . $student['last_name'] . $student['first_name'] . '"'
 }
 $net_report_date = date('Y-m-d');
 $amount = $_POST['amount'];
