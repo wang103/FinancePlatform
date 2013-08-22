@@ -11,3 +11,40 @@ function validateModifyAccountForm() {
         }
     }
 }
+
+function validateSubmitNewRequestForm() {
+    var form = document.forms["new_request_form"];
+
+    var name = form["name"].value;
+    if (name == null || name == "") {
+        alert("申请人姓名不能为空");
+        return false;
+    }
+
+    var amount = form["amount"].value;
+    if (amount == null || amount == "") {
+        alert("报销金额不能为空");
+        return false;
+    }
+
+    var pages = form["pages"].value;
+    if (pages == null || pages == "") {
+        alert("单据数量不能为空");
+        return false;
+    }
+
+    var r_class = form["class"].value;
+    if (r_class == "others") {
+        var other_subject = form["other_subject"].value;
+        if (other_subject == null || other_subject == "") {
+            alert("具体报销科目不能为空");
+            return false;
+        }
+    }
+
+    var card_number = form["card_number"].value;
+    if (card_number == null || card_number == "") {
+        alert("经费卡号不能为空");
+        return false;
+    }
+}

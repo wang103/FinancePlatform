@@ -7,6 +7,7 @@ session_start();
 <head>
 <link rel='stylesheet' type='text/css' href='../css/style01.css'>
 <script src='js/interface_listener.js'></script>
+<script src='js/validate_form.js'></script>
 </head>
 
 <body>
@@ -43,10 +44,12 @@ mysql_close($con);
 
 <h3>新建报销申请</h3>
 
-<form id="new_request_form" action="php/create_new_request.php" method="post">
+<form id="new_request_form" name="new_request_form" action="php/create_new_request.php"
+onsubmit="return validateSubmitNewRequestForm()" method="post">
+
 <label id="name">申请人姓名：</label> <input type="text" name="name" required>
 
-<label id="id_number">申请人学号：</label> <input type="text" name="id_number" required>
+<label id="id_number">申请人学号：</label> <input type="text" name="id_number">
 
 <p>
 <label id="date">日期：</label> <input type="date" name="date" required value="<?php echo date('Y-m-d'); ?>">
@@ -147,10 +150,10 @@ mysql_close($con);
     <legend>负责老师</legend>
     
     <label>导师组组别：</label>
-    <input type="text" name="professor_class" required>
+    <input type="text" name="professor_class">
 
     <label id="professor_name_label">导师姓名：</label>
-    <input type="text" name="professor_name" required value="<?php echo $advisor_name;?>">
+    <input type="text" name="professor_name" value="<?php echo $advisor_name;?>">
 </fieldset>
 
 <br><br>
@@ -162,7 +165,7 @@ mysql_close($con);
     <input type="text" name="card_number" required>
 
     <label id="card_name_label">经费卡名称：</label>
-    <input type="text" name="card_name" required>
+    <input type="text" name="card_name">
 </fieldset>
 
 <br><br>

@@ -11,7 +11,7 @@ require_once(dirname(__FILE__) . '/utils.php');
 <p>
 <label id="name">申请人姓名：</label> <input type="text" name="name" required readonly value="<?php echo $row['submitter_name']?>">
 
-<label id="id_number">申请人学号：</label> <input type="text" name="id_number" required readonly value="<?php echo $row['submitter_id_number']?>">
+<label id="id_number">申请人学号：</label> <input type="text" name="id_number" readonly value="<?php echo $row['submitter_id_number']?>">
 </p>
 
 <fieldset class="fieldset-auto-width">
@@ -22,20 +22,20 @@ require_once(dirname(__FILE__) . '/utils.php');
     <input type="date" name="date" required readonly value="<?php echo $row['date_start']?>">
 
     <label id="date1">负责老师通过：</label>
-    <input type="date" name="date1" required readonly value="<?php echo $row['date_advisor_agreed']?>">
+    <input type="date" name="date1" readonly value="<?php echo $row['date_advisor_agreed']?>">
     </p>
 
     <p>
     <label id="date2">网报完成：</label>
-    <input type="date" name="date2" required readonly value="<?php echo $row['date_net_report_finished']?>">
+    <input type="date" name="date2" readonly value="<?php echo $row['date_net_report_finished']?>">
 
     <label id="date3">提交人完成：</label>
-    <input type="date" name="date3" required readonly value="<?php echo $row['date_student_finished']?>">
+    <input type="date" name="date3" readonly value="<?php echo $row['date_student_finished']?>">
     </p>
 
     <p>
     <label id="date4">报销完成：</label>
-    <input type="date" name="date4" required readonly value="<?php echo $row['date_finished']?>">
+    <input type="date" name="date4" readonly value="<?php echo $row['date_finished']?>">
     </p>
 </fieldset>
 
@@ -136,10 +136,10 @@ require_once(dirname(__FILE__) . '/utils.php');
     <legend>负责老师</legend>
     
     <label>导师组组别：</label>
-    <input type="text" name="professor_class" required readonly value="<?php echo $row['professor_class']?>">
+    <input type="text" name="professor_class" readonly value="<?php echo $row['professor_class']?>">
 
     <label id="professor_name_label">导师姓名：</label>
-    <input type="text" name="professor_name" required readonly value="<?php echo $row['professor_name']?>">
+    <input type="text" name="professor_name" readonly value="<?php echo $row['professor_name']?>">
 </fieldset>
 
 <br><br>
@@ -151,7 +151,7 @@ require_once(dirname(__FILE__) . '/utils.php');
     <input type="text" name="card_number" required readonly value="<?php echo $row['expanse_number']?>">
 
     <label id="card_name_label">经费卡名称：</label>
-    <input type="text" name="card_name" required readonly value="<?php echo $row['expanse_name']?>">
+    <input type="text" name="card_name" readonly value="<?php echo $row['expanse_name']?>">
 </fieldset>
 
 <br><br>

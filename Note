@@ -59,7 +59,7 @@ ON DELETE CASCADE
 CREATE TABLE requests
 (
 request_id INT NOT NULL AUTO_INCREMENT,
-submitter_name VARCHAR(255),
+submitter_name VARCHAR(255) NOT NULL,
 submitter_id_number VARCHAR(127),
 transfered_email VARCHAR(255),
 date_start DATE NOT NULL,
@@ -86,7 +86,7 @@ receipt_same_as_actual INT(1) NOT NULL,
 receipt_difference TEXT,
 professor_class VARCHAR(255),
 professor_name VARCHAR(255),
-expanse_number VARCHAR(255),
+expanse_number VARCHAR(255) NOT NULL,
 expanse_name VARCHAR(255),
 payment_option INT,
 payment_option_other VARCHAR(255),
