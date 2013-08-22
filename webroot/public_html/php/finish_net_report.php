@@ -36,11 +36,12 @@ $transfered_username = 'NULL';
 $transfered_name = 'NULL';
 if ($_POST['transfer_sel'] == "yes") {
     $transfered_username = '"' . $_POST['transfer'] . '"';
-
+    
+    mysql_query('SET NAMES utf8');
     $sql = 'SELECT * FROM users WHERE username="' . $_POST['transfer'] . '"';
     $result = mysql_query($sql, $con);
     $student = mysql_fetch_assoc($result);
-    $transfered_name = '"' . $student['last_name'] . $student['first_name'] . '"'
+    $transfered_name = '"' . $student['last_name'] . $student['first_name'] . '"';
 }
 $net_report_date = date('Y-m-d');
 $amount = $_POST['amount'];
@@ -188,6 +189,5 @@ mysql_close($con);
 $last_url = $_SESSION['last_url'];
 $_SESSION['feedback'] = $finished_status;
 header("location: " . $last_url);
-
 die();
 ?>

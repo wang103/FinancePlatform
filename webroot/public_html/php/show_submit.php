@@ -44,7 +44,7 @@ mysql_close($con);
 
 <h3>新建报销申请</h3>
 
-<form id="new_request_form" name="new_request_form" action="php/create_new_request.php"
+<form id="new_request_form" name="new_request_form" action="php/create_new_request.php" 
 onsubmit="return validateSubmitRequestForm('new_request_form')" method="post">
 
 <label id="name">申请人姓名：</label> <input type="text" name="name" required>

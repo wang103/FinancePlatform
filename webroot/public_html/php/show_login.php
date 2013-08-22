@@ -43,10 +43,10 @@ else {
     <h4>请登录账户</h4>
 	<form name="login_form" action="php/login.php" method="post">
 	<p id="login_p" align="left">
-	<label id="login_label">用户名:</label> <input id="login_input" type="text" name="username" required>
+	<label id="login_label">用户:</label> <input id="login_input" type="text" name="username" required>
 	</p>
 	<p id="login_p" align="left">
-	<label id="login_label">密码:</label> <input id="login_input" type="password" name="pwd" required>
+	<label id="login_label">密码:</label> <input id="login_pw_input" type="password" name="pwd" required>
 	</p>
 	<p id="login_p" align="center">
 	<input type="submit" value="登录">

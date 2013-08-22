@@ -42,7 +42,7 @@ if (!isMyStudentsSubmission($row['financial_assistant_username'], $_SESSION['USE
 
 <body>
 
-<form id="advisor_agree_form" name="advisor_agree_form" action=<?php echo "advisor_agree.php?rn=" . $_GET['rn']?>
+<form id="advisor_agree_form" name="advisor_agree_form" action=<?php echo "advisor_agree.php?rn=" . $_GET['rn']?> 
 onsubmit="return validateSubmitRequestForm('advisor_agree_form')" method="post">
 
 <?php

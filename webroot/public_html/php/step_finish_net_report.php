@@ -36,7 +36,7 @@ mysql_close($con);
 
 <body>
 
-<form id="net_report_form" name="net_report_form" action="finish_net_report.php"
+<form id="net_report_form" name="net_report_form" action="finish_net_report.php" 
 onsubmit="return validateSubmitRequestForm('net_report_form')" method="post">
 
 <?php
