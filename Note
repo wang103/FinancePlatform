@@ -84,8 +84,6 @@ contract_company_name VARCHAR(255),
 contract_location VARCHAR(127),
 contract_bank_number VARCHAR(255),
 contract_opener VARCHAR(255),
-receipt_same_as_actual INT(1) NOT NULL,
-receipt_difference TEXT,
 professor_class VARCHAR(255),
 professor_name VARCHAR(255),
 expanse_number VARCHAR(255) NOT NULL,
@@ -152,8 +150,6 @@ asset_platform_id分别是知识产权平台的申请流水号和资产平台的
 have_all_files代表申请材料是否齐全。是为1，否为0。不齐全无法提交。
 contract_company_name，contract_location，contract_bank_number，和contract_opener
 分别为公司名称，公司地区，银行卡号，和开户行。
-receipt_same_as_actual代表发票内容是否和实际内容一致。是为1，否为0。如果不一致，
-receipt_difference为不一致的具体内容。
 professor_class和professor_name分别为负责老师的导师组组别和老师的名字。
 expanse_number和expanse_name分别为经费卡编号和经费卡名称。
 payment_option代表支付方式。如果方式是其他的话，payment_option_other为具体方式名称。

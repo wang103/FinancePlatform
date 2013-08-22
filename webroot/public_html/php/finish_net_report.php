@@ -85,13 +85,6 @@ $contract_company_name = $_POST['company_name'];
 $contract_location = $_POST['company_location'];
 $contract_bank_number = $_POST['bank_card'];
 $contract_opener = $_POST['opener'];
-if ($_POST['receipt_agree'] == "yes") {
-    $receipt_same_as_actual = 1;
-    $receipt_difference = "";
-} else {
-    $receipt_same_as_actual = 0;
-    $receipt_difference = $_POST['receipt_content'];
-}
 $professor_class = $_POST['professor_class'];
 $professor_name = $_POST['professor_name'];
 $expanse_number = $_POST['card_number'];
@@ -138,11 +131,9 @@ $sql = 'UPDATE requests SET submitter_name="' . $name . '", submitter_id_number=
     $asset_platform_id . ',' . 'have_all_files=' . $have_all_files . ',' .
     'contract_company_name="' . $contract_company_name . '",' . 'contract_location="' .
     $contract_location . '",' . 'contract_bank_number="' . $contract_bank_number . '",' .
-    'contract_opener="' . $contract_opener . '",' . 'receipt_same_as_actual=' .
-    $receipt_same_as_actual . ',' . 'receipt_difference="' .
-    $receipt_difference . '",' . 'professor_class="' . $professor_class . '",' .
-    'professor_name="' . $professor_name . '",' . 'expanse_number="' .
-    $expanse_number . '",' . 'expanse_name="' . $expanse_name . '",' .
+    'contract_opener="' . $contract_opener . '",' . 'professor_class="' .
+    $professor_class . '",' . 'professor_name="' . $professor_name . '",' .
+    'expanse_number="' . $expanse_number . '",' . 'expanse_name="' . $expanse_name . '",' .
     'payment_option=' . $payment_option . ',' . 'payment_option_other="' .
     $payment_option_other . '",' . 'usage_optional="' . $usage_optional . '",' .
     'note_optional="' . $note_optional. '",' . 'request_status=' .

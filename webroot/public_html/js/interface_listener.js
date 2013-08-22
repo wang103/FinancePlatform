@@ -62,18 +62,6 @@ function turnOffSpecialSubject() {
 
 /*---------- private function end ----------*/
 
-function receiptChanged(sel) {
-    if (sel.value == "yes") {
-        document.getElementById("receipt_label").style.display = 'none';
-        document.getElementById("receipt_content").style.display = 'none';
-        document.getElementById("receipt_content").required = false;
-    } else {
-        document.getElementById("receipt_label").style.display = 'block';
-        document.getElementById("receipt_content").style.display = 'block';
-        document.getElementById("receipt_content").required = true;
-    }
-}
-
 function transferChanged(sel) {
     if (sel.value == "no") {
         document.getElementById("transfer_label").style.display = 'none';

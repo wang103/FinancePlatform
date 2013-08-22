@@ -118,21 +118,6 @@ require_once(dirname(__FILE__) . '/utils.php');
 <br><br>
 
 <fieldset class="fieldset-auto-width">
-    <legend>发票内容</legend>
-
-    <label>是否和实际内容一致？</label>
-    <input type="radio" name="receipt_agree" onclick="receiptChanged(this);" disabled='disabled' value="yes" <?php if($row['receipt_same_as_actual']==1) echo "checked"?>>是
-    <input type="radio" name="receipt_agree" onclick="receiptChanged(this);" disabled='disabled' value="no" <?php if($row['receipt_same_as_actual']==0) echo "checked"?>>不是
-
-    <br>
-
-    <label id="receipt_label" <?php if($row['receipt_same_as_actual']==1) echo 'style="display: none"'?>>请填写不一致的内容：</label>
-    <textarea id="receipt_content" name="receipt_content" <?php if($row['receipt_same_as_actual']==1) echo 'style="display: none"'?> rows="6" cols="60" readonly> <?php echo $row['receipt_difference']?> </textarea>
-</fieldset>
-
-<br><br>
-
-<fieldset class="fieldset-auto-width">
     <legend>负责老师</legend>
     
     <label>导师组组别：</label>

@@ -132,21 +132,6 @@ onsubmit="return validateSubmitRequestForm('new_request_form')" method="post">
 <br><br>
 
 <fieldset class="fieldset-auto-width">
-    <legend>发票内容</legend>
-
-    <label>是否和实际内容一致？</label>
-    <input type="radio" name="receipt_agree" onclick="receiptChanged(this);" value="yes" checked>是
-    <input type="radio" name="receipt_agree" onclick="receiptChanged(this);" value="no">不是
-
-    <br>
-
-    <label id="receipt_label" style="display: none">请填写不一致的内容：</label>
-    <textarea id="receipt_content" name="receipt_content" style="display: none" rows="6" cols="60"></textarea>
-</fieldset>
-
-<br><br>
-
-<fieldset class="fieldset-auto-width">
     <legend>负责老师</legend>
     
     <label>导师组组别：</label>

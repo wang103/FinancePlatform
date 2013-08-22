@@ -87,13 +87,6 @@ $contract_company_name = $_POST['company_name'];
 $contract_location = $_POST['company_location'];
 $contract_bank_number = $_POST['bank_card'];
 $contract_opener = $_POST['opener'];
-if ($_POST['receipt_agree'] == "yes") {
-    $receipt_same_as_actual = 1;
-    $receipt_difference = "";
-} else {
-    $receipt_same_as_actual = 0;
-    $receipt_difference = $_POST['receipt_content'];
-}
 $professor_class = $_POST['professor_class'];
 $professor_name = $_POST['professor_name'];
 $expanse_number = $_POST['card_number'];
@@ -120,8 +113,7 @@ $sql = 'INSERT INTO requests (submitter_name, submitter_id_number, date_start, '
     'amount, have_budget, financial_assistant_username, financial_assistant_name, ' .
     'page_number, subject, subject_other, is_special, intel_platform_id, ' .
     'asset_platform_id, have_all_files, contract_company_name, contract_location, ' .
-    'contract_bank_number, contract_opener, receipt_same_as_actual, ' .
-    'receipt_difference, professor_class, professor_name, expanse_number, ' .
+    'contract_bank_number, contract_opener, professor_class, professor_name, expanse_number, ' .
     'expanse_name, payment_option, payment_option_other, usage_optional, ' .
     'note_optional, request_status) VALUES (' .
     '"' . $submitter_name . '", "' . $submitter_id_number . '", "' . $submit_date .
@@ -130,10 +122,9 @@ $sql = 'INSERT INTO requests (submitter_name, submitter_id_number, date_start, '
     ', "'. $subject_other . '", ' . $is_special . ', ' . $intel_platform_id .
     ', ' . $asset_platform_id . ', ' . $have_all_files . ', "'. $contract_company_name .
     '", "' . $contract_location . '", "' . $contract_bank_number . '", "' . $contract_opener .
-    '", ' . $receipt_same_as_actual . ', "' . $receipt_difference . '", "' . $professor_class .
-    '", "' . $professor_name . '", "' . $expanse_number . '", "' . $expanse_name .
-    '", ' . $payment_option . ', "' . $payment_option_other . '", "' . $usage_optional .
-    '", "' . $note_optional . '", ' . $request_status . ')';
+    '", "' . $professor_class . '", "' . $professor_name . '", "' . $expanse_number .
+    '", "' . $expanse_name . '", ' . $payment_option . ', "' . $payment_option_other .
+    '", "' . $usage_optional . '", "' . $note_optional . '", ' . $request_status . ')';
 
 mysql_query('SET NAMES utf8');
 if (!mysql_query($sql, $con)) {
