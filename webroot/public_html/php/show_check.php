@@ -29,7 +29,7 @@ mysql_query('SET NAMES utf8');
 
 if ($_SESSION['STATUS'] == 0) {
     echo '<h3>所有报销申请</h3>';
-    $qry = 'SELECT * FROM requests ORDER BY request_id DESC';
+    $qry = 'SELECT * FROM requests WHERE request_status!=7 ORDER BY request_id DESC';
 } elseif ($_SESSION['STATUS'] == 3) {
     echo '<h3>我的学生的报销申请</h3>';
 
@@ -52,16 +52,16 @@ if ($_SESSION['STATUS'] == 0) {
     }
 
     if ($counter > 1) {
-        $qry = $qry . ') ORDER BY request_id DESC';
+        $qry = $qry . ') AND request_status!=7 ORDER BY request_id DESC';
     } else {
         // Make return result empty on purpose.
         $qry = 'SELECT * FROM requests WHERE request_status=666'; 
     }
 } else {
     echo '<h3>我的报销申请</h3>';
-    $qry = 'SELECT * FROM requests WHERE financial_assistant_username="' .
+    $qry = 'SELECT * FROM requests WHERE (financial_assistant_username="' .
         $_SESSION['USERNAME'] . '" OR transfered_username="' . $_SESSION['USERNAME'] .
-        '" ORDER BY request_id DESC';
+        '") AND request_status!=7 ORDER BY request_id DESC';
 }
 ?>
 

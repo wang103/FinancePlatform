@@ -94,6 +94,19 @@ function getStatusFromIndex($statusIndex) {
     }
 }
 
+function sendEmail($to, $subject, $content) {
+    $subject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+
+    $header = 'MIME-Version: 1.0' . '\r\n' .
+        'Content-type: text/html;' .
+        'charset=UTF-8;' .
+        'format=flowed' . '\r\n' .
+        'Content-Transfer-Encoding: 8Bit\r\n' .
+        'X-Mailer: PHP/' . phpversion();
+
+    mail($to, $subject, $content, $header);
+}
+
 function notifyWithEmail($to, $status) {
     require_once(dirname(__FILE__) . '/../../config.php');
 
@@ -125,16 +138,7 @@ function notifyWithEmail($to, $status) {
         return 1;
     }
 
-    $subject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
-
-    $header = 'MIME-Version: 1.0' . '\r\n' .
-        'Content-type: text/html;' .
-        'charset=UTF-8;' .
-        'format=flowed' . '\r\n' .
-        'Content-Transfer-Encoding: 8Bit\r\n' .
-        'X-Mailer: PHP/' . phpversion();
-
-    mail($to, $subject, $message, $header);
+    sendEmail($to, $subject, $message);
 
     return 0;
 }

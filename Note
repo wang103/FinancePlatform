@@ -254,7 +254,10 @@ INSERT INTO advisors VALUES ('test7', 'test77');
 
 16. 运行scripts/里的脚本时当前目录必须是FinancePlatform/。
 
-17. 文件介绍：
+17. 财务助理虽然可以取消新建的申请，老师和财务主任也并不会在网页上看到被
+    取消的申请。但一切都会记录在数据库中。
+
+18. 文件介绍：
 FinancePlatform/
     Note        （此文档笔记）
     README.md   （简单的README文档）
@@ -320,7 +323,8 @@ FinancePlatform/
                 step_professor_finish.php       （显示：财务主任添加建议界面）
                 professor_finish.php            （功能：财务主任添加建议）
 
-                utils.php                       （帮助：一些常用到的代码集中于此）
+                utils.php                       （帮助：一些常用到的代码集中于此, sendEmail可以用来
+                                                发送邮件）
 
                 common_interface_01.php         （显示：报销的具体内容在多个地方都需要显示，
                                                 所以集中放在这里）
