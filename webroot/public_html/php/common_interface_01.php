@@ -1,6 +1,13 @@
 <?php
 require_once(dirname(__FILE__) . '/utils.php');
+require_once(dirname(__FILE__) . '/../../config.php');
 ?>
+
+<fieldset class="fieldset-auto-width">
+    <legend>快速链接</legend>
+    <a href=<?php echo '"' . INTEL_PLATFORM_URL . '"'?> target="_blank">查询知识产权平台</a>
+    <a href=<?php echo '"' . ASSET_PLATFORM_URL . '"'?> target="_blank">查询资产平台</a>
+</fieldset>
 
 <p>
 <label id="request_status">申请目前状态：</label> <?php getGeneralStatusFromIndex($row['request_status']) ?>
@@ -79,17 +86,37 @@ require_once(dirname(__FILE__) . '/utils.php');
     <legend>特殊科目</legend>
 
     <label>是否为特殊科目？</label>
-    <input type="radio" name="special" onclick="specialChanged(this);" disabled='disabled' value="yes" <?php if($row['is_special']==1) echo "checked"?>>是
-    <input type="radio" name="special" onclick="specialChanged(this);" disabled='disabled' value="no" <?php if($row['is_special']==0) echo "checked"?>>不是
+    <input type="radio" name="special" onclick="specialChanged(this);" disabled='disabled' 
+        value="yes" <?php if($row['is_special']==1) echo "checked"?>>是
+    <input type="radio" name="special" onclick="specialChanged(this);" disabled='disabled' 
+        value="no" <?php if($row['is_special']==0) echo "checked"?>>不是
+
+    <?php
+    $show_asset = false;
+    $show_intel = false;
+    if ($row['subject'] == 0) {
+        $show_asset = true;
+    } elseif ($row['subject'] == 3) {
+        $show_intel = true;
+    } elseif ($row['subject'] == 1 || $row['subject'] == 4 || $row['subject'] == 6) {
+        $show_asset = true;
+        $show_intel = true;
+    }
+
+    if ($row['is_special'] == 0) {
+        $show_asset = false;
+        $show_intel = false;
+    }
+    ?>
 
     <p>
-    <label id="special_label_1" <?php if($row['is_special']==0) echo 'style="display: none"'?>>知识产权平台流水号：</label>
-    <input id="special_input_1" <?php if($row['is_special']==0) echo 'style="display: none"'?> type="text" name="special_int_intel" readonly value="<?php echo $row['intel_platform_id']?>">
+    <label id="special_label_1" <?php if($show_intel==false) echo 'style="display: none"'?>>知识产权平台流水号：</label>
+    <input id="special_input_1" <?php if($show_intel==false) echo 'style="display: none"'?> type="text" name="special_int_intel" readonly value="<?php echo $row['intel_platform_id']?>">
     </p>
 
     <p>
-    <label id="special_label_2" <?php if($row['is_special']==0) echo 'style="display: none"'?>>资产平台流水号：</label>
-    <input id="special_input_2" <?php if($row['is_special']==0) echo 'style="display: none"'?> type="text" name="special_int_asset" readonly value="<?php echo $row['asset_platform_id']?>">
+    <label id="special_label_2" <?php if($show_asset==false) echo 'style="display: none"'?>>资产平台流水号：</label>
+    <input id="special_input_2" <?php if($show_asset==false) echo 'style="display: none"'?> type="text" name="special_int_asset" readonly value="<?php echo $row['asset_platform_id']?>">
     </p>
 </fieldset>
 

@@ -32,6 +32,7 @@ mysql_close($con);
 <head>
 <link rel='stylesheet' type='text/css' href='../css/style01.css'>
 <script src='../js/interface_listener.js'></script>
+<script src='../js/validate_form.js'></script>
 </head>
 
 <body>
@@ -66,6 +67,8 @@ document.getElementsByName("date1")[0].readOnly = true;
 document.getElementsByName("date2")[0].readOnly = true;
 document.getElementsByName("date3")[0].readOnly = true;
 document.getElementsByName("date4")[0].readOnly = true;
+document.getElementsByName("special")[0].disabled = true;
+document.getElementsByName("special")[1].disabled = true;
 </script>
 
 </body>

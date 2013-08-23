@@ -281,6 +281,7 @@ FinancePlatform/
             js/                         （包含javascript文件）
                 interface_listener.js           （对用户在common_interface_01.php上的操作作出反应）
                 validate_form.js                （对将要提交的Form进行初步审核，过了方可提交给服务器）
+                sorttable.js                    （请看第15条）
             video/
                 (^=.=^) nyan~~
             php/                        （包含PHP文件）

@@ -10,9 +10,28 @@ function subjectChanged(sel) {
         document.getElementById("other_subject_input").required = false;
     }
 
-    if (value == "equipment" || value == "material" ||
-            value == "software" || value == "others") {
-        turnOnSpecialSubject();
+    var elems = document.getElementsByName("special");
+    for (i = 0; i < elems.length; i++) {
+        elems[i].disabled = true;
+    }
+
+    // equipment shows asset number field.
+    // layout shows intel-property number field.
+    // material, software, and others show both field.
+    // The rest shows nothing.
+    if (value == "equipment") {
+        turnOnSpecialSubject(1);
+    } else if (value == "layout") {
+        turnOnSpecialSubject(2);
+    } else if (value == "material" || value == "software") {
+        turnOnSpecialSubject(0);
+    } else if (value == "others") {
+        turnOnSpecialSubject(0);
+        
+        var elems = document.getElementsByName("special");
+        for (i = 0; i < elems.length; i++) {
+            elems[i].disabled = false;
+        }
     } else {
         turnOffSpecialSubject();
     }
@@ -22,18 +41,25 @@ function specialChanged(sel) {
     if (sel.value == "no") {
         turnOffSpecialSubject();
     } else {
-        turnOnSpecialSubject();
+        turnOnSpecialSubject(0);
     }
 }
 
 /*---------- private function start ----------*/
 
-function turnOnSpecialSubject() {
-    document.getElementById("special_label_1").style.display = 'block';
-    document.getElementById("special_label_2").style.display = 'block';
-    document.getElementById("special_input_1").style.display = 'block';
-    document.getElementById("special_input_2").style.display = 'block';
+/**
+ * param option:    0->show both asset number and intell-property number.
+ *                  1->show only asset number.
+ *                  2->show only intell-property number.
+ */
+function turnOnSpecialSubject(option) {
+    int_rule = option; 
     
+    var intelElementLb = document.getElementById("special_label_1");
+    var assetElementLb = document.getElementById("special_label_2");
+    var intelElementIp = document.getElementById("special_input_1");
+    var assetElementIp = document.getElementById("special_input_2");
+
     var elems = document.getElementsByName("special");
     for (i = 0; i < elems.length; i++) {
         if (elems[i].value == "yes") {
@@ -42,9 +68,37 @@ function turnOnSpecialSubject() {
             elems[i].checked = false;
         }
     }
+
+    if (option == 1) {
+        intelElementLb.style.display = 'none';
+        assetElementLb.style.display = 'block';
+        intelElementIp.style.display = 'none';
+        assetElementIp.style.display = 'block';
+
+        intelElementIp.disabled = true;
+        assetElementIp.disabled = false;
+    } else if (option == 2) {
+        intelElementLb.style.display = 'block';
+        assetElementLb.style.display = 'none';
+        intelElementIp.style.display = 'block';
+        assetElementIp.style.display = 'none';
+
+        intelElementIp.disabled = false;
+        assetElementIp.disabled = true;
+    } else {
+        intelElementLb.style.display = 'block';
+        assetElementLb.style.display = 'block';
+        intelElementIp.style.display = 'block';
+        assetElementIp.style.display = 'block';
+        
+        intelElementIp.disabled = false;
+        assetElementIp.disabled = false;
+    }
 }
 
 function turnOffSpecialSubject() {
+    int_rule = -1;
+
     document.getElementById("special_label_1").style.display = 'none';
     document.getElementById("special_label_2").style.display = 'none';
     document.getElementById("special_input_1").style.display = 'none';

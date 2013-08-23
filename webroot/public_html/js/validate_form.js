@@ -12,6 +12,8 @@ function validateModifyAccountForm() {
     }
 }
 
+var int_rule = 1;
+
 function validateSubmitRequestForm(form_name) {
     var form = document.forms[form_name];
 
@@ -46,5 +48,34 @@ function validateSubmitRequestForm(form_name) {
     if (card_number == null || card_number == "") {
         alert("经费卡号不能为空");
         return false;
+    }
+
+    if (int_rule == 2) {
+        var intel_number = form["special_int_intel"].value;
+        if (intel_number == null || intel_number == "") {
+            alert("知识产权平台流水号不能为空");
+            return false;
+        }
+    } else if (int_rule == 1) {
+        var asset_number = form["special_int_asset"].value;
+        if (asset_number == null || asset_number == "") {
+            alert("资产平台流水号不能为空");
+            return false;
+        }
+    } else if (int_rule == 0) {
+        var intel_number = form["special_int_intel"].value;
+        var asset_number = form["special_int_asset"].value;
+        
+        if ((intel_number == null || intel_number == "") &&
+                (asset_number == null || asset_number == "")) {
+            alert("最少要填写一个平台的流水号");
+            return false;
+        }
+    }
+
+    /*** Enable the radio buttons so post can read its value ***/
+    var elems = document.getElementsByName("special");
+    for (i = 0; i < elems.length; i++) {
+        elems[i].disabled = false;
     }
 }

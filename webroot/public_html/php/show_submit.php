@@ -93,12 +93,14 @@ onsubmit="return validateSubmitRequestForm('new_request_form')" method="post">
     <legend>特殊科目</legend>
 
     <label>是否为特殊科目？</label>
-    <input type="radio" name="special" onclick="specialChanged(this);" value="yes" checked>是
-    <input type="radio" name="special" onclick="specialChanged(this);" value="no">不是
+    <input type="radio" name="special" onclick="specialChanged(this);" disabled='disabled' 
+        value="yes" checked>是
+    <input type="radio" name="special" onclick="specialChanged(this);" disabled='disabled' 
+        value="no">不是
 
     <p>
-    <label id="special_label_1">知识产权平台流水号：</label>
-    <input id="special_input_1" type="text" name="special_int_intel">
+    <label id="special_label_1" style="display: none">知识产权平台流水号：</label>
+    <input id="special_input_1" style="display: none" type="text" name="special_int_intel">
     </p>
 
     <p>
