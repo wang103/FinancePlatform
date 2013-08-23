@@ -249,9 +249,12 @@ INSERT INTO advisors VALUES ('test7', 'test77');
 14. 网页的"holygrail"设计代码来自于Matthew Levine:
     http://alistapart.com/article/holygrail
 
-15. 运行scripts/里的脚本时当前目录必须是FinancePlatform/。
+15. 网页的可排序表格设计代码来自于Stuart Langridge:
+    http://www.kryogenix.org/code/browser/sorttable/
 
-16. 文件介绍：
+16. 运行scripts/里的脚本时当前目录必须是FinancePlatform/。
+
+17. 文件介绍：
 FinancePlatform/
     Note        （此文档笔记）
     README.md   （简单的README文档）

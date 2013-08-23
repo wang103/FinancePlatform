@@ -1,3 +1,9 @@
+#process_table thead, #check_table thead {
+    background-color: #eee;
+    font-weight: bold;
+    cursor: default;
+}
+
 td, th {
     text-align: center;
 }

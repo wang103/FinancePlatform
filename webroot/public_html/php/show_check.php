@@ -10,6 +10,7 @@ if (!isset($_SESSION['STATUS'])) {
 
 <head>
 <link rel='stylesheet' type='text/css' href='../css/style02.css'>
+<script src='../js/sorttable.js'></script>
 </head>
 
 <body>
@@ -64,7 +65,7 @@ if ($_SESSION['STATUS'] == 0) {
 }
 ?>
 
-<table border="1">
+<table class="sortable" id="check_table" border="1">
     <tr>
         <th>流水号</th>
         <th>报销时间</th>

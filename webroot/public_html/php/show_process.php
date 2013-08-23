@@ -10,6 +10,7 @@ if (!isset($_SESSION['STATUS'])) {
 
 <head>
 <link rel='stylesheet' type='text/css' href='../css/style02.css'>
+<script src='../js/sorttable.js'></script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@ if (!isset($_SESSION['STATUS'])) {
 <h3>处理报销申请</h3>
 
 需要处理的申请
-<table border="1">
+<table class="sortable" id="process_table" border="1">
     <tr>
         <th>流水号</th>
         <th>报销时间</th>
