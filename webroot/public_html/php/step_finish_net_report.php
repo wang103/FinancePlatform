@@ -69,6 +69,22 @@ document.getElementsByName("date3")[0].readOnly = true;
 document.getElementsByName("date4")[0].readOnly = true;
 document.getElementsByName("special")[0].disabled = true;
 document.getElementsByName("special")[1].disabled = true;
+
+var intel_value = f['special_input_1'].value;
+var asset_value = f['special_input_2'].value;
+
+// Must set the initial value for int_rule.
+if ((intel_value == null || intel_value == "") &&
+    (asset_value == null || asset_value == "")) {
+    int_rule = -1;
+} else if (intel_value == null || intel_value == "") {
+    int_rule = 1;
+} else if (asset_value == null || asset_value == "") {
+    int_rule = 2;
+} else {
+    int_rule = 0;
+}
+
 </script>
 
 </body>
