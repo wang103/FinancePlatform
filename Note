@@ -251,6 +251,7 @@ INSERT INTO advisors VALUES ('test7', 'test77');
 
 15. 网页的可排序表格设计代码来自于Stuart Langridge:
     http://www.kryogenix.org/code/browser/sorttable/
+    只要点击表格即可排序。
 
 16. 运行scripts/里的脚本时当前目录必须是FinancePlatform/。
 
