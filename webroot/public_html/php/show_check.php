@@ -9,8 +9,8 @@ if (!isset($_SESSION['STATUS'])) {
 <html>
 
 <head>
-<link rel='stylesheet' type='text/css' href='../css/style02.css'>
-<script src='../js/sorttable.js'></script>
+<link rel='stylesheet' type='text/css' href='css/style02.css'>
+<script src='js/sorttable.js'></script>
 </head>
 
 <body>
